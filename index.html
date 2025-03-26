@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Start Page</title>
+        <link href="./css/index.css" type="text/css" rel="stylesheet">
+        <script src="./js/index.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    </head>
+    <body onload="setup()">
+        
+        <h1>This is a title</h1>
+        <video id="video_player" width="320" height="240" muted="true">
+            <source src="./media/video.mp4" type="video/mp4">
+        </video>
+        <button onclick="start()">test</button>
+        <div id="ratingScale">
+            <button onclick="submit(1)">1</button>
+            <button onclick="submit(2)">2</button>
+            <button onclick="submit(3)">3</button>
+            <button onclick="submit(4)">4</button>
+            <button onclick="submit(5)">5</button>
+        </div>
+        <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+    </body>
+</html>
