@@ -15,17 +15,28 @@ class DataPoint{
 function setup(){
     videoElement = document.getElementById("video_player")
     ratingElement = document.getElementById("ratingScale")
-    interval = parseInt(sessionStorage.getItem("interval"))
+    interval = parseInt(localStorage.getItem("interval"))
 
     videoElement.ontimeupdate = () => pauseVideo()
     //videoElement.onended = () => showGraph()
 
-    
     ratingElement.onclick = () => playVideo()
     ratingElement.style.visibility = "hidden"
+
+    console.log("interval: " + parseInt(localStorage.getItem("interval")))
+    console.log("scale: " + localStorage.getItem("scale"))
+    console.log("pause: " + localStorage.getItem("pausing"))
+
+    alert("test")
 }
 
 function timePointContained(time){
+    inputs = localStorage.getItem("dataInputs")
+    if(inputs == ""){
+        return
+    }
+    inputs = JSON.parse(inputs)
+
     for (var i in inputs){
         if(inputs[i].time == time){
             return true
@@ -56,11 +67,16 @@ function start(){
 }
 
 function addDataPoint(dp){
-    inputs = JSON.parse(sessionStorage.getItem("dataInputs"))
+    inputs = localStorage.getItem("dataInputs")
+    if(inputs != ""){
+        inputs = JSON.parse(inputs)
+    }else{
+        inputs = []
+    }
     inputs.push(dp)
     parsedInputs = JSON.stringify(inputs)
-    sessionStorage.setItem("dataInputs", parsedInputs)
-    console.log(sessionStorage.getItem("dataInputs"))
+    localStorage.setItem("dataInputs", parsedInputs)
+    console.log(localStorage.getItem("dataInputs"))
 }
 
 function submit(rating){
