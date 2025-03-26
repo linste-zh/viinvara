@@ -1,4 +1,4 @@
-var video, ratingScale
+let video, ratingScale, videoSrc
 const inputs = []
 timeScale = 10
 
@@ -35,7 +35,7 @@ function setup(){
 
     video.ontimeupdate = () => pauseVideo()
     video.onended = () => showGraph()
-    video.pause()
+    //video.pause()
     
     ratingScale.onclick = () => playVideo()
     ratingScale.style.visibility = "hidden"
@@ -56,6 +56,7 @@ function playVideo(){
 }
 
 function start(){
+    console.log("PLaying video: " + video.getAttribute("src"))
     playVideo()
 }
 
@@ -87,4 +88,21 @@ function showGraph(){
           }]
         }
       });
+}
+
+function pickSrc(){
+    let input = document.createElement('input');
+    input.type = 'file';
+    input.accept = "video/mp4"
+    input.style = "display: none;"
+    input.onchange = () => {
+        // you can use this method to get file and perform respective operations
+            let files =   Array.from(input.files);
+            chosenVideo = files[0]
+            if (chosenVideo) {
+                videoSrc = URL.createObjectURL(chosenVideo);
+                video.src = videoSrc;
+            }
+        };
+    input.click();
 }

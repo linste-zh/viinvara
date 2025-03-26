@@ -10,8 +10,10 @@
         
         <h1>This is a title</h1>
         <video id="video_player" width="320" height="240" muted="true">
-            <source src="./media/video.mp4" type="video/mp4">
+            <source id = "video_src" type="video/mp4">
         </video>
+        <button onclick="pickSrc()">pick source</button>
+        <!--<input type="file" id="fileInput" accept="video/mp4" style="display: none;">!-->
         <button onclick="start()">test</button>
         <div id="ratingScale">
             <button onclick="submit(1)">1</button>
