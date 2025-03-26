@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Start Page</title>
-        <link href="./css/index.css" type="text/css" rel="stylesheet">
-        <script src="./js/index.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+        <title>Rating</title>
+        <link href="../css/experiment.css" type="text/css" rel="stylesheet">
+        <link href="../css/settings.css" type="text/css" rel="stylesheet">
+        <script src="../js/rating.js"></script>
+        <script src="../js/settings.js"></script>
     </head>
+
     <body onload="setup()">
-        
-        <h1>This is a title</h1>
+        <button onclick="pickSrc()">pick source</button>
+        <h1>Rate your Video</h1>
         <video id="video_player" width="320" height="240" muted="true">
             <source id = "video_src" type="video/mp4">
         </video>
-        <button onclick="pickSrc()">pick source</button>
-        <!--<input type="file" id="fileInput" accept="video/mp4" style="display: none;">!-->
         <button onclick="start()">test</button>
         <div id="ratingScale">
             <button onclick="submit(1)">1</button>
@@ -22,6 +22,6 @@
             <button onclick="submit(4)">4</button>
             <button onclick="submit(5)">5</button>
         </div>
-        <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
     </body>
 </html>
+
