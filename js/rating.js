@@ -24,7 +24,8 @@ function setup(){
     }
     videoElement.onended = () => continueResults()
 
-    ratingElement.onclick = () => playVideo()
+    applyScale()
+    //ratingElement.onclick = () => playVideo()
     ratingElement.style.visibility = "hidden"
 
     console.log("interval: " + parseInt(localStorage.getItem("interval")))
@@ -32,6 +33,26 @@ function setup(){
     console.log("pause: " + localStorage.getItem("pausing"))
 
     alert("test")
+}
+
+function applyScale(){
+    setScale = JSON.parse(localStorage.getItem("scale"))
+    startNr = parseInt(setScale[0])
+    endNr = parseInt(setScale[1])
+
+    fullScale = []
+    for (let i = startNr; i <= endNr; i++) {
+        fullScale.push(i);
+    }
+    
+    fullScale.forEach(nr => {
+        console.log(nr)
+        let button = document.createElement('button');
+        button.textContent = nr;
+        /*button.classList.add('scale-button');*/
+        ratingElement.appendChild(button);
+        button.addEventListener("click", () => submit(nr));
+    })
 }
 
 function timePointContained(time){
@@ -96,6 +117,7 @@ function addDataPoint(dp){
 }
 
 function submit(rating){
+    console.log("triggered")
     timeInS = Math.floor(videoElement.currentTime)
     dp = new DataPoint(currentTimeStamp, rating)
     addDataPoint(dp)
