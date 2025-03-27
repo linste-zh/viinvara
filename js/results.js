@@ -1,4 +1,10 @@
 function showGraph(){
+    inputs = localStorage.getItem("dataInputs")
+    if(inputs != ""){
+        inputs = JSON.parse(inputs)
+    }else{
+        inputs = []
+    }
     xValues = []
     yValues = []
     for (var i in inputs){

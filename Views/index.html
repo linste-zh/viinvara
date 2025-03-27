@@ -6,9 +6,11 @@
         <script src="../js/settings.js"></script>
     </head>
     <body>
-        <h1>Welcome to the Page!</h1>
-        <p>Here's a bunch of text I can add at some point</p>
         <div>
+            <h1>Welcome to the Page!</h1>
+            <p>Here's a bunch of text I can add at some point</p>
+        </div>
+        <div style="border: 2px solid black; padding: 20px;">
             <div>
                 Interval (in seconds):
                 <input id="interval_input" type="number" min="1" value="60" onkeyup=enforceInterval(this)>
@@ -16,17 +18,20 @@
             <div>
                 Scale Start: 
                 <input id="scale_start_input" type="number" value="1" onkeyup=enforceScale(this)>
+                <br>
                 Scale End:
                 <input id="scale_end_input" type="number" value="9" onkeyup=enforceScale(this)>
             </div>
             <div>
-                Settings for Pause/Play: 
+                Settings for Pause/Play: <br>
                 <input type="radio" id="pause_true" name="pause" value="true" onclick="pauseCheck(this)" checked="true">
-                <label for="pause_true">pause on input</label><br>
+                <label for="pause_true">pause on input</label><br>   
                 <input type="radio" id="pause_false" name="pause" value="false" onclick="pauseCheck(this)">
                 <label for="pause_false">don't pause on input</label><br>
             </div>
         </div>
-        <button onclick="initialStart()">start experiment</button>
+        <div>
+                <button onclick="initialStart()">start experiment</button>
+        </div>
     </body>
 </html>

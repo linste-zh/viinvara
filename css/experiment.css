@@ -1,0 +1,8 @@
+div{
+    min-height: 20px;
+    margin: auto;
+    width: fit-content;
+    /*min-width: 200px;*/
+    text-align: center;
+    margin-bottom: 10px;
+}

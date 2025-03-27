@@ -1,4 +1,4 @@
-let videoElement, ratingElement, interval
+let videoElement, ratingElement, interval, currentTimeStamp
 
 class DataPoint{
     constructor(time, rating){
@@ -17,8 +17,12 @@ function setup(){
     ratingElement = document.getElementById("ratingScale")
     interval = parseInt(localStorage.getItem("interval"))
 
-    videoElement.ontimeupdate = () => pauseVideo()
-    //videoElement.onended = () => showGraph()
+    if(localStorage.getItem("pausing") == "true"){
+        videoElement.ontimeupdate = () => videoIntervalWithPause()
+    }else{
+        videoElement.ontimeupdate = () => videoIntervalWithoutPause()
+    }
+    videoElement.onended = () => continueResults()
 
     ratingElement.onclick = () => playVideo()
     ratingElement.style.visibility = "hidden"
@@ -45,13 +49,25 @@ function timePointContained(time){
     return false
 }    
     
-function pauseVideo(){
+function videoIntervalWithPause(){
     timeInS = Math.floor(videoElement.currentTime)
 
     if(timeInS > 0 
         && !timePointContained(timeInS) 
         && timeInS % interval == 0){
         videoElement.pause()
+        currentTimeStamp = timeInS
+        ratingElement.style.visibility = "visible"
+    }
+}
+
+function videoIntervalWithoutPause(){
+    timeInS = Math.floor(videoElement.currentTime)
+
+    if(timeInS > 0 
+        && !timePointContained(timeInS) 
+        && timeInS % interval == 0){
+        currentTimeStamp = timeInS
         ratingElement.style.visibility = "visible"
     }
 }
@@ -81,9 +97,13 @@ function addDataPoint(dp){
 
 function submit(rating){
     timeInS = Math.floor(videoElement.currentTime)
-    dp = new DataPoint(timeInS, rating)
+    dp = new DataPoint(currentTimeStamp, rating)
     addDataPoint(dp)
     playVideo()
+}
+
+function continueResults(){
+    window.location.href="results.html"
 }
 
 

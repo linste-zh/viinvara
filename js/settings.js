@@ -43,7 +43,6 @@ function enforceScale(el){
 }
 
 function pauseCheck(el){
-    console.log("pause: " + localStorage.getItem("pausing"))
     if(el.value == "true"){
         localStorage.setItem("pausing", true)
     }else{
