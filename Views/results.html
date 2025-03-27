@@ -7,11 +7,13 @@
         <script src="../js/results.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     </head>
-    <body onload="showGraph()">
+    <body onload="createData()">
         <div>
             <button onclick="reset()">reset</button>
             <h1>Title</h1>
         </div>
-        <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+        <canvas id="myChart" onload = "showGraph()" style="width:100%;max-width:700px"></canvas>
+        <div id="exportCSV" onload="exportCSV()">
+        </div>
     </body>
 </html>
