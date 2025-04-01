@@ -1,3 +1,35 @@
+.pageContent{
+  background-color: rgba(245, 246, 232, 0.606);
+  padding: 20px;
+  box-shadow: 0 0 10px 15px rgba(245, 246, 232, 0.606);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-width: 400px;
+  min-height: 500px;
+}
+
+.variableSettings{
+  width: 100%;
+  border: solid black;
+}
+
+.inputReq{
+  margin: 5px 0px;
+}
+
+.textInput{
+  min-width: 100px;
+  width: 60%;
+  margin-bottom: 20px;
+}
+
+.nrInput{
+  width: 40px;
+}
+
+
 /*based on https://www.w3schools.com/howto/howto_js_accordion.asp*/
 .settingAccordionTrigger{
     background-color: lightblue;
@@ -28,10 +60,6 @@
   
 .active:after {
     content: "\2796";
-}
-
-.nrInput{
-    width: 40px;
 }
 
 /*based on https://www.w3schools.com/howto/howto_css_switch.asp*/
