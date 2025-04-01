@@ -6,26 +6,16 @@ function setup(){
     interval = parseInt(localStorage.getItem("interval"))
     videoContainer = document.getElementById("videoContainer")
 
-    console.log("interval: " + parseInt(localStorage.getItem("interval")))
+    console.log("name: " + localStorage.getItem("userName"))
+    console.log("interval: " + localStorage.getItem("lingVar"))
+    console.log("interval: " + localStorage.getItem("interval"))
     console.log("scale: " + localStorage.getItem("scale"))
     console.log("pause: " + localStorage.getItem("pausing"))
+    console.log("at start: " + localStorage.getItem("inputAtStart"))
+    console.log("at end: " + localStorage.getItem("inputAtEnd"))
 }
 
-function submitNameAndVar(){
-    userName = document.getElementById("nameField").value
-    if(userName == ""){
-        alert("please fill out the name field")
-        return
-    }
-    localStorage.setItem("userName", userName)
-    lingVar = document.getElementById("varField").value
-    if(lingVar == ""){
-        alert("please fill out the variable field")
-        return
-    }
-    localStorage.setItem("lingVar", lingVar)
-    videoContainer.innerHTML = "<button onclick='setUpVideo()'>pick source</button>"
-}
+
 
 function setUpVideo(){
     videoContainer.innerHTML = '<video id="video_player"><source id = "video_src" type="video/mp4"></video>'

@@ -5,34 +5,64 @@
         <link href="../css/basicLayout.css" type="text/css" rel="stylesheet">
         <link href="../css/index.css" type="text/css" rel="stylesheet">
         <script src="../js/settings.js"></script>
+        <script src="../js/index.js"></script>
     </head>
     <body>
         <div>
             <h1>Welcome to the Page!</h1>
             <p>Here's a bunch of text I can add at some point</p>
         </div>
-        <div style="border: 2px solid black; padding: 20px;">
-            <div>
-                Interval (in seconds):
-                <input id="interval_input" type="number" min="1" value="60" onkeyup=enforceInterval(this)>
-            </div>
-            <div>
-                Scale Start: 
-                <input id="scale_start_input" type="number" value="1" onkeyup=enforceScale(this)>
-                <br>
-                Scale End:
-                <input id="scale_end_input" type="number" value="9" onkeyup=enforceScale(this)>
-            </div>
-            <div>
-                Settings for Pause/Play: <br>
-                <input type="radio" id="pause_true" name="pause" value="true" onclick="pauseCheck(this)" checked="true">
-                <label for="pause_true">pause on input</label><br>   
-                <input type="radio" id="pause_false" name="pause" value="false" onclick="pauseCheck(this)">
-                <label for="pause_false">don't pause on input</label><br>
+        <div>
+            <h2>Please enter your name</h2>
+            <input type="text" id="nameField">
+            <h2>What variable are you rating?</h2>
+            <input type="text" id="varField">
+        </div>
+        <div class="settings">
+            <button class="settingAccordionTrigger" onclick="toggleAccordion(this)">Experiment Settings</button>
+            <div class="settingAccordion">
+                <div>
+                    Interval:
+                    <input id="interval_input" class="nrInput" type="number" min="1" value="60" onkeyup=enforceInterval(this)>
+                    s
+                </div>
+                <div>
+                    Rating Scale: 
+                    <input id="scale_start_input" class="nrInput" type="number" value="1" onkeyup=enforceScale(this)>
+                    to
+                    <input id="scale_end_input" class="nrInput" type="number" value="9" onkeyup=enforceScale(this)>
+                </div>
+                <div>
+                    Pause Rating: 
+                    no
+                    <label class="switch">
+                        <input type="checkbox" id="pauseChecker">
+                        <span class="slider"></span>
+                    </label>
+                    yes
+                </div>
+                <div>
+                    Rating at 0s: 
+                    no
+                    <label class="switch">
+                        <input type="checkbox" id="startInputChecker">
+                        <span class="slider"></span>
+                    </label>
+                    yes
+                </div>
+                <div>
+                    Rating at end of video: 
+                    no
+                    <label class="switch">
+                        <input type="checkbox" id="endInputChecker">
+                        <span class="slider"></span>
+                    </label>
+                    yes
+                </div>
             </div>
         </div>
         <div>
-                <button onclick="initialStart()">start experiment</button>
+            <button onclick="loadExperiment()">start experiment</button>
         </div>
     </body>
 </html>

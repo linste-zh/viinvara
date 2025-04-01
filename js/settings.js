@@ -1,4 +1,30 @@
-function initialStart(){
+function loadExperiment(){
+    filledOut = submitNameAndVar()
+    if(!filledOut){
+        return
+    }
+    acceptSettings()
+
+    window.location.href="experiment.html"
+}
+function submitNameAndVar(){
+    userName = document.getElementById("nameField").value
+    if(userName == ""){
+        alert("please fill out the name field")
+        return false
+    }
+    localStorage.setItem("userName", userName)
+    lingVar = document.getElementById("varField").value
+    if(lingVar == ""){
+        alert("please fill out the variable field")
+        return false
+    }
+    localStorage.setItem("lingVar", lingVar)
+
+    return true
+}
+
+function acceptSettings(){
     interval = document.getElementById("interval_input").value
     localStorage.setItem("interval", interval)
 
@@ -9,11 +35,14 @@ function initialStart(){
     scale = [scale_start, scale_end]
     localStorage.setItem("scale", JSON.stringify(scale))
 
-    console.log("interval: " + localStorage.getItem("interval"))
-    console.log("scale: " + localStorage.getItem("scale"))
-    console.log("pause: " + localStorage.getItem("pausing"))
+    pause = document.getElementById("pauseChecker").checked
+    localStorage.setItem("pausing", pause)
 
-    window.location.href="experiment.html"
+    atStart = document.getElementById("startInputChecker").checked
+    localStorage.setItem("inputAtStart", atStart)
+
+    atEnd = document.getElementById("startInputChecker").checked
+    localStorage.setItem("inputAtEnd", atEnd)
 }
 
 function enforceInterval(el){
@@ -22,14 +51,6 @@ function enforceInterval(el){
 
 function enforceScale(el){
 
-}
-
-function pauseCheck(el){
-    if(el.value == "true"){
-        localStorage.setItem("pausing", true)
-    }else{
-        localStorage.setItem("pausing", false)
-    }
 }
 
 function reset(){
