@@ -1,22 +1,35 @@
-let videoElement, ratingElement, interval, currentTimeStamp
-
-class DataPoint{
-    constructor(time, rating){
-        this.time = time;
-        this.rating = rating;
-    }
-
-    getTime(){
-        return this.time
-    }
-    
-}
+let videoContainer, videoElement, ratingElement, interval, currentTimeStamp
 
 function setup(){
-    videoElement = document.getElementById("video_player")
     ratingElement = document.getElementById("ratingScale")
     interval = parseInt(localStorage.getItem("interval"))
+    videoContainer = document.getElementById("videoContainer")
 
+    console.log("interval: " + parseInt(localStorage.getItem("interval")))
+    console.log("scale: " + localStorage.getItem("scale"))
+    console.log("pause: " + localStorage.getItem("pausing"))
+}
+
+function submitNameAndVar(){
+    userName = document.getElementById("nameField").value
+    if(userName == ""){
+        alert("please fill out the name field")
+        return
+    }
+    localStorage.setItem("userName", userName)
+    lingVar = document.getElementById("varField").value
+    if(lingVar == ""){
+        alert("please fill out the variable field")
+        return
+    }
+    localStorage.setItem("lingVar", lingVar)
+    videoContainer.innerHTML = "<button onclick='setUpVideo()'>pick source</button>"
+}
+
+function setUpVideo(){
+    videoContainer.innerHTML = '<video id="video_player" width="640" height="280" muted="true"><source id = "video_src" type="video/mp4"></video>'
+    videoElement = document.getElementById("video_player")
+    pickSrc()
     if(localStorage.getItem("pausing") == "true"){
         videoElement.ontimeupdate = () => videoIntervalWithPause()
     }else{
@@ -24,15 +37,34 @@ function setup(){
     }
     videoElement.onended = () => continueResults()
 
+    ratingElement.innerHTML='<button onclick="start()">start</button>'
+}
+
+async function pickSrc(){
+    var videoSrc
+    let input = document.createElement('input');
+    input.type = 'file';
+    input.accept = "video/mp4"
+    input.style = "display: none;"
+    input.onchange = () => {
+        // you can use this method to get file and perform respective operations
+            let files =   Array.from(input.files);
+            chosenVideo = files[0]
+            if (chosenVideo) {
+                videoSrc = URL.createObjectURL(chosenVideo); // Create a temporary blob URL
+                videoElement.src = videoSrc
+            }
+        };
+    input.click();
+}
+
+function start(){
+    ratingElement.innerHTML = ""
     applyScale()
-    //ratingElement.onclick = () => playVideo()
     ratingElement.style.visibility = "hidden"
 
-    console.log("interval: " + parseInt(localStorage.getItem("interval")))
-    console.log("scale: " + localStorage.getItem("scale"))
-    console.log("pause: " + localStorage.getItem("pausing"))
-
-    alert("test")
+    console.log("Playing video: " + videoElement.getAttribute("src"))
+    playVideo()
 }
 
 function applyScale(){
@@ -55,21 +87,11 @@ function applyScale(){
     })
 }
 
-function timePointContained(time){
-    inputs = localStorage.getItem("dataInputs")
-    if(inputs == ""){
-        return
-    }
-    inputs = JSON.parse(inputs)
+function playVideo(){
+    ratingElement.style.visibility = "hidden"
+    videoElement.play()
+}
 
-    for (var i in inputs){
-        if(inputs[i].time == time){
-            return true
-        }
-    }
-    return false
-}    
-    
 function videoIntervalWithPause(){
     timeInS = Math.floor(videoElement.currentTime)
 
@@ -93,15 +115,41 @@ function videoIntervalWithoutPause(){
     }
 }
 
-function playVideo(){
-    ratingElement.style.visibility = "hidden"
-    videoElement.play()
+class DataPoint{
+    constructor(time, rating){
+        this.time = time;
+        this.rating = rating;
+    }
+
+    getTime(){
+        return this.time
+    }
+    
 }
 
-function start(){
-    console.log("Playing video: " + videoElement.getAttribute("src"))
+function submit(rating){
+    console.log("triggered")
+    timeInS = Math.floor(videoElement.currentTime)
+    dp = new DataPoint(currentTimeStamp, rating)
+    addDataPoint(dp)
     playVideo()
 }
+
+function timePointContained(time){
+    inputs = localStorage.getItem("dataInputs")
+    if(inputs == ""){
+        return
+    }
+    inputs = JSON.parse(inputs)
+
+    for (var i in inputs){
+        if(inputs[i].time == time){
+            return true
+        }
+    }
+    return false
+}    
+
 
 function addDataPoint(dp){
     inputs = localStorage.getItem("dataInputs")
@@ -116,16 +164,6 @@ function addDataPoint(dp){
     console.log(localStorage.getItem("dataInputs"))
 }
 
-function submit(rating){
-    console.log("triggered")
-    timeInS = Math.floor(videoElement.currentTime)
-    dp = new DataPoint(currentTimeStamp, rating)
-    addDataPoint(dp)
-    playVideo()
-}
-
 function continueResults(){
     window.location.href="results.html"
 }
-
-

@@ -13,23 +13,18 @@
             <h1>Title</h1>
         </div>
         <div>
-            <button onclick="pickSrc()">pick source</button>
-            </br>
-            <h2>Rate your Video</h1>
-            <video id="video_player" width="640" height="280" muted="true">
-                <source id = "video_src" type="video/mp4">
-            </video>
-            </br>
-            <button onclick="start()">test</button>
+            <h2>Rate your Video</h2>
         </div>
-        
+        <div id="videoContainer">
+            <h2>Please enter your name</h2>
+            <input type="text" id="nameField">
+            <h2>What variable are you rating?</h2>
+            <input type="text" id="varField">
+            </br>
+            <button onclick="submitNameAndVar()">submit</button>
+        </div>
         <div id="ratingScale">
-            <!--<button onclick="submit(1)">1</button>
-            <button onclick="submit(2)">2</button>
-            <button onclick="submit(3)">3</button>
-            <button onclick="submit(4)">4</button>
-            <button onclick="submit(5)">5</button>!-->
-
+            
         </div>
     </body>
 </html>
