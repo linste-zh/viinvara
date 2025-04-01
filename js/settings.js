@@ -1,6 +1,5 @@
 function initialStart(){
     interval = document.getElementById("interval_input").value
-    alert("interval: " + interval)
     localStorage.setItem("interval", interval)
 
     localStorage.setItem("dataInputs", "")

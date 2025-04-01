@@ -1,4 +1,5 @@
 let videoContainer, videoElement, ratingElement, interval, currentTimeStamp
+pauseVideo = () => {videoElement.pause()}
 
 function setup(){
     ratingElement = document.getElementById("ratingScale")
@@ -27,13 +28,13 @@ function submitNameAndVar(){
 }
 
 function setUpVideo(){
-    videoContainer.innerHTML = '<video id="video_player" width="640" height="280" muted="true"><source id = "video_src" type="video/mp4"></video>'
+    videoContainer.innerHTML = '<video id="video_player"><source id = "video_src" type="video/mp4"></video>'
     videoElement = document.getElementById("video_player")
     pickSrc()
     if(localStorage.getItem("pausing") == "true"){
-        videoElement.ontimeupdate = () => videoIntervalWithPause()
+        videoElement.ontimeupdate = () => videoInterval(pauseVideo)
     }else{
-        videoElement.ontimeupdate = () => videoIntervalWithoutPause()
+        videoElement.ontimeupdate = () => videoInterval()
     }
     videoElement.onended = () => continueResults()
 
@@ -92,24 +93,13 @@ function playVideo(){
     videoElement.play()
 }
 
-function videoIntervalWithPause(){
+function videoInterval(pausingBehaviour = () => {}){
     timeInS = Math.floor(videoElement.currentTime)
 
     if(timeInS > 0 
         && !timePointContained(timeInS) 
         && timeInS % interval == 0){
-        videoElement.pause()
-        currentTimeStamp = timeInS
-        ratingElement.style.visibility = "visible"
-    }
-}
-
-function videoIntervalWithoutPause(){
-    timeInS = Math.floor(videoElement.currentTime)
-
-    if(timeInS > 0 
-        && !timePointContained(timeInS) 
-        && timeInS % interval == 0){
+        pausingBehaviour()
         currentTimeStamp = timeInS
         ratingElement.style.visibility = "visible"
     }

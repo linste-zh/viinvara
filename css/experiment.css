@@ -6,3 +6,10 @@ div{
     text-align: center;
     margin-bottom: 10px;
 }
+
+.videoContainer{
+    min-height: 280;
+    min-width: 640;
+    width: 50%;
+    height: auto;
+}

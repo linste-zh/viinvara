@@ -3,19 +3,20 @@
     <head>
         <title>Rating</title>
         <link href="../css/experiment.css" type="text/css" rel="stylesheet">
+        <link href="../css/basicLayout.css" type="text/css" rel="stylesheet">
         <script src="../js/rating.js"></script>
         <script src="../js/settings.js"></script>
     </head>
 
     <body onload="setup()">
-        <div>
+        <div class = "header">
             <button onclick="reset()">reset</button>
-            <h1>Title</h1>
+            <h1>Video-Variable Measurement</h1>
         </div>
         <div>
             <h2>Rate your Video</h2>
         </div>
-        <div id="videoContainer">
+        <div id="videoContainer" class="videoContainer">
             <h2>Please enter your name</h2>
             <input type="text" id="nameField">
             <h2>What variable are you rating?</h2>
@@ -23,9 +24,7 @@
             </br>
             <button onclick="submitNameAndVar()">submit</button>
         </div>
-        <div id="ratingScale">
-            
-        </div>
+        <div id="ratingScale"></div>
     </body>
 </html>
 
