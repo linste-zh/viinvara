@@ -3,8 +3,10 @@ pauseVideo = () => {videoElement.pause()}
 
 function setup(){
     ratingElement = document.getElementById("ratingScale")
-    interval = parseInt(localStorage.getItem("interval"))
     videoContainer = document.getElementById("videoContainer")
+
+    interval = parseInt(localStorage.getItem("interval"))
+    currentTimeStamp = 0
 
     console.log("name: " + localStorage.getItem("userName"))
     console.log("interval: " + localStorage.getItem("lingVar"))
@@ -18,7 +20,7 @@ function setup(){
 
 
 function setUpVideo(){
-    videoContainer.innerHTML = '<video id="video_player"><source id = "video_src" type="video/mp4"></video>'
+    videoContainer.innerHTML = '<video id="video_player" class="videoPlayer"><source id = "video_src" type="video/mp4"></video>'
     videoElement = document.getElementById("video_player")
     pickSrc()
     if(localStorage.getItem("pausing") == "true"){
@@ -26,9 +28,14 @@ function setUpVideo(){
     }else{
         videoElement.ontimeupdate = () => videoInterval()
     }
-    videoElement.onended = () => continueResults()
 
-    ratingElement.innerHTML='<button onclick="start()">start</button>'
+    if(localStorage.getItem("inputAtEnd") == "true"){
+        videoElement.onended = () => continueResults(videoInterval(pauseVideo))
+    }else{
+        videoElement.onended = () => continueResults()
+    }
+
+    ratingElement.innerHTML='<button class="bigButton" onclick="start()">start</button>'
 }
 
 async function pickSrc(){

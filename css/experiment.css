@@ -1,15 +1,55 @@
-div{
-    min-height: 20px;
-    margin: auto;
-    width: fit-content;
-    /*min-width: 200px;*/
+.pageContent{
+    min-width: 400px;
+    min-height: 300px;
+    max-height: 100%;
+    background-color: red;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.textPanel{
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+    background-color: blue;
+}
+
+.textPanel h1{
+    color: black;
+    margin: 0px;
+}
+
+.textPanel h2{
+    color: black;
+    margin: 0px;
+    font-size: 12pt;
+    font-style: italic;
+}
+
+.experimentArea{
+    background-color: rgba(245, 246, 232, 0.606);
+    box-shadow: 0 0 10px 15px rgba(245, 246, 232, 0.606);
+    background-color: green;
 }
 
 .videoContainer{
-    min-height: 280;
-    min-width: 640;
-    width: 50%;
-    height: auto;
+    background-color: yellow;
+    height: 80%;
+}
+
+.bigButton{
+    font-size: 15pt;
+    padding: 20px;
+}
+
+.videoPlayer{
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.ratingScaleContainer{
+    min-height: 30px;
+    background-color: orange;
+    border: solid;
 }
