@@ -10,74 +10,83 @@
     <body>
         <header class = "header">
             <a class="iconWrapper" onclick="reset()"><img class="home icon" src="../media/home_icon.png" alt="Home Icon"></a>
-            <a class="iconWrapper" onclick=""><img class="help icon" src="../media/help_icon.png" alt="Home Icon"></a>
+            <a class="iconWrapper" onclick=""><img class="help icon" src="../media/help_icon.png" alt="Help Icon"></a>
         </header>
         <main class="mainBody">
             <div class="pageContent">
-                <div>
+                <div class="textPanel">
                     <h1>Welcome to the Page!</h1>
-                    <p>Here's a bunch of text I can add at some point</p>
+                    <h2>Developed by Linda Steiner</h2>
+                    <h2>Based on MacIntyre’s Idiodynamic Software</h2>
+                    <p>Here's a bunch of text I can add at some point Here's a bunch of text I can add at some point Here's a bunch of text I can add at some point Here's a bunch of text I can add at some point Here's a bunch of text I can add at some pointHere's a bunch of text I can add at some pointHere's a bunch of text I can add at some point</p>
                 </div>
-                <div class="variableSettings">
-                    <h2 class="inputReq">Who is doing the experiment?</h2>
-                    <input type="text" class = "textInput" id="nameField">
-                </div>
-                <div class="variableSettings">
-                    <h2 class="inputReq">What variable are you rating?</h2>
-                    <input type="text" class = "textInput" id="varField">
-                </div>
-                <div class="experimentSettings">
-                    <button class="settingAccordionTrigger" onclick="toggleAccordion(this)">Experiment Settings</button>
-                    <div class="settingAccordion">
-                        <div>
-                            Interval:
-                            <input id="interval_input" class="nrInput" type="number" min="1" value="60" onkeyup=enforceInterval(this)>
-                            s
+                <section class="settings">
+                    <h1>Set Up the Experiment</h1>
+                    <div class="var settingsContainer">
+                        <label for="nameField">Who is doing the experiment?</label>
+                        <input type="text" class = "textInput" id="nameField">
+                    </div>
+                    <div class="var settingsContainer">
+                        <label for="varField">What variable are you rating?</label>
+                        <input type="text" class = "textInput" id="varField">
+                    </div>
+                    <div class="exp settingsContainer">
+                        <div class="settingAccordionTrigger" onclick="toggleAccordion(this)">
+                            Experiment Settings
+                            <img id="accordionArrow" class="arrowIcon" src="../media/arrow_icon.png">
                         </div>
-                        <div>
-                            Rating Scale: 
-                            <input id="scale_start_input" class="nrInput" type="number" value="1" onkeyup=enforceScale(this)>
-                            to
-                            <input id="scale_end_input" class="nrInput" type="number" value="9" onkeyup=enforceScale(this)>
-                        </div>
-                        <div>
-                            Pause Rating: 
-                            no
-                            <label class="switch">
-                                <input type="checkbox" id="pauseChecker">
-                                <span class="slider"></span>
-                            </label>
-                            yes
-                        </div>
-                        <div>
-                            Rating at 0s: 
-                            no
-                            <label class="switch">
-                                <input type="checkbox" id="startInputChecker">
-                                <span class="slider"></span>
-                            </label>
-                            yes
-                        </div>
-                        <div>
-                            Rating at end of video: 
-                            no
-                            <label class="switch">
-                                <input type="checkbox" id="endInputChecker">
-                                <span class="slider"></span>
-                            </label>
-                            yes
+                        <div class="settingAccordion">
+                            <div>
+                                Interval:
+                                <input id="interval_input" class="nrInput" type="number" min="1" value="60" onkeyup=enforceInterval(this)>
+                                s
+                            </div>
+                            <div>
+                                Rating Scale: 
+                                <input id="scale_start_input" class="nrInput" type="number" value="1" onkeyup=enforceScale(this)>
+                                to
+                                <input id="scale_end_input" class="nrInput" type="number" value="9" onkeyup=enforceScale(this)>
+                            </div>
+                            <div>
+                                Pause Rating: 
+                                no
+                                <label class="switch">
+                                    <input type="checkbox" id="pauseChecker">
+                                    <span class="slider"></span>
+                                </label>
+                                yes
+                            </div>
+                            <div>
+                                Rating at 0s: 
+                                no
+                                <label class="switch">
+                                    <input type="checkbox" id="startInputChecker">
+                                    <span class="slider"></span>
+                                </label>
+                                yes
+                            </div>
+                            <div>
+                                Rating at end of video: 
+                                no
+                                <label class="switch">
+                                    <input type="checkbox" id="endInputChecker">
+                                    <span class="slider"></span>
+                                </label>
+                                yes
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="startButtonContainer">
-                    <button onclick="loadExperiment()">start experiment</button>
-                </div>
+                    <div class="startButtonContainer">
+                        <button onclick="loadExperiment()">start experiment</button>
+                    </div>
+                </section>
             </div>
         </main>
         <footer class = "footer">
-            <span>V0.8</span>
-            <span>Linda Steiner</span>
-            <span>VarSLA</span>
+            <span class="footerNote">02/04/2025</span>
+            <span class="footerNote">V0.9</span>
+            <span class="footerNote">Linda Steiner</span>
+            <span class="footerNote">VarSLA</span>
         </footer>
     </body>
 </html>

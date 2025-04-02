@@ -1,27 +1,79 @@
 .pageContent{
-  position: relative;
-  min-height: 400px;
+  min-height: 200px;
+  width: 50%;
+  min-width: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.textPanel{
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.textPanel h1{
+  color: black;
+  margin: 0px;
+}
+
+.textPanel h2{
+  color: black;
+  margin: 0px;
+  font-size: 12pt;
+  font-style: italic;
+}
+
+.textPanel p{
+  color: black;
+}
+
+
+.settings{
+  min-height: 200px;
   min-width: 400px;
   background-color: rgba(245, 246, 232, 0.606);
   box-shadow: 0 0 10px 15px rgba(245, 246, 232, 0.606);
   padding: 20px;
-  height: fit-content;
 }
 
+.settings h1{
+  text-align: center;
+  margin: 0px 0px 10px 0px;
+  font-size: 18pt;
+}
 
-.variableSettings{
+.settings label{
+  margin: 0px 0px 5px 0px;
+  font-size: 12pt;
+}
+
+.settingsContainer{
   width: 100%;
-  border: solid black;
+  padding: 5px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.inputReq{
-  margin: 5px 0px;
+.var{
+  flex-direction: row;
+  gap: 8px;
+}
+
+.exp{
+  flex-direction: column;
+}
+
+.settingsContainer label{
+  color: black;
 }
 
 .textInput{
-  min-width: 100px;
-  width: 60%;
-  margin-bottom: 20px;
+  min-width: 150px;
 }
 
 .nrInput{
@@ -31,34 +83,34 @@
 
 /*based on https://www.w3schools.com/howto/howto_js_accordion.asp*/
 .settingAccordionTrigger{
-    background-color: lightblue;
-    cursor: pointer;
-    padding: 18px;
     width: 100%;
-    text-align: left;
+    background-color: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    padding: 5px;
 }
 
 .active, .settingAccordionTrigger:hover {
-    background-color: turquoise;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.arrowIcon{
+  height: 20px;
+  width: auto;
+  float: right;
+  transition: transform 0.2s ease-out;
+}
+
+.iconActive{
+  transform: scaleY(-1);
 }
 
 .settingAccordion{
-    padding: 0 18px;
-    background-color: grey;
+    width: 100%;
+    padding: 0px 5px;
+    background-color: rgba(255, 255, 255, 0.2);
     overflow: hidden;
     max-height: 0;
-}
-
-.settingAccordionTrigger:after {
-    content: '\02795';
-    font-size: 13px;
-    color: black;
-    float: right;
-    margin-left: 5px;
-}
-  
-.active:after {
-    content: "\2796";
+    transition: max-height 0.2s ease-out;
 }
 
 /*based on https://www.w3schools.com/howto/howto_css_switch.asp*/
