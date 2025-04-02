@@ -1,8 +1,10 @@
+body,html{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
 body{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
     background: rgb(17,214,164);
     background: linear-gradient(
         90deg,
@@ -14,41 +16,60 @@ body{
         rgba(12,148,131,1) 84%,
         rgba(10,129,130,1) 100%
     );
+    display: grid;
+    grid:
+      "header" auto
+      "main" 1fr
+      "footer" auto
+      / 1fr;
 }
-
 .header{
-    position: fixed;
+    grid-area: header;
+    position: sticky;
     top: 0px;
     left: 0px;
     z-index: 99;
-    min-height: 50px;
+    height: 60px;
     width: 100%;
+    background-color: rgba(211, 211, 211, 0.632);
+}
+
+
+.header .icon{
+    max-height: 40px;
+    width: auto;
+    margin: 10px;
+}
+
+/*icon source: https://www.flaticon.com/free-icon/home_1946436?term=home&page=1&position=3&origin=tag&related_id=1946436*/
+.home{
+    position: relative;
+    float: left;
+}
+
+/*icon source: https://www.flaticon.com/free-icon/question_471715?term=question+mark&page=1&position=20&origin=search&related_id=471715*/
+.help{
+    position: relative;
+    float: right;
+}
+
+
+.mainBody{
+    grid-area: main;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(211, 211, 211, 0.632);
-    margin: 0px 0px 20px 0px;
 }
 
+
 .footer{
-    position: fixed;
+    grid-area: footer;
+    position: sticky;
     bottom: 0px;
     left: 0px;
     z-index: 99;
-    min-height: 50px;
+    min-height: 40px;
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     background-color: rgba(211, 211, 211, 0.632);
-    margin: 20px 0px 0px 0px;
-}
-
-.header button{
-    padding: 10px;
-    margin: 15px;
-}
-
-.header h1{
-    font-size:calc(12px + 1.5vw);
+    overflow: hidden;
 }

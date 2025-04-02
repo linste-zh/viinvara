@@ -54,12 +54,16 @@ function enforceScale(el){
 }
 
 function reset(){
-    localStorage.removeItem("interval")
-    localStorage.removeItem("scale")
-    localStorage.removeItem("pausing")
-    localStorage.removeItem("dataInputs")
-    localStorage.removeItem("userName")
-    localStorage.removeItem("lingVar")
+    if (confirm("Return to start page? This will reset all your data and variables.")){
+        localStorage.removeItem("interval")
+        localStorage.removeItem("scale")
+        localStorage.removeItem("pausing")
+        localStorage.removeItem("dataInputs")
+        localStorage.removeItem("userName")
+        localStorage.removeItem("lingVar")
 
-    window.location.href="index.html"
+        window.location.href="index.html"
+    }else{
+        console.log("cancelled")
+    }
 }
