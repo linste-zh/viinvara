@@ -8,26 +8,24 @@
         <script src="../js/index.js"></script>
     </head>
     <body>
-        <header class = "header">
-            <a class="iconWrapper" onclick="reset()"><img class="home icon" src="../media/home_icon.png" alt="Home Icon"></a>
-            <a class="iconWrapper" onclick=""><img class="help icon" src="../media/help_icon.png" alt="Help Icon"></a>
-        </header>
         <main class="mainBody">
             <div class="pageContent">
                 <div class="textPanel">
                     <h1>Welcome to the Page!</h1>
-                    <h2>Developed by Linda Steiner</h2>
                     <h2>Based on MacIntyre’s Idiodynamic Software</h2>
-                    <p>Here's a bunch of text I can add at some point Here's a bunch of text I can add at some point Here's a bunch of text I can add at some point Here's a bunch of text I can add at some point Here's a bunch of text I can add at some pointHere's a bunch of text I can add at some pointHere's a bunch of text I can add at some point</p>
+                    <p>
+                        This software can be used for experiments wherein a variable has to be rated on a scale while watching a video. The results are presented as a graph and can be downloaded as a CSV table.</br>
+                        This work is based on <a href="https://80113hunterhsu.github.io/VariableTester/" target="_blank">MacIntyre's Software</a>.
+                    </p>
                 </div>
                 <section class="settings">
-                    <h1>Set Up the Experiment</h1>
+                    <h1>Set Up Experiment</h1>
                     <div class="var settingsContainer">
                         <label for="nameField">Who is doing the experiment?</label>
                         <input type="text" class = "textInput" id="nameField">
                     </div>
                     <div class="var settingsContainer">
-                        <label for="varField">What variable are you rating?</label>
+                        <label for="varField">What variable are they rating?</label>
                         <input type="text" class = "textInput" id="varField">
                     </div>
                     <div class="exp settingsContainer">
@@ -36,19 +34,19 @@
                             <img id="accordionArrow" class="arrowIcon" src="../media/arrow_icon.png">
                         </div>
                         <div class="settingAccordion">
-                            <div>
-                                Interval:
+                            <div class="settingRow">
+                                <b>Interval:</b>
                                 <input id="interval_input" class="nrInput" type="number" min="1" value="60" onkeyup=enforceInterval(this)>
                                 s
                             </div>
-                            <div>
-                                Rating Scale: 
+                            <div class="settingRow">
+                                <b>Rating Scale:</b>
                                 <input id="scale_start_input" class="nrInput" type="number" value="1" onkeyup=enforceScale(this)>
                                 to
                                 <input id="scale_end_input" class="nrInput" type="number" value="9" onkeyup=enforceScale(this)>
                             </div>
-                            <div>
-                                Pause Rating: 
+                            <div class="settingRow">
+                                <b>Pause Rating:</b> 
                                 no
                                 <label class="switch">
                                     <input type="checkbox" id="pauseChecker">
@@ -56,8 +54,8 @@
                                 </label>
                                 yes
                             </div>
-                            <div>
-                                Rating at 0s: 
+                            <div class="settingRow">
+                                <b>Rating at Start of Video:</b> 
                                 no
                                 <label class="switch">
                                     <input type="checkbox" id="startInputChecker">
@@ -65,8 +63,8 @@
                                 </label>
                                 yes
                             </div>
-                            <div>
-                                Rating at end of video: 
+                            <div class="settingRow">
+                                <b>Rating at End of Video:</b> 
                                 no
                                 <label class="switch">
                                     <input type="checkbox" id="endInputChecker">
@@ -77,7 +75,7 @@
                         </div>
                     </div>
                     <div class="startButtonContainer">
-                        <button onclick="loadExperiment()">start experiment</button>
+                        <button class="startButton" onclick="loadExperiment()">Start Experiment</button>
                     </div>
                 </section>
             </div>

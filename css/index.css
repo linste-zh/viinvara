@@ -80,6 +80,13 @@
   width: 40px;
 }
 
+.startButton{
+  float: right;
+  background-color: white;
+  border: 1px solid black;
+  padding: 10px;
+}
+
 
 /*based on https://www.w3schools.com/howto/howto_js_accordion.asp*/
 .settingAccordionTrigger{
@@ -87,6 +94,7 @@
     background-color: rgba(255, 255, 255, 0.2);
     cursor: pointer;
     padding: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.484);
 }
 
 .active, .settingAccordionTrigger:hover {
@@ -111,6 +119,14 @@
     overflow: hidden;
     max-height: 0;
     transition: max-height 0.2s ease-out;
+    display: flex;
+    justify-content: space-between;
+    align-items: right;
+    flex-direction: column;
+}
+
+.settingRow{
+  margin: 5px 0px;
 }
 
 /*based on https://www.w3schools.com/howto/howto_css_switch.asp*/
@@ -157,11 +173,11 @@
 }
 
 input:checked + .slider {
-  background-color: #2196F3;
+  background-color: rgb(48, 166, 154);
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
+  box-shadow: 0 0 1px rgb(48, 166, 154);
 }
 
 input:checked + .slider:before {
