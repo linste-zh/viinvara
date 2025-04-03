@@ -28,7 +28,7 @@ function showGraph(){
           labels: timeValues,
           datasets: [{
             //backgroundColor: "rgba(0,0,255,1.0)",
-            //borderColor: "rgba(0,0,255,0.1)",
+            borderColor: "rgba(0, 0, 0, 0.47)",
             data: ratingValues
           }]
         }

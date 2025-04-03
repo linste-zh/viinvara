@@ -1,0 +1,42 @@
+.pageContent{
+    min-width: 500px;
+    min-height: 300px;
+    height: fit-content;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.results{
+    background-color: rgba(245, 246, 232, 0.606);
+    box-shadow: 0 0 10px 15px rgba(245, 246, 232, 0.606);
+}
+
+canvas{
+    height: 300px;
+    width: 80%;
+    margin: 10px;
+}
+
+.csvContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.csvContainer a{
+    background-color: rgba(255, 255, 255, 0.5);
+    color: black;
+    text-decoration: none;
+    border: unset;
+    padding: 5px;
+    cursor: pointer;
+    border: 1px solid rgba(0, 0, 0, 0.484);
+}
+
+.csvContainer a:hover{
+    background-color: rgba(255, 255, 255, 0.846);
+}

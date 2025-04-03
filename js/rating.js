@@ -8,6 +8,9 @@ function setup(){
     interval = parseInt(localStorage.getItem("interval"))
     currentTimeStamp = 0
 
+    instruction = String(localStorage.getItem("userName") + ", please rate this video based on " + localStorage.getItem("lingVar"))
+    document.getElementById("instruction").innerHTML = "<h1>" + instruction + "</h1>"
+
     console.log("name: " + localStorage.getItem("userName"))
     console.log("interval: " + localStorage.getItem("lingVar"))
     console.log("interval: " + localStorage.getItem("interval"))
@@ -79,7 +82,7 @@ function applyScale(){
         console.log(nr)
         let button = document.createElement('button');
         button.textContent = nr;
-        /*button.classList.add('scale-button');*/
+        button.classList.add('ratingButton');
         ratingElement.appendChild(button);
         button.addEventListener("click", () => submit(nr));
     })

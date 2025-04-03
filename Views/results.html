@@ -13,8 +13,22 @@
             <a class="iconWrapper" onclick="reset()"><img class="home icon" src="../media/home_icon.png" alt="Home Icon"></a>
             <a class="iconWrapper" onclick=""><img class="help icon" src="../media/help_icon.png" alt="Help Icon"></a>
         </header>
-        <canvas id="myChart" onload = "showGraph()" style="width:100%;max-width:700px"></canvas>
-        <div id="exportCSV" onload="exportCSV()">
-        </div>
+        <main class="mainBody">
+            <div class="pageContent">
+                <div class="textPanel" id="instruction">
+                    <h1>Here are your results!</h1>
+                </div>
+                <section class="results">
+                    <canvas id="myChart" onload = "showGraph()" style="width:100%;max-width:700px"></canvas>
+                    <div id="exportCSV" class="csvContainer" onload="exportCSV()"></div>
+                </section>
+            </div>
+        </main>
+        <footer class = "footer">
+            <span class="footerNote">03/04/2025</span>
+            <span class="footerNote">V0.10 (Demo 1)</span>
+            <span class="footerNote">Linda Steiner</span>
+            <span class="footerNote">VarSLA</span>
+        </footer>
     </body>
 </html>
