@@ -17,33 +17,35 @@ function createData(){
     }
 
     showGraph()
-    exportCSV()
+    createCSV()
+    createJpeg()
 }
 
 function showGraph(){
-    console.log("trigger showGraph")
-    new Chart("myChart", {
+    //var canvas = document.getElementById("resultChart");
+    //var ctx = canvas.getContext("2d");
+
+    // Draw a white background first
+    //ctx.fillStyle = "white";
+    //ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    new Chart("resultChart", {
         type: "line",
         data: {
           labels: timeValues,
           datasets: [{
-            //backgroundColor: "rgba(0,0,255,1.0)",
             borderColor: "rgba(0, 0, 0, 0.47)",
             data: ratingValues
           }]
+        },
+        plugins: {
+            beforeDraw: function (chart) {
+                let ctx = chart.canvas.getContext("2d");
+                ctx.fillStyle = "white"; // Set white background
+                ctx.fillRect(0, 0, chart.width, chart.height);
+            }
         }
       });
-}
-
-function exportCSV(){
-    csvURL = createCSV()
-
-    const link = document.createElement('a')
-    link.setAttribute('href', csvURL)
-    link.setAttribute('download', 'File.csv')
-    link.textContent = 'Click to Download CSV'
-
-    document.getElementById('exportCSV').append(link)
 }
 
 
@@ -75,6 +77,28 @@ function createCSV(){
         csvContent += row.join(',') + '\n'
     })
 
+    csvLink = document.getElementById("csvLink")
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8,' })
-    return URL.createObjectURL(blob)
+    csvURL =  URL.createObjectURL(blob)
+    csvLink.setAttribute('href', csvURL)
+
+    currentDate = new Date()
+    const fileName = `${currentDate.getYear()}/${currentDate.getMonth()+1}/${currentDate.getDate()}_${localStorage.getItem("userName")}_${localStorage.getItem("lingVar")}`
+    console.log(fileName)
+    csvLink.setAttribute('download', fileName)
+}
+
+function createJpeg(){
+    var canvas = document.getElementById("resultChart");
+    setTimeout(() => {
+        var canvasUrl = canvas.toDataURL("image/jpeg");
+
+        jpegLink = document.getElementById("jpegLink")
+        jpegLink.setAttribute('href', canvasUrl)
+
+        currentDate = new Date()
+        const fileName = `${currentDate.getYear()}/${currentDate.getMonth()+1}/${currentDate.getDate()}_${localStorage.getItem("userName")}_${localStorage.getItem("lingVar")}`
+        console.log("ready to download")
+        jpegLink.setAttribute('download', fileName)
+    }, 500)
 }

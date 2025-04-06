@@ -19,8 +19,11 @@
                     <h1>Here are your results!</h1>
                 </div>
                 <section class="results">
-                    <canvas id="myChart" onload = "showGraph()" style="width:100%;max-width:700px"></canvas>
-                    <div id="exportCSV" class="csvContainer" onload="exportCSV()"></div>
+                    <canvas id="resultChart" onload = "showGraph()" style="width:100%;max-width:700px"></canvas>
+                    <div id="exportCSV" class="csvContainer">
+                        <a id="csvLink">Click to Download CSV</a>
+                        <a id="jpegLink">Click to Download JPEG</a>
+                    </div>
                 </section>
             </div>
         </main>
