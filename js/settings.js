@@ -58,15 +58,35 @@ function acceptSettings(){
 }
 
 function enforceInterval(el){
-    if(el.value != "" && el.value < 1){
+    if(el.value == ""){
+        return
+    }
+
+    if(el.value < 1){
         el.value = 1;
+    }else if(el.value > 3600){
+        el.value = 3600;
     }
 }
 
 function enforceScale(el){
-    scale_start = document.getElementById("scale_start_input").value
-    scale_end = document.getElementById("scale_end_input").value
+    scale_start = parseInt(document.getElementById("scale_start_input").value)
+    scale_end = parseInt(document.getElementById("scale_end_input").value)
 
+    fullScale = []
+    for (let i = scale_start; i <=  scale_end; i++) {
+        fullScale.push(i);
+    }
+
+    if(fullScale.length <= 10){
+        return
+    }
+
+    if(el.id == "scale_start_input"){
+        el.value = scale_end - 9
+    }else{
+        el.value = scale_start + 9
+    }
 }
 
 function reset(){
