@@ -8,6 +8,8 @@ const activeExperimentState ={
 }
 
 function setup(){
+    document.getElementsByTagName("body")[0].style = localStorage.getItem("theme")
+    
     activeExperimentState.videoContainer = document.getElementById("videoContainer")
     activeExperimentState.ratingElement = document.getElementById("ratingScale")
 

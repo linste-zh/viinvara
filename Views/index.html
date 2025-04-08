@@ -7,9 +7,15 @@
         <script src="../js/settings.js"></script>
         <script src="../js/index.js"></script>
     </head>
-    <body>
+    <body onload="chooseTheme('green')">
         <main class="mainBody">
             <div class="pageContent">
+                <div class="themeChoice">
+                    <button class="themeOption green" onclick="chooseTheme('green')"></button>
+                    <button class="themeOption pink" onclick="chooseTheme('pink')"></button>
+                    <button class="themeOption blue" onclick="chooseTheme('blue')"></button>
+                    <button class="themeOption gray" onclick="chooseTheme('gray')"></button>
+                </div>
                 <div class="textPanel">
                     <h1>ViInVaRa</h1>
                     <h2>Video Interval Variable Rater</h2>

@@ -1,7 +1,8 @@
 let timeValues, ratingValues
 
-function createData(){
-    console.log("trigger createData")
+function setUp(){
+    document.getElementsByTagName("body")[0].style = localStorage.getItem("theme")
+
     timeValues = []
     ratingValues = []
     inputs = localStorage.getItem("dataInputs")

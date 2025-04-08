@@ -1,3 +1,7 @@
+function setTheme(){
+    
+}
+
 function loadExperiment(){
     filledOut = submitNameAndVar()
     if(!filledOut){
