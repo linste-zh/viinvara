@@ -29,7 +29,29 @@ function start(){
     applyScale()
     activeExperimentState.ratingElement.style.visibility = "hidden"
 
-    playVideo()
+    if(localStorage.getItem("inputAtStart")){
+        activateRating()
+        setInterval(function () {
+            if(!activeExperimentState.pendingRating){
+                playVideo()
+            }
+        }, 500);
+    }else{
+        playVideo()
+    }
+}
+
+function end(){
+    if(localStorage.getItem("inputAtEnd")){
+        activateRating()
+        setInterval(function () {
+            if(!activeExperimentState.pendingRating){
+                window.location.href="results.html"
+            }
+        }, 500);
+    }else{
+        window.location.href="results.html"
+    }
 }
 
 //__________________________________________________________________
@@ -49,7 +71,7 @@ async function setUpVideo(){
     }
 
     activeExperimentState.videoElement.onended = () => {
-        window.location.href="results.html"
+        end()
     }
 
     activeExperimentState.ratingElement.innerHTML='<button class="bigButton" onclick="start()">start</button>'
@@ -83,6 +105,7 @@ function playVideo(){
     activeExperimentState.videoElement.play()
 }
 
+
 //__________________________________________________________________
 //RATING SETTINGS
 //__________________________________________________________________
@@ -110,13 +133,15 @@ async function checkIfRatingRequired(pausingBehaviour = () => {}){
     timeInS = Math.floor(activeExperimentState.videoElement.currentTime)
     if(timePointContained(timeInS)){        //avoid duplicates
         return false
-    }else if(timeInS == 0 && localStorage.getItem("inputAtStart") == "true"){   //start of video
+    }
+    /*else if(timeInS == 0 && localStorage.getItem("inputAtStart") == "true"){   //start of video
         console.log("rating at start")
         activateRating(pauseVideo)
     }else if(timeInS == Math.floor(activeExperimentState.videoElement.duration) && localStorage.getItem("inputAtEnd") == "true"){   //end of video
         console.log("rating at end")
         activateRating(pauseVideo)
-    }else if(timeInS > 0 && timeInS % activeExperimentState.interval == 0){    //interval
+    }*/
+    else if(timeInS > 0 && timeInS % activeExperimentState.interval == 0){    //interval
         console.log("rating at interval ")
         activateRating(pausingBehaviour)
     }else{
@@ -127,6 +152,7 @@ async function checkIfRatingRequired(pausingBehaviour = () => {}){
 }
 
 function activateRating(pausingBehaviour = () => {}){
+    activeExperimentState.pendingRating = true
     pausingBehaviour()
     activeExperimentState.currentTimeStamp = timeInS
     activeExperimentState.ratingElement.style.visibility = "visible"
@@ -160,7 +186,6 @@ function timePointContained(time){
 }  
 
 function submit(rating){
-    timeInS = Math.floor(activeExperimentState.videoElement.currentTime)
     dp = new DataPoint(activeExperimentState.currentTimeStamp, rating)
     addDataPoint(dp)
     playVideo()
@@ -177,4 +202,5 @@ function addDataPoint(dp){
     parsedInputs = JSON.stringify(inputs)
     localStorage.setItem("dataInputs", parsedInputs)
     console.log(localStorage.getItem("dataInputs"))
+    activeExperimentState.pendingRating = false
 }

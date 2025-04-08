@@ -41,7 +41,7 @@ function acceptSettings(){
     atStart = document.getElementById("startInputChecker").checked
     localStorage.setItem("inputAtStart", atStart)
 
-    atEnd = document.getElementById("startInputChecker").checked
+    atEnd = document.getElementById("endInputChecker").checked
     localStorage.setItem("inputAtEnd", atEnd)
 }
 
