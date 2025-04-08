@@ -90,9 +90,8 @@
   padding: 10px;
 }
 
-.radioButton:checked{
-  /*background-color:rgb(48, 166, 154)*/
-  color: red;
+.radioButton{
+  accent-color: rgb(48, 166, 154);
 }
 
 /*based on https://www.w3schools.com/howto/howto_js_accordion.asp*/

@@ -78,15 +78,21 @@ function enforceScale(el){
         fullScale.push(i);
     }
 
-    if(fullScale.length <= 10){
-        return
+    if(fullScale.length > 10){
+        if(el.id == "scale_start_input"){
+            el.value = scale_end - 9
+        }else{
+            el.value = scale_start + 9
+        }
+    }else if(scale_start >= scale_end){
+        if(el.id == "scale_start_input"){
+            el.value = scale_end - 1
+        }else{
+            el.value = scale_start + 1
+        }
     }
 
-    if(el.id == "scale_start_input"){
-        el.value = scale_end - 9
-    }else{
-        el.value = scale_start + 9
-    }
+    
 }
 
 function reset(){
