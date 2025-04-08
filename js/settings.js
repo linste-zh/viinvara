@@ -43,6 +43,9 @@ function acceptSettings(){
 
     atEnd = document.getElementById("endInputChecker").checked
     localStorage.setItem("inputAtEnd", atEnd)
+
+    checked_option = document.querySelector('input[name = "notRatedBehaviour"]:checked').value;
+    localStorage.setItem("notRatedBehaviour", checked_option)
 }
 
 function enforceInterval(el){
@@ -61,6 +64,9 @@ function reset(){
         localStorage.removeItem("dataInputs")
         localStorage.removeItem("userName")
         localStorage.removeItem("lingVar")
+        localStorage.removeItem("notRatedBehaviour")
+        localStorage.removeItem("inputAtEnd")
+        localStorage.removeItem("inputAtStart")        
 
         window.location.href="index.html"
     }else{

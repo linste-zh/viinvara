@@ -16,12 +16,13 @@ function setup(){
 
     console.log("Experiment State: " + activeExperimentState)
     console.log("name: " + localStorage.getItem("userName"))
-    console.log("interval: " + localStorage.getItem("lingVar"))
+    console.log("variable: " + localStorage.getItem("lingVar"))
     console.log("interval: " + localStorage.getItem("interval"))
     console.log("scale: " + localStorage.getItem("scale"))
     console.log("pause: " + localStorage.getItem("pausing"))
     console.log("at start: " + localStorage.getItem("inputAtStart"))
     console.log("at end: " + localStorage.getItem("inputAtEnd"))
+    console.log("no rating: " + localStorage.getItem("notRatedBehaviour"))
 }
 
 function start(){
@@ -29,7 +30,7 @@ function start(){
     applyScale()
     activeExperimentState.ratingElement.style.visibility = "hidden"
 
-    if(localStorage.getItem("inputAtStart")){
+    if(localStorage.getItem("inputAtStart") == "true"){
         activateRating()
         setInterval(function () {
             if(!activeExperimentState.pendingRating){
@@ -42,7 +43,7 @@ function start(){
 }
 
 function end(){
-    if(localStorage.getItem("inputAtEnd")){
+    if(localStorage.getItem("inputAtEnd") == "true"){
         activateRating()
         setInterval(function () {
             if(!activeExperimentState.pendingRating){
@@ -118,6 +119,16 @@ function applyScale(){
     for (let i = startNr; i <= endNr; i++) {
         fullScale.push(i);
     }
+
+    if(localStorage.getItem("notRatedBehaviour") == "neutral"){
+        if(fullScale.length % 2 != 0){
+            middle = fullScale[Math.floor(fullScale.length / 2)];
+        }else{
+            middle = fullScale[Math.floor(fullScale.length / 2)] - 0.5;
+        }
+        activeExperimentState.neutralRating = middle
+        console.log("neutral rating: " + middle)
+    }
     
     fullScale.forEach(nr => {
         console.log(nr)
@@ -129,26 +140,35 @@ function applyScale(){
     })
 }
 
-async function checkIfRatingRequired(pausingBehaviour = () => {}){
+function checkIfRatingRequired(pausingBehaviour = () => {}){
+    timeUntilNextRating = activeExperimentState.currentTimeStamp + activeExperimentState.interval - activeExperimentState.videoElement.currentTime  
+    if(activeExperimentState.pendingRating && timeUntilNextRating < 0.5){
+        console.log(timeUntilNextRating)
+        notRatedInTime()
+    }
+
     timeInS = Math.floor(activeExperimentState.videoElement.currentTime)
     if(timePointContained(timeInS)){        //avoid duplicates
         return false
-    }
-    /*else if(timeInS == 0 && localStorage.getItem("inputAtStart") == "true"){   //start of video
-        console.log("rating at start")
-        activateRating(pauseVideo)
-    }else if(timeInS == Math.floor(activeExperimentState.videoElement.duration) && localStorage.getItem("inputAtEnd") == "true"){   //end of video
-        console.log("rating at end")
-        activateRating(pauseVideo)
-    }*/
-    else if(timeInS > 0 && timeInS % activeExperimentState.interval == 0){    //interval
+    }else if(timeInS > 0 && timeInS % activeExperimentState.interval == 0){    //interval
         console.log("rating at interval ")
         activateRating(pausingBehaviour)
-    }else{
-        return false
+        return true
     }
-    return true
-    //const videoSrc = await pickSrc()
+}
+
+function notRatedInTime(){
+    behaviour = localStorage.getItem("notRatedBehaviour")
+
+    if(behaviour == "pause"){
+        console.log("paused due to notRatedInTime")
+        pauseVideo()
+    }else if(behaviour == "empty"){
+        activeExperimentState.pendingRating = false
+        playVideo()
+    }else if(behaviour == "neutral"){
+        submit(middle)
+    }
 }
 
 function activateRating(pausingBehaviour = () => {}){
