@@ -23,6 +23,7 @@ body{
       "footer" auto
       / 1fr;
 }
+
 .header{
     grid-area: header;
     position: sticky;
@@ -32,6 +33,16 @@ body{
     height: 60px;
     width: 100%;
     background-color: rgba(211, 211, 211, 1);
+    text-align: center;
+}
+
+.header h1{
+    display: block;
+    margin-top: auto;
+    margin-bottom: auto;
+    position: relative;
+    float: left;
+    font-size: 50px;
 }
 
 
