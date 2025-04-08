@@ -26,12 +26,21 @@ function submitNameAndVar(){
 
 function acceptSettings(){
     interval = document.getElementById("interval_input").value
+    if(interval == ""){
+        interval = 60;
+    }
     localStorage.setItem("interval", interval)
 
     localStorage.setItem("dataInputs", "")
 
     scale_start = document.getElementById("scale_start_input").value
     scale_end = document.getElementById("scale_end_input").value
+    if(scale_start == ""){
+        scale_start = 1;
+    }
+    if(scale_end == ""){
+        scale_end = 9;
+    }
     scale = [scale_start, scale_end]
     localStorage.setItem("scale", JSON.stringify(scale))
 
@@ -49,10 +58,14 @@ function acceptSettings(){
 }
 
 function enforceInterval(el){
-    
+    if(el.value != "" && el.value < 1){
+        el.value = 1;
+    }
 }
 
 function enforceScale(el){
+    scale_start = document.getElementById("scale_start_input").value
+    scale_end = document.getElementById("scale_end_input").value
 
 }
 
