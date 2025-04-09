@@ -173,6 +173,10 @@
   margin: 5px 0px;
 }
 
+#labelSettings{
+  display: none;
+}
+
 /*based on https://www.w3schools.com/howto/howto_css_switch.asp*/
 /* The switch - the box around the slider */
 .switch {

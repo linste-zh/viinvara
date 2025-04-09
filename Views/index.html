@@ -6,6 +6,7 @@
         <link href="../css/index.css" type="text/css" rel="stylesheet">
         <script src="../js/settings.js"></script>
         <script src="../js/index.js"></script>
+        <meta charset="UTF-8">
     </head>
     <body onload="chooseTheme('green')">
         <header class = "header">
@@ -24,7 +25,7 @@
                 <div class="textPanel">
                     <h1>ViInVaRa</h1>
                     <h2>Video Interval Variable Rater</h2>
-                    <h2>Based on MacIntyre’s Idiodynamic Software</h2>
+                    <h2>Based on MacIntyre's Idiodynamic Software</h2>
                     <p>
                         This software can be used for experiments wherein a variable has to be rated on a scale while watching a video. The results are presented as a graph and can be downloaded as a CSV table.</br>
                         This work is based on <a href="https://80113hunterhsu.github.io/VariableTester/" target="_blank">MacIntyre's Software</a>.
@@ -42,7 +43,29 @@
                     </div>
                     <div class="exp settingsContainer">
                         <div class="settingAccordionTrigger" onclick="toggleAccordion(this)">
-                            Experiment Settings
+                            Scale Settings
+                            <img id="accordionArrow" class="arrowIcon" src="../media/arrow_icon.png">
+                        </div>
+                        <div class="settingAccordion">
+                            <div class="settingRow">
+                                <b>Rating Scale:</b>
+                                <input id="scale_start_input" class="nrInputSmall" type="number" value="1" onkeyup=updateScale(this) onchange=updateScale(this)>
+                                to
+                                <input id="scale_end_input" class="nrInputSmall" type="number" value="9" onkeyup=updateScale(this) onchange=updateScale(this)>
+                            </div>
+                            <div class="settingRow">
+                                <b>Add labels:</b> 
+                                no
+                                <label class="switch">
+                                    <input type="checkbox" id="labelChecker" onchange="updateLabelSettings()">
+                                    <span class="slider"></span>
+                                </label>
+                                yes
+                            </div>
+                            <div class="settingRow" id="labelSettings"></div>
+                        </div>
+                        <div class="settingAccordionTrigger" onclick="toggleAccordion(this)">
+                            Interval Settings
                             <img id="accordionArrow" class="arrowIcon" src="../media/arrow_icon.png">
                         </div>
                         <div class="settingAccordion">
@@ -50,21 +73,6 @@
                                 <b>Interval:</b>
                                 <input id="interval_input" class="nrInputBig" type="number" min="1" max="3600" value="60" onkeyup=enforceInterval(this)>
                                 s
-                            </div>
-                            <div class="settingRow">
-                                <b>Rating Scale:</b>
-                                <input id="scale_start_input" class="nrInputSmall" type="number" value="1" onkeyup=enforceScale(this) onchange=enforceScale(this)>
-                                to
-                                <input id="scale_end_input" class="nrInputSmall" type="number" value="9" onkeyup=enforceScale(this) onchange=enforceScale(this)>
-                            </div>
-                            <div class="settingRow">
-                                <b>Pause Rating:</b> 
-                                no
-                                <label class="switch">
-                                    <input type="checkbox" id="pauseChecker">
-                                    <span class="slider"></span>
-                                </label>
-                                yes
                             </div>
                             <div class="settingRow">
                                 <b>Rating at Start of Video:</b> 
@@ -80,6 +88,21 @@
                                 no
                                 <label class="switch">
                                     <input type="checkbox" id="endInputChecker">
+                                    <span class="slider"></span>
+                                </label>
+                                yes
+                            </div>
+                        </div>
+                        <div class="settingAccordionTrigger" onclick="toggleAccordion(this)">
+                            Rating Behaviour Settings
+                            <img id="accordionArrow" class="arrowIcon" src="../media/arrow_icon.png">
+                        </div>
+                        <div class="settingAccordion">
+                            <div class="settingRow">
+                                <b>Pause to rate:</b> 
+                                no
+                                <label class="switch">
+                                    <input type="checkbox" id="pauseChecker">
                                     <span class="slider"></span>
                                 </label>
                                 yes

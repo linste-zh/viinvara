@@ -1,64 +1,104 @@
-function setTheme(){
-    
-}
+settingsObject = {}
+fullScale = []
+fullScaleLabels = []
+scaleChanged = true
 
 function loadExperiment(){
-    filledOut = submitNameAndVar()
-    if(!filledOut){
+    experimentDataObject = createDataExperimentObject()
+    if(!experimentDataObject){
         return
     }
-    acceptSettings()
+    localStorage.setItem("experimentDataObject", JSON.stringify(experimentDataObject))
+    console.log(localStorage.getItem("experimentDataObject"))
 
-    window.location.href="experiment.html"
+    scaleObject = createScaleObject()
+    if(!scaleObject){
+        return
+    }
+    localStorage.setItem("scaleObject", JSON.stringify(scaleObject))
+    console.log(localStorage.getItem("scaleObject"))
+
+    settingsObject = createSettingsObject()
+    if(!settingsObject){
+        return
+    }
+    localStorage.setItem("settingsObject", JSON.stringify(settingsObject))
+    console.log(localStorage.getItem("settingsObject"))
+
+    //window.location.href="experiment.html"
 }
-function submitNameAndVar(){
+
+function createDataExperimentObject(){
+    dataExperimentObject = {}
     userName = document.getElementById("nameField").value
     if(userName == ""){
         alert("please fill out the name field")
         return false
     }
-    localStorage.setItem("userName", userName)
     lingVar = document.getElementById("varField").value
     if(lingVar == ""){
         alert("please fill out the variable field")
         return false
     }
-    localStorage.setItem("lingVar", lingVar)
+    dataExperimentObject = {
+        "userName": userName,
+        "lingVar": lingVar,
+        "dataObjects": []
+    }
 
-    return true
+    return dataExperimentObject
 }
 
-function acceptSettings(){
+function createScaleObject(){
+    wantLabels = document.getElementById("labelChecker").checked
+    
+    fullScale = getCurrentFullScale()
+    if(fullScale.length < 2){
+        alert("Please provide a valid scale.")
+        return false
+    }
+
+    ensureMinLengthLabelsArray()
+
+    scaleObject = {}
+    for(let i = 0; i < fullScale.length; i++){
+        label = ""
+        if(i < fullScaleLabels.length && wantLabels){
+            label = fullScaleLabels[i]
+        }
+
+        scaleObject[i] = {
+            "value": fullScale[i],
+            "label": label
+        }
+    }
+
+    return scaleObject
+}
+
+function createSettingsObject(){
+    settingObject = {}
+
     interval = document.getElementById("interval_input").value
     if(interval == ""){
-        interval = 60;
+        alert("Please provide valid interval.")
+        return false
     }
-    localStorage.setItem("interval", interval)
-
-    localStorage.setItem("dataInputs", "")
-
-    scale_start = document.getElementById("scale_start_input").value
-    scale_end = document.getElementById("scale_end_input").value
-    if(scale_start == ""){
-        scale_start = 1;
-    }
-    if(scale_end == ""){
-        scale_end = 9;
-    }
-    scale = [scale_start, scale_end]
-    localStorage.setItem("scale", JSON.stringify(scale))
+    settingObject["interval"] = interval
 
     pause = document.getElementById("pauseChecker").checked
-    localStorage.setItem("pausing", pause)
+    settingObject["pausing"] = pause
 
     atStart = document.getElementById("startInputChecker").checked
-    localStorage.setItem("inputAtStart", atStart)
+    settingObject["inputAtStart"] = atStart
 
     atEnd = document.getElementById("endInputChecker").checked
-    localStorage.setItem("inputAtEnd", atEnd)
+    settingObject["inputAtEnd"] = atEnd
 
     checked_option = document.querySelector('input[name = "notRatedBehaviour"]:checked').value;
-    localStorage.setItem("notRatedBehaviour", checked_option)
+    settingObject["notRatedBehaviour"] = checked_option
+
+    return settingObject
 }
 
 function enforceInterval(el){
@@ -73,16 +113,24 @@ function enforceInterval(el){
     }
 }
 
-function enforceScale(el){
+function getCurrentFullScale(){
     scale_start = parseInt(document.getElementById("scale_start_input").value)
     scale_end = parseInt(document.getElementById("scale_end_input").value)
 
-    fullScale = []
+    curFullScale = []
     for (let i = scale_start; i <=  scale_end; i++) {
-        fullScale.push(i);
+        curFullScale.push(i);
     }
 
-    if(fullScale.length > 10){
+    return curFullScale
+}
+
+function updateScale(el){
+    scaleChanged = true
+    curFullScale = getCurrentFullScale()
+
+    //enforce valid scale
+    if(curFullScale.length > 10){
         if(el.id == "scale_start_input"){
             el.value = scale_end - 9
         }else{
@@ -95,8 +143,78 @@ function enforceScale(el){
             el.value = scale_start + 1
         }
     }
-
     
+    fullScale = getCurrentFullScale()
+
+    ensureMinLengthLabelsArray()
+    updateLabelSettings()
+}
+
+function ensureMinLengthLabelsArray(){
+    while(fullScale.length > fullScaleLabels.length){
+        fullScaleLabels.push("")
+    }
+    return fullScaleLabels
+}
+
+
+function updateLabelSettings(fullScale = getCurrentFullScale()){
+    if(document.getElementById("labelChecker").checked){
+        displayScaleLableInputs()
+    }else{
+        document.getElementById("labelSettings").style.display = "none"
+    }
+
+    //note: decrease not nicely animated yet
+    let accordionContainer = document.getElementById("labelSettings").closest(".settingAccordion");
+    setTimeout(() => {
+        accordionContainer.style.maxHeight = accordionContainer.scrollHeight + "px";
+    }, 20);
+}
+
+function displayScaleLableInputs(){
+    labelSettingElement =  document.getElementById("labelSettings")
+    fullScale = getCurrentFullScale()
+    
+    if(scaleChanged){
+        ensureMinLengthLabelsArray()
+
+        labelSettingElement.innerHTML = ""
+
+        for(let i = 0; i < fullScale.length; i++){
+            value = fullScale[i]
+            label = ""
+            if(i < fullScaleLabels.length){
+                label = fullScaleLabels[i]
+            }
+
+            let curElLabel = document.createElement('label');
+            curElLabel.innerHTML = value;
+            curElLabel.for = i
+            //curLabel.classList.add('ratingButton');
+            labelSettingElement.appendChild(curElLabel);
+
+            let curElInput = document.createElement('input');
+            curElInput.id = i
+            curElInput.type = "text"
+            curElInput.value = label
+            curElInput.onkeyup = () => {
+                fullScaleLabels[parseInt(curElInput.id)] = curElInput.value
+            }
+            //curLabel.classList.add('ratingButton');
+            labelSettingElement.appendChild(curElInput);
+
+            labelSettingElement.appendChild(document.createElement("br"));
+        }
+
+        scaleChanged = false
+    }
+
+    labelSettingElement.style.display = "block"
+    let accordionContainer = document.getElementById("labelSettings").closest(".settingAccordion");
+    setTimeout(() => {
+        accordionContainer.style.maxHeight = accordionContainer.scrollHeight + "px";
+    }, 10);
 }
 
 function reset(){
