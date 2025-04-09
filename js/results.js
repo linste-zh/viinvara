@@ -1,16 +1,13 @@
 let timeValues, ratingValues
+const experimentData = JSON.parse(localStorage.getItem("experimentDataObject"))
+
 
 function setUp(){
     document.getElementsByTagName("body")[0].style = localStorage.getItem("theme")
 
+    inputs = experimentData["dataInputs"]
     timeValues = []
     ratingValues = []
-    inputs = localStorage.getItem("dataInputs")
-    if(inputs != ""){
-        inputs = JSON.parse(inputs)
-    }else{
-        inputs = []
-    }
 
     for (var i in inputs){
         timeValues.push(inputs[i].time)
@@ -35,6 +32,7 @@ function showGraph(){
         data: {
           labels: timeValues,
           datasets: [{
+            label: experimentData["lingVar"],
             borderColor: "rgba(0, 0, 0, 0.47)",
             data: ratingValues
           }]
@@ -52,12 +50,7 @@ function showGraph(){
 
 //source: https://medium.com/@idorenyinudoh10/how-to-export-data-from-javascript-to-a-csv-file-955bdfc394a9
 function createCSV(){
-    inputs = localStorage.getItem("dataInputs")
-    if(inputs != ""){
-        inputs = JSON.parse(inputs)
-    }else{
-        inputs = []
-    }
+    inputs = experimentData["dataInputs"]
 
     //create headers
     const titleKeys = Object.keys(inputs[0])
@@ -84,7 +77,7 @@ function createCSV(){
     csvLink.setAttribute('href', csvURL)
 
     currentDate = new Date()
-    const fileName = `${currentDate.getYear()}/${currentDate.getMonth()+1}/${currentDate.getDate()}_${localStorage.getItem("userName")}_${localStorage.getItem("lingVar")}`
+    const fileName = `${currentDate.getYear()}/${currentDate.getMonth()+1}/${currentDate.getDate()}_${experimentData["userName"]}_${experimentData["lingVar"]}`
     console.log(fileName)
     csvLink.setAttribute('download', fileName)
 }
@@ -98,7 +91,7 @@ function createJpeg(){
         jpegLink.setAttribute('href', canvasUrl)
 
         currentDate = new Date()
-        const fileName = `${currentDate.getYear()}/${currentDate.getMonth()+1}/${currentDate.getDate()}_${localStorage.getItem("userName")}_${localStorage.getItem("lingVar")}`
+        const fileName = `${currentDate.getYear()}/${currentDate.getMonth()+1}/${currentDate.getDate()}_${experimentData["userName"]}_${experimentData["lingVar"]}`
         console.log("ready to download")
         jpegLink.setAttribute('download', fileName)
     }, 500)
