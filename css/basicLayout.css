@@ -6,12 +6,12 @@ body,html{
 
 body{
     background: rgb(17,214,164);
-    display: grid;
+    /*display: grid;
     grid:
       "header" auto
       "main" 1fr
       "footer" auto
-      / 1fr;
+    ;*/
 }
 
 .header{
@@ -19,7 +19,7 @@ body{
     position: sticky;
     top: 0px;
     left: 0px;
-    z-index: 99;
+    z-index: 10;
     height: 60px;
     width: 100%;
     background-color: rgba(211, 211, 211, 1);
@@ -57,7 +57,8 @@ body{
 
 
 .mainBody{
-    grid-area: main;
+    width: 100vw;
+    min-height: calc(100vh - 60px - 25px);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -65,11 +66,10 @@ body{
 
 
 .footer{
-    grid-area: footer;
     position: sticky;
     bottom: 0px;
     left: 0px;
-    z-index: 99;
+    z-index: 10;
     height: 25px;
     width: 100%;
     background-color: rgba(211, 211, 211, 1);

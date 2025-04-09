@@ -1,28 +1,25 @@
 html, body{
-    height: 100%;
-    max-height: 100%;
-    min-height: 100%;
+    max-height: 100vh;
+    min-height: 100vh;
 }
 
 .mainBody{
-    max-height: calc(100vw - 60px - 25px);
+    align-items: stretch;
+    max-height: calc(100vh - 60px - 25px);
 }
 
+
 .pageContent{
-    min-width: 400px;
-    min-height: 300px;
-    height: 100%;
-    max-height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: stretch;
     align-items: center;
 }
 
 .textPanel{
+    flex: 1;
     text-align: center;
-    max-height: 10%;
-    margin-bottom: 20px;
+
 }
 
 .textPanel h1{
@@ -37,20 +34,12 @@ html, body{
     font-style: italic;
 }
 
-.experimentArea{
+.videoContainer{
+    flex: 10;
+    width: 100%;
+    overflow: hidden;
     background-color: rgba(245, 246, 232, 0.606);
     box-shadow: 0 0 10px 15px rgba(245, 246, 232, 0.606);
-    height: 90%;
-    max-height: 90%;
-    width: 100%;
-}
-
-.videoContainer{
-    /*height: 85%;
-    max-height: 85%;
-    width: 100%;*/
-    height: 400px;
-    width: 700px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -63,31 +52,39 @@ html, body{
     padding: 20px;
 }
 
-
 .videoPlayer{
-    height: auto;
-    width: auto;
     max-height: 100%;
     max-width: 100%;
+    object-fit: contain;
+    overflow-clip-margin: content-box;
+    overflow: clip;
 }
 
+
 .ratingScaleContainer{
+    flex: 2;
     min-height: 30px;
-    height: 15%;
-    max-height: 15%;
+    height: 100%;
     width: 100%;
-    border: solid;
+    align-self: center;
     display: flex;
-    flex-wrap: wrap;
-    flex-flow: row;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
 }
 
+.ratingScale{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: rgba(245, 246, 232, 0.606);
+}
+
 .ratingButton{
-    flex: 1;
-    height: 40px;
-    width: 40px;
+    height: 100%;
+    width: auto;
     font-size: 2vw;
     margin: 10px;
     text-align: center;

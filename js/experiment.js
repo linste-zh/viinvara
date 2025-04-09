@@ -177,7 +177,7 @@ function activateRating(pausingBehaviour = () => {}){
     activeExperimentState.pendingRating = true
     pausingBehaviour()
     activeExperimentState.currentTimeStamp = timeInS
-    activeExperimentState.ratingElement.style.visibility = "visible"
+    activeExperimentState.ratingElement.style = "visibility: visible; background-color: white"
 }
 
 class DataPoint{
