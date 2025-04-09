@@ -14,6 +14,7 @@ html, body{
     flex-direction: column;
     justify-content: stretch;
     align-items: center;
+    row-gap: 10px;
 }
 
 .textPanel{
@@ -49,6 +50,7 @@ html, body{
 .bigButton{
     font-size: 15pt;
     max-height: 90%;
+    width: fit-content;
     padding: 20px;
 }
 
@@ -75,18 +77,38 @@ html, body{
 .ratingScale{
     width: 100%;
     height: 100%;
-    display: flex;
-    flex-flow: row;
-    justify-content: space-evenly;
-    align-items: center;
     background-color: rgba(245, 246, 232, 0.606);
+    box-shadow: 0 0 10px 15px rgba(245, 246, 232, 0.606);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%/10), max(100%)), 1fr);
+    grid-template-rows: 80% 20%;
+    align-items: center;
+    justify-items: center;
+}
+
+.ratingGridDiv{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .ratingButton{
-    height: 100%;
-    width: auto;
+    min-height: fit-content;
+    min-width: fit-content;
+    max-height: 100%;
+    max-width: 100%;
+    width: 60%;
+    height: 80%;
     font-size: 2vw;
     margin: 10px;
+    text-align: center;
+    border-radius: 15%;
+}
+
+.buttonLabel{
+    font-size: 1.5vw;
     text-align: center;
 }
 

@@ -25,7 +25,7 @@ function loadExperiment(){
     localStorage.setItem("settingsObject", JSON.stringify(settingsObject))
     console.log(localStorage.getItem("settingsObject"))
 
-    //window.location.href="experiment.html"
+    window.location.href="experiment.html"
 }
 
 function createDataExperimentObject(){
@@ -43,7 +43,7 @@ function createDataExperimentObject(){
     dataExperimentObject = {
         "userName": userName,
         "lingVar": lingVar,
-        "dataObjects": []
+        "dataInputs": []
     }
 
     return dataExperimentObject
@@ -84,7 +84,7 @@ function createSettingsObject(){
         alert("Please provide valid interval.")
         return false
     }
-    settingObject["interval"] = interval
+    settingObject["interval"] = parseInt(interval)
 
     pause = document.getElementById("pauseChecker").checked
     settingObject["pausing"] = pause
@@ -158,7 +158,7 @@ function ensureMinLengthLabelsArray(){
 }
 
 
-function updateLabelSettings(fullScale = getCurrentFullScale()){
+function updateLabelSettings(){
     if(document.getElementById("labelChecker").checked){
         displayScaleLableInputs()
     }else{
@@ -198,19 +198,19 @@ function displayScaleLableInputs(){
             curElInput.id = i
             curElInput.type = "text"
             curElInput.value = label
+            curElInput.maxLength = 20
+            curElInput.classList.add("labelInput")
             curElInput.onkeyup = () => {
                 fullScaleLabels[parseInt(curElInput.id)] = curElInput.value
             }
-            //curLabel.classList.add('ratingButton');
+            
             labelSettingElement.appendChild(curElInput);
-
-            labelSettingElement.appendChild(document.createElement("br"));
         }
 
         scaleChanged = false
     }
 
-    labelSettingElement.style.display = "block"
+    labelSettingElement.style.display = "grid"
     let accordionContainer = document.getElementById("labelSettings").closest(".settingAccordion");
     setTimeout(() => {
         accordionContainer.style.maxHeight = accordionContainer.scrollHeight + "px";
@@ -219,15 +219,9 @@ function displayScaleLableInputs(){
 
 function reset(){
     if (confirm("Return to start page? This will reset all your data and variables.")){
-        localStorage.removeItem("interval")
-        localStorage.removeItem("scale")
-        localStorage.removeItem("pausing")
-        localStorage.removeItem("dataInputs")
-        localStorage.removeItem("userName")
-        localStorage.removeItem("lingVar")
-        localStorage.removeItem("notRatedBehaviour")
-        localStorage.removeItem("inputAtEnd")
-        localStorage.removeItem("inputAtStart")        
+        localStorage.removeItem("experimentDataObject")
+        localStorage.removeItem("scaleObject")
+        localStorage.removeItem("settingsObject")
 
         window.location.href="index.html"
     }else{
