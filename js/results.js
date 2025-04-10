@@ -1,6 +1,6 @@
 let timeValues, ratingValues
 const experimentData = JSON.parse(localStorage.getItem("experimentDataObject"))
-
+const scale = JSON.parse(localStorage.getItem("scaleObject"))
 
 function setUp(){
     document.getElementsByTagName("body")[0].style = localStorage.getItem("theme")
@@ -20,13 +20,6 @@ function setUp(){
 }
 
 function showGraph(){
-    //var canvas = document.getElementById("resultChart");
-    //var ctx = canvas.getContext("2d");
-
-    // Draw a white background first
-    //ctx.fillStyle = "white";
-    //ctx.fillRect(0, 0, canvas.width, canvas.height);
-
     new Chart("resultChart", {
         type: "line",
         data: {
@@ -35,18 +28,40 @@ function showGraph(){
             label: experimentData["lingVar"],
             borderColor: "rgba(0, 0, 0, 0.47)",
             data: ratingValues
-          }]
+          }],
+        },
+        //partially done via ChatGPT
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        min: scale[0]["value"],
+                        max: scale[Object.values(scale).length - 1]["value"]
+                    }
+                }]
+            },
+            responsive: true,
+            onClick: function(event, elements) {
+                if (elements.length > 0) {
+                    const firstPoint = elements[0];
+                    const time = this.data.labels[firstPoint._index];
+                    playVideo(time);
+                }
+            }
         },
         plugins: {
-            beforeDraw: function (chart) {
+            beforeDraw: (chart) => {
                 let ctx = chart.canvas.getContext("2d");
                 ctx.fillStyle = "white"; // Set white background
                 ctx.fillRect(0, 0, chart.width, chart.height);
             }
         }
-      });
+    });
 }
 
+function playVideo(time){
+    console.log(time)
+}
 
 //source: https://medium.com/@idorenyinudoh10/how-to-export-data-from-javascript-to-a-csv-file-955bdfc394a9
 function createCSV(){
@@ -95,4 +110,33 @@ function createJpeg(){
         console.log("ready to download")
         jpegLink.setAttribute('download', fileName)
     }, 500)
+}
+
+async function setUpVideo(){
+    const videoSrc = await pickSrc()
+
+    videoContainer.innerHTML = '<video controls id="video_player" class="videoPlayer"><source id = "video_src" type="video/mp4"></video>'
+    document.getElementById("video_player")
+    document.getElementById("video_player").src = videoSrc
+}
+
+function pickSrc(){
+    return new Promise((resolve, reject) => {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = "video/mp4"
+        input.style = "display: none;"
+        input.onchange = () => {
+            let files =   Array.from(input.files);
+            chosenVideo = files[0]
+            if (chosenVideo) {
+                videoSrc = URL.createObjectURL(chosenVideo);
+                resolve(videoSrc);
+            }else{
+                reject("No video file selected.");
+            }
+        }
+
+        input.click();
+    });
 }

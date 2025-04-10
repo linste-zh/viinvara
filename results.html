@@ -21,12 +21,18 @@
                     <h1>Here are your results!</h1>
                 </div>
                 <section class="results">
-                    <canvas id="resultChart" onload = "showGraph()" style="width:100%;max-width:700px"></canvas>
-                    <div id="exportCSV" class="csvContainer">
-                        <a id="csvLink">Click to Download CSV</a>
-                        <a id="jpegLink">Click to Download JPEG</a>
+                    <div id="graphContainer">
+                        <canvas id="resultChart" onload = "showGraph()"></canvas>
+                    </div>
+                    <div id="videoContainer" class="videoContainer">
+                        <b>please select your video file again</b>
+                        <button class="bigButton" onclick='setUpVideo()'>pick source</button>
                     </div>
                 </section>
+                <div id="exportCSV" class="csvContainer">
+                    <a id="csvLink">Click to Download CSV</a>
+                    <a id="jpegLink">Click to Download JPEG</a>
+                </div>
             </div>
         </main>
         <footer class = "footer">

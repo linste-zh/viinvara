@@ -1,8 +1,8 @@
 .pageContent{
     min-width: 500px;
     min-height: 300px;
+    width: 100%;
     height: fit-content;
-    max-height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -10,14 +10,25 @@
 }
 
 .results{
+    width: 100%;
     background-color: rgba(245, 246, 232, 0.606);
     box-shadow: 0 0 10px 15px rgba(245, 246, 232, 0.606);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(50%, 1fr));
 }
 
 canvas{
-    height: 300px;
-    width: 80%;
-    margin: 10px;
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+}
+
+.videoPlayer{
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    overflow-clip-margin: content-box;
+    overflow: clip;
 }
 
 .csvContainer{
