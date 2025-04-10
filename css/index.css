@@ -156,6 +156,7 @@
   transform: scaleY(-1);
 }
 
+
 .settingAccordion{
     width: 100%;
     padding: 0px 5px;
@@ -171,6 +172,13 @@
 
 .settingRow{
   margin: 5px 0px;
+}
+
+#soundIcon{
+  height: 20px;
+  width: auto;
+  cursor: pointer;
+  float: left;
 }
 
 #labelSettings{

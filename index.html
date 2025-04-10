@@ -35,7 +35,7 @@
                     <h1>Set Up Experiment</h1>
                     <div class="var settingsContainer">
                         <label for="nameField">Who is doing the experiment?</label>
-                        <input type="text" class = "textInput" id="nameField">
+                        <input type="text" class = "textInput" id="nameField" autofocus>
                     </div>
                     <div class="var settingsContainer">
                         <label for="varField">What variable are they rating?</label>
@@ -108,6 +108,17 @@
                                 yes
                             </div>
                             <div class="settingRow">
+                                <b style="float: left; margin-left: 5px">Notification Sound at Interval:</b> 
+                                <select id="notificationSound" onchange="setSound()" style="float: left; margin-left: 5px">
+                                    <option value="none">None (silent)</option>
+                                    <option value="bubbles.mp3">Bubbles</option>
+                                    <option value="chime.mp3">Chime</option>
+                                    <option value="honk.mp3">Honk</option>
+                                    <option value="ping.mp3">Ping</option>
+                                </select>
+                                <img id="soundIcon" onclick="testSound()" src="./media/play_icon.png" alt="Test Sound Icon"> 
+                            </div>
+                            <div class="settingRow">
                                 <b>Behaviour when rating not provided in time:</b></br>
                                 <input type="radio" id="emergencyPause" class="radioButton" name="notRatedBehaviour" value="pause">
                                 <label for="emergencyPause">pause</label><br>
@@ -123,10 +134,13 @@
                     </div>
                 </section>
             </div>
+            <audio style="display: none" id="soundPlayer">
+                <source id="soundSource" type="audio/mpeg">
+            </audio>
         </main>
         <footer class = "footer">
-            <span class="footerNote">08/04/2025</span>
-            <span class="footerNote">V0.13 (Demo 1)</span>
+            <span class="footerNote">10/04/2025</span>
+            <span class="footerNote">V0.15</span>
             <span class="footerNote">Linda Steiner</span>
             <span class="footerNote">VarSLA</span>
         </footer>

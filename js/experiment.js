@@ -18,6 +18,11 @@ function setup(){
 
     activeExperimentState.interval = settings["interval"]
 
+    fullScale = []
+    for(var index in scale){
+        fullScale.push(scale[index]["value"])
+    }
+
     if(settings["notRatedBehaviour"] == "neutral"){
         if(fullScale.length % 2 != 0){
             middle = fullScale[Math.floor(fullScale.length / 2)];
@@ -27,6 +32,8 @@ function setup(){
         activeExperimentState.neutralRating = middle
         console.log("neutral rating: " + middle)
     }
+
+    document.getElementById("soundPlayer").src = settings["sound"]
 
 
     instruction = String(experimentData["userName"] + ", please rate this video based on " + experimentData["lingVar"])
@@ -94,6 +101,10 @@ async function setUpVideo(){
 
     activeExperimentState.videoElement.onended = () => {
         end()
+    }
+
+    document.getElementById("soundPlayer").onended = () => {
+        activeExperimentState.videoElement.volume = 1;
     }
 
     activeExperimentState.ratingElement.innerHTML='<div class="ratingGridDiv"><button class="bigButton" onclick="start()">start</button></div>'
@@ -197,7 +208,7 @@ function checkIfRatingRequired(pausingBehaviour = () => {}){
     timeInS = Math.floor(activeExperimentState.videoElement.currentTime)
     if(timePointContained(timeInS)){        
         return false
-    }else if(timeInS > 0 && timeInS % activeExperimentState.interval == 0){ 
+    }else if(timeInS > 0 && timeInS % activeExperimentState.interval == 0 && !activeExperimentState.pendingRating){
         activateRating(pausingBehaviour)
         return true
     }
@@ -218,8 +229,10 @@ function notRatedInTime(){
 }
 
 function activateRating(pausingBehaviour = () => {}){
+    console.log("rating activated")
     activeExperimentState.pendingRating = true
     pausingBehaviour()
+    playSound()
     activeExperimentState.currentTimeStamp = timeInS
     activeExperimentState.ratingElement.style = "visibility: visible"
 }
@@ -264,4 +277,13 @@ function addDataPoint(dp){
     console.log(localStorage.getItem("experimentDataObject"))
 
     activeExperimentState.pendingRating = false
+}
+
+function playSound(){
+    if(settings["sound"] == "none"){
+        return
+    }
+
+    activeExperimentState.videoElement.volume = 0.7
+    document.getElementById("soundPlayer").play()
 }

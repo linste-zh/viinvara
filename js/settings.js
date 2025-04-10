@@ -2,6 +2,7 @@ settingsObject = {}
 fullScale = []
 fullScaleLabels = []
 scaleChanged = true
+currentSound = "none"
 
 function loadExperiment(){
     experimentDataObject = createDataExperimentObject()
@@ -98,6 +99,8 @@ function createSettingsObject(){
     checked_option = document.querySelector('input[name = "notRatedBehaviour"]:checked').value;
     settingObject["notRatedBehaviour"] = checked_option
 
+    settingObject["sound"] = currentSound
+
     return settingObject
 }
 
@@ -112,6 +115,32 @@ function enforceInterval(el){
         el.value = 3600;
     }
 }
+
+function setSound(){
+    picked = document.getElementById("notificationSound").value
+    if(picked == "none"){
+        return
+    }
+    currentSound = "./media/" + picked
+    document.getElementById("soundPlayer").src = currentSound
+}
+
+//image source: https://www.flaticon.com/free-icon/play_3318660?term=play&page=1&position=1&origin=style&related_id=3318660
+//image source: https://www.flaticon.com/free-icon/sound-waves_7582349?term=playing+sound&page=1&position=1&origin=search&related_id=7582349
+function testSound(){
+    soundPlayer = document.getElementById("soundPlayer")
+    console.log(currentSound)
+
+    if(currentSound == "none"){
+        return
+    }else{
+        soundPlayer.play()
+        document.getElementById("soundIcon").src = "./media/playing_icon.png"
+        soundPlayer.onended = () => {document.getElementById("soundIcon").src = "./media/play_icon.png"}
+    }
+}
+
+
 
 function getCurrentFullScale(){
     scale_start = parseInt(document.getElementById("scale_start_input").value)
