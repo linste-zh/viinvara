@@ -82,7 +82,10 @@ function end(){
 async function setUpVideo(){
     const videoSrc = await pickSrc()
 
-    videoContainer.innerHTML = '<video id="video_player" class="videoPlayer"><source id = "video_src" type="video/mp4"></video>'
+    videoContainer.innerHTML = `
+        <video id="video_player" class="videoPlayer">
+        <source id = "video_src" type="video/mp4">
+        </video>`
     activeExperimentState.videoElement = document.getElementById("video_player")
     activeExperimentState.videoElement.src = videoSrc
 
@@ -114,16 +117,45 @@ function pickSrc(){
         input.type = 'file';
         input.accept = "video/mp4"
         input.style = "display: none;"
+
+        //code from ChatGPT
         input.onchange = () => {
-            let files =   Array.from(input.files);
-            chosenVideo = files[0]
-            if (chosenVideo) {
-                videoSrc = URL.createObjectURL(chosenVideo);
-                resolve(videoSrc);
-            }else{
+            const file = input.files[0];
+            if (file) {
+                const request = indexedDB.open("videoDB", 1);
+
+                request.onupgradeneeded = function (e) {
+                    const db = e.target.result;
+                    if (!db.objectStoreNames.contains("videos")) {
+                        db.createObjectStore("videos", { keyPath: "id" });
+                    }
+                };
+
+                request.onsuccess = function (e) {
+                    const db = e.target.result;
+                    const transaction = db.transaction(["videos"], "readwrite");
+                    const store = transaction.objectStore("videos");
+
+                    const videoData = { id: "selectedVideo", file: file };
+                    const addRequest = store.put(videoData);
+
+                    addRequest.onsuccess = function () {
+                        console.log("Video stored in IndexedDB.");
+                        resolve("indexeddb"); // you can return a flag or ID
+                    };
+
+                    addRequest.onerror = function () {
+                        reject("Failed to store video in IndexedDB.");
+                    };
+                };
+
+                request.onerror = function () {
+                    reject("Failed to open IndexedDB.");
+                };
+            } else {
                 reject("No video file selected.");
             }
-        }
+        };
 
         input.click();
     });
