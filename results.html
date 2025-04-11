@@ -7,6 +7,7 @@
         <script src="./js/settings.js"></script>
         <script src="./js/results.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.7/chartjs-plugin-annotation.min.js"></script>
         <meta charset="UTF-8">
     </head>
     <body onload="setUp()">
@@ -20,13 +21,19 @@
                 <div class="textPanel" id="instruction">
                     <h1>Here are your results!</h1>
                 </div>
-                <section class="results">
+                <section class="results" id="resultsGrid">
                     <div id="graphContainer">
-                        <canvas id="resultChart" onload = "showGraph()"></canvas>
+                        <canvas id="resultChart"></canvas>
                     </div>
-                    <div id="videoContainer" class="videoContainer">
-                        <b>please select your video file again</b>
-                        <button class="bigButton" onclick='setUpVideo()'>pick source</button>
+                    <div id="resultVideoContainer">
+                        <div id="showVideo" onclick="toggleVideo()">
+                            <b id="showVideoText">Show Video</b>
+                            <img id="videoArrow" class="arrowIcon" src="./media/arrow_icon.png">
+                        </div>
+                        <div id="videoContainer" class="videoContainer">
+                            <b>please select your video file again</b>
+                            <button class="bigButton" onclick='setUpVideo()'>pick source</button>
+                        </div>
                     </div>
                 </section>
                 <div id="exportCSV" class="csvContainer">
@@ -36,8 +43,8 @@
             </div>
         </main>
         <footer class = "footer">
-            <span class="footerNote">10/04/2025</span>
-            <span class="footerNote">V0.15</span>
+            <span class="footerNote">11/04/2025</span>
+            <span class="footerNote">V0.16</span>
             <span class="footerNote">Linda Steiner</span>
             <span class="footerNote">VarSLA</span>
         </footer>

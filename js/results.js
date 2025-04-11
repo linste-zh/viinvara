@@ -1,6 +1,8 @@
 let timeValues, ratingValues
 const experimentData = JSON.parse(localStorage.getItem("experimentDataObject"))
 const scale = JSON.parse(localStorage.getItem("scaleObject"))
+var videoShown = false
+var videoPicked = false
 
 function setUp(){
     document.getElementsByTagName("body")[0].style = localStorage.getItem("theme")
@@ -14,39 +16,67 @@ function setUp(){
         ratingValues.push(inputs[i].rating)
     }
 
+    document.getElementById("videoContainer").style.display = "none"
+
+
     showGraph()
     createCSV()
     createJpeg()
 }
 
 function showGraph(){
+
+    var middle_rating = scale[Math.floor(Object.values(scale).length / 2)]
+    console.log(middle_rating)
+
+    if(Object.values(scale).length % 2 != 0){
+        middle = middle_rating["value"];
+    }else{
+        middle = middle_rating["value"] - 0.5;
+    }
+
+    console.log(middle)
+
+    //largely done via ChatGPT
     new Chart("resultChart", {
         type: "line",
         data: {
           labels: timeValues,
           datasets: [{
-            label: experimentData["lingVar"],
+            label: experimentData["userName"] + " rating " + experimentData["lingVar"],
             borderColor: "rgba(0, 0, 0, 0.47)",
-            data: ratingValues
-          }],
+            data: ratingValues,
+            fill: true,
+        }]
         },
-        //partially done via ChatGPT
         options: {
             scales: {
                 yAxes: [{
                     ticks: {
                         min: scale[0]["value"],
-                        max: scale[Object.values(scale).length - 1]["value"]
+                        max: scale[Object.values(scale).length - 1]["value"],
+                        stepSize: 1,
+                    },
+                    gridLines: {
+                        drawBorder: false
                     }
                 }]
             },
-            responsive: true,
             onClick: function(event, elements) {
                 if (elements.length > 0) {
                     const firstPoint = elements[0];
                     const time = this.data.labels[firstPoint._index];
                     playVideo(time);
                 }
+            },
+            annotation: {
+                annotations: [{
+                    type: "line",
+                    mode: "horizontal",
+                    scaleID: "y-axis-0",
+                    value: middle,
+                    borderWidth: 2,
+                }]
             }
         },
         plugins: {
@@ -60,7 +90,10 @@ function showGraph(){
 }
 
 function playVideo(time){
-    console.log(time)
+    if(videoShown){
+        document.getElementById("video_player").play()
+        document.getElementById("video_player").currentTime = time;
+    }
 }
 
 //source: https://medium.com/@idorenyinudoh10/how-to-export-data-from-javascript-to-a-csv-file-955bdfc394a9
@@ -111,6 +144,27 @@ function createJpeg(){
         jpegLink.setAttribute('download', fileName)
     }, 500)
 }
+
+function toggleVideo(){
+    document.getElementById("videoArrow").classList.toggle("active")
+    videoContainer = document.getElementById("videoContainer")
+
+
+    if(videoContainer.style.display == "none"){
+        document.getElementById("showVideoText").innerHTML = "Hide Video"
+        videoContainer.style.display = "flex"
+        document.getElementById("resultsGrid").style.gridTemplateColumns = "1.5fr 1fr"
+        videoShown = true
+    }else{
+        document.getElementById("showVideoText").innerHTML = "Show Video"
+        if(videoPicked){document.getElementById("video_player").pause()}
+        videoContainer.style.display = "none"
+        document.getElementById("resultsGrid").style.gridTemplateColumns = "1fr auto"
+        videoShown = false
+    }
+    showGraph()
+}
+
 
 async function setUpVideo(){
     const videoSrc = await pickSrc()
