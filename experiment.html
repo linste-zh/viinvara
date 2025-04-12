@@ -15,12 +15,13 @@
         <header class = "header">
             <a class="iconWrapper" onclick="reset()"><img class="home icon" src="./media/home_icon.png" alt="Home Icon"></a>
             <h1>ViInVaRa</h1>
-            <a class="iconWrapper" onclick=""><img class="help icon" src="./media/help_icon.png" alt="Help Icon"></a>
+            <!--<a class="iconWrapper" onclick=""><img class="help icon" src="./media/help_icon.png" alt="Help Icon"></a>-->
         </header>
         <main class="mainBody">
             <div class="pageContent">
-                <div class="textPanel" id="instruction">
-                    <h1>Rate your Video</h1>
+                <div class="textPanel">
+                    <span id="instruction">Rate your Video</span>
+                    <button onclick="exitExperiment()">continue <img class="exitIcon" src="./media/exit_icon.png"></button>
                 </div>
                 <div id="videoContainer" class="videoContainer">
                     <button class="bigButton" onclick='setUpVideo()'>pick source</button>

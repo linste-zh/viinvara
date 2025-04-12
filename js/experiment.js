@@ -37,8 +37,8 @@ function setup(){
     document.getElementById("soundPlayer").src = settings["sound"]
 
 
-    instruction = String(experimentData["userName"] + ", please rate this video based on " + experimentData["lingVar"])
-    document.getElementById("instruction").innerHTML = "<h1>" + instruction + "</h1>"
+    instruction = String("<b>" + experimentData["userName"] + "</b>, please rate this video based on <b>" + experimentData["lingVar"] + "</b>")
+    document.getElementById("instruction").innerHTML = instruction
 
     console.log(activeExperimentState)
     console.log(experimentData)
@@ -84,13 +84,28 @@ function end(){
     }
 }
 
+function exitExperiment(){
+    if(activeExperimentState.videoElement){
+        pauseVideo()
+    }
+   
+    if (confirm("Continue to the results already? This will prematurely end your experiment.")){
+        window.location.href="results.html"
+    }else{
+        if(activeExperimentState.videoElement){
+            playVideo()
+        }
+        console.log("cancelled")
+    }
+}
+
 //__________________________________________________________________
 //VIDEO SETTINGS
 //__________________________________________________________________
 async function setUpVideo(){
     const videoSrc = await pickSrc()
 
-    videoContainer.innerHTML = '<video id="video_player" class="videoPlayer"><source id = "video_src" type="video/mp4"></video>'
+    videoContainer.innerHTML = '<video id="video_player" class="videoPlayer" type="video/mp4"></video>'
     activeExperimentState.videoElement = document.getElementById("video_player")
     activeExperimentState.videoElement.src = videoSrc
 
@@ -150,7 +165,6 @@ function playVideo(startTime){
         activeExperimentState.videoElement.currentTime = startTime
     }
 }
-
 
 //__________________________________________________________________
 //RATING SETTINGS
@@ -234,6 +248,7 @@ function activateRating(pausingBehaviour = () => {}){
     activeExperimentState.pendingRating = true
     pausingBehaviour()
     playSound()
+    timeInS = Math.floor(activeExperimentState.videoElement.currentTime)
     activeExperimentState.currentTimeStamp = timeInS
     activeExperimentState.ratingElement.style = "visibility: visible"
 }
