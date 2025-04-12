@@ -12,6 +12,7 @@ const settings = JSON.parse(localStorage.getItem("settingsObject"))
 
 function setup(){
     document.getElementsByTagName("body")[0].style = localStorage.getItem("theme")
+    document.getElementsByTagName("body")[0].addEventListener("keydown", (event) => {keyPressed(event)})
     
     activeExperimentState.videoContainer = document.getElementById("videoContainer")
     activeExperimentState.ratingElement = document.getElementById("ratingScale")
@@ -259,6 +260,19 @@ function timePointContained(time){
     }
     return false
 }  
+
+function keyPressed(e){
+    keyValue = e.key
+    console.log(keyValue)
+    if(keyValue in Object.values(scale) && activeExperimentState.pendingRating){
+        if(keyValue == 0){
+            keyValue = 9
+        }else{
+            keyValue -= 1
+        }
+        submit(scale[keyValue].value)
+    }
+}
 
 function submit(rating){
     dp = new DataPoint(activeExperimentState.currentTimeStamp, rating)

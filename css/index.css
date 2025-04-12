@@ -38,7 +38,7 @@
 }
 
 .gray{
-  background-color: rgba(245, 246, 232, 1);
+  background-color: linear-gradient(90deg,rgba(171, 171, 171, 1) 0%, rgba(209, 209, 209, 1) 16%, rgba(227, 227, 227, 1) 34%, rgba(255, 255, 255, 1) 50%, rgba(227, 227, 227, 1) 66%, rgba(209, 209, 209, 1) 84%, rgba(171, 171, 171, 1) 100%);;
 }
 
 .themeOption:hover{
@@ -72,8 +72,8 @@
 .settings{
   min-height: 200px;
   min-width: 400px;
-  background-color: rgba(245, 246, 232, 0.606);
-  box-shadow: 0 0 10px 15px rgba(245, 246, 232, 0.606);
+  background-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 10px 15px rgba(255, 255, 255, 0.6);
   padding: 20px;
 }
 
