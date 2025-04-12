@@ -263,13 +263,15 @@ function timePointContained(time){
 
 function keyPressed(e){
     keyValue = e.key
-    console.log(keyValue)
+    if(isNaN(keyValue)){
+        return
+    }
+    if(keyValue == 0){
+        keyValue = 10
+    }
+    keyValue -= 1
+
     if(keyValue in Object.values(scale) && activeExperimentState.pendingRating){
-        if(keyValue == 0){
-            keyValue = 9
-        }else{
-            keyValue -= 1
-        }
         submit(scale[keyValue].value)
     }
 }
