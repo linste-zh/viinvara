@@ -3,6 +3,8 @@ const experimentData = JSON.parse(localStorage.getItem("experimentDataObject"))
 const scale = JSON.parse(localStorage.getItem("scaleObject"))
 var videoShown = false
 var videoPicked = false
+var timeStamp = 0
+var chart
 
 function setUp(){
     document.getElementsByTagName("body")[0].style = localStorage.getItem("theme")
@@ -25,9 +27,11 @@ function setUp(){
 }
 
 function showGraph(){
+    if (chart) {
+        chart.destroy();
+    }
 
     var middle_rating = scale[Math.floor(Object.values(scale).length / 2)]
-    console.log(middle_rating)
 
     if(Object.values(scale).length % 2 != 0){
         middle = middle_rating["value"];
@@ -35,58 +39,128 @@ function showGraph(){
         middle = middle_rating["value"] - 0.5;
     }
 
-    console.log(middle)
-
     //largely done via ChatGPT
-    new Chart("resultChart", {
+    Chart.register(
+        window['chartjs-plugin-annotation'],
+        Chart.LineController,
+        Chart.LineElement,
+        Chart.PointElement,
+        Chart.LinearScale,
+        Chart.TimeScale,
+        Chart.CategoryScale,
+        Chart.Title,
+        Chart.Tooltip,
+        Chart.Legend
+    );    
+
+    Chart.register({
+        id: 'whiteBackground',
+        beforeDraw(chart) {
+            const ctx = chart.canvas.getContext("2d");
+            ctx.fillStyle = "white";
+            ctx.fillRect(0, 0, chart.width, chart.height);
+        }
+    });
+
+
+    const ctx = document.getElementById("resultChart").getContext('2d')
+    chart = new Chart(ctx, {
         type: "line",
         data: {
           labels: timeValues,
           datasets: [{
             label: experimentData["userName"] + " rating " + experimentData["lingVar"],
             borderColor: "rgba(0, 0, 0, 0.47)",
-            data: ratingValues,
+            data: timeValues.map((t, i) => ({ x: t, y: ratingValues[i] })),
             fill: true,
-        }]
+            clip: false,
+          }]
         },
         options: {
+            responsive: true,
             scales: {
-                yAxes: [{
+                x: {
+                    type: 'linear',
+                    position: 'bottom',
+                    min: 0,
+                    max: timeValues[timeValues.length - 1]
+                },
+                y: {
+                    min: scale[0]["value"],
+                    max: scale[Object.values(scale).length - 1]["value"],
                     ticks: {
-                        min: scale[0]["value"],
-                        max: scale[Object.values(scale).length - 1]["value"],
                         stepSize: 1,
                     },
-                    gridLines: {
+                    grid: {
                         drawBorder: false
-                    }
-                }]
-            },
-            onClick: function(event, elements) {
-                if (elements.length > 0) {
-                    const firstPoint = elements[0];
-                    const time = this.data.labels[firstPoint._index];
-                    playVideo(time);
+                    },
+                    offset: true,
                 }
             },
-            annotation: {
-                annotations: [{
-                    type: "line",
-                    mode: "horizontal",
-                    scaleID: "y-axis-0",
-                    value: middle,
-                    borderWidth: 2,
-                }]
-            }
-        },
-        plugins: {
-            beforeDraw: (chart) => {
-                let ctx = chart.canvas.getContext("2d");
-                ctx.fillStyle = "white"; // Set white background
-                ctx.fillRect(0, 0, chart.width, chart.height);
+            onClick: function(e, elements, chart) {
+                const canvasPosition = Chart.helpers.getRelativePosition(e, chart);
+                const dataX = chart.scales.x.getValueForPixel(canvasPosition.x);
+                const dataY = chart.scales.y.getValueForPixel(canvasPosition.y)
+
+                timeStamp = dataX
+                chart.options.plugins.annotation.annotations.timestampLine.value = timeStamp;
+                chart.update()
+
+                if (videoShown && videoPicked) {
+                    document.getElementById('video_player').currentTime = timeStamp;
+                }
+            },
+            plugins: {
+                annotation: {
+                    interaction: {
+                        mode: 'x',
+                        intersect: false
+                    },
+                    annotations: {
+                        middleLine: {
+                            type: "line",
+                            yMin: middle,
+                            yMax: middle,
+                            borderColor: "black",
+                            borderWidth: 2
+                        },
+                        timestampLine: {
+                            type: 'line',
+                            mode: 'vertical',
+                            scaleID: 'x',
+                            value: timeStamp,
+                            borderColor: 'red',
+                            borderWidth: 2,
+                            label: {
+                                display: true,
+                                content: '<>',
+                                position: 'start'
+                            },
+                            draggable: true,
+                            ondragstart: (e) => {
+                                console.log("drag")
+                            },
+                            /*onDragEnd: (e) => {
+                                const newValue = e.annotation.value;
+                                timeStamp = newValue;
+                                console.log('Dragged timestamp to', newValue);
+                        
+                                // Sync video
+                                if (videoShown && videoPicked) {
+                                    document.getElementById('video_player').currentTime = newValue;
+                                }
+                            }*/
+                        }
+                    }
+                }
             }
         }
-    });
+    })
+
+    /*setInterval(() => {
+        chart.update()
+        console.log("chart updated")
+    }, 500)*/
 }
 
 function playVideo(time){
@@ -140,7 +214,6 @@ function createJpeg(){
 
         currentDate = new Date()
         const fileName = `${currentDate.getYear()}/${currentDate.getMonth()+1}/${currentDate.getDate()}_${experimentData["userName"]}_${experimentData["lingVar"]}`
-        console.log("ready to download")
         jpegLink.setAttribute('download', fileName)
     }, 500)
 }
@@ -171,7 +244,14 @@ async function setUpVideo(){
 
     videoContainer.innerHTML = '<video controls id="video_player" class="videoPlayer"><source id = "video_src" type="video/mp4"></video>'
     document.getElementById("video_player")
-    document.getElementById("video_player").src = videoSrc
+    document.getElementById("video_player").src = videoSrc + "#t=" + timeStamp
+
+    document.getElementById("video_player").ontimeupdate  = () => {
+        timeStamp = document.getElementById("video_player").currentTime
+        
+        chart.options.plugins.annotation.annotations.timestampLine.value = timeStamp;
+        chart.update()
+    }
 }
 
 function pickSrc(){
@@ -185,6 +265,7 @@ function pickSrc(){
             chosenVideo = files[0]
             if (chosenVideo) {
                 videoSrc = URL.createObjectURL(chosenVideo);
+                videoPicked = true
                 resolve(videoSrc);
             }else{
                 reject("No video file selected.");
