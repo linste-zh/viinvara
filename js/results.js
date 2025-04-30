@@ -116,6 +116,7 @@ function showGraph(){
                         mode: 'x',
                         intersect: false
                     },
+                    events: ["click"],
                     annotations: {
                         middleLine: {
                             type: "line",
@@ -135,21 +136,7 @@ function showGraph(){
                                 display: true,
                                 content: '<>',
                                 position: 'start'
-                            },
-                            draggable: true,
-                            ondragstart: (e) => {
-                                console.log("drag")
-                            },
-                            /*onDragEnd: (e) => {
-                                const newValue = e.annotation.value;
-                                timeStamp = newValue;
-                                console.log('Dragged timestamp to', newValue);
-                        
-                                // Sync video
-                                if (videoShown && videoPicked) {
-                                    document.getElementById('video_player').currentTime = newValue;
-                                }
-                            }*/
+                            }
                         }
                     }
                 }
