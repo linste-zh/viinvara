@@ -97,10 +97,10 @@ function showGraph(){
                     offset: true,
                 }
             },
+            events: ['mousemove', 'mouseout', 'click'],
             onClick: function(e, elements, chart) {
                 const canvasPosition = Chart.helpers.getRelativePosition(e, chart);
                 const dataX = chart.scales.x.getValueForPixel(canvasPosition.x);
-                const dataY = chart.scales.y.getValueForPixel(canvasPosition.y)
 
                 timeStamp = dataX
                 chart.options.plugins.annotation.annotations.timestampLine.value = timeStamp;
@@ -109,6 +109,25 @@ function showGraph(){
                 if (videoShown && videoPicked) {
                     document.getElementById('video_player').currentTime = timeStamp;
                 }
+            },
+            onmousenter: function (e, item) {
+                console.log("entered")
+                //chart.options.plugins.annotation.annotations.hoverLine.display = true;
+                chart.update()
+            },
+            onmouseleave: function (e, item) {
+                console.log("left")
+                //chart.options.plugins.annotation.annotations.hoverLine.display = false;
+                chart.update()
+            },
+            onHover: function (e, item) {
+                const canvasPosition = Chart.helpers.getRelativePosition(e, chart);
+                const dataX = chart.scales.x.getValueForPixel(canvasPosition.x);
+
+                hoverTime = dataX
+                //chart.options.plugins.annotation.annotations.hoverLine.display = true;
+                //chart.options.plugins.annotation.annotations.hoverLine.value = hoverTime;
+                chart.update()
             },
             plugins: {
                 annotation: {
@@ -130,14 +149,24 @@ function showGraph(){
                             mode: 'vertical',
                             scaleID: 'x',
                             value: timeStamp,
-                            borderColor: 'red',
-                            borderWidth: 2,
-                            label: {
+                            borderColor: '#74d4f8',
+                            borderWidth: 1.5,
+                            display: false
+                            /*label: {
                                 display: true,
                                 content: '<>',
                                 position: 'start'
-                            }
-                        }
+                            }*/
+                        },
+                        /*hoverLine: {
+                            type: 'line',
+                            mode: 'vertical',
+                            scaleID: 'x',
+                            value: timeStamp,
+                            borderColor: 'red',
+                            borderWidth: 2,
+                            borderDash: [5, 15]
+                        }*/
                     }
                 }
             }
@@ -213,16 +242,19 @@ function toggleVideo(){
     if(videoContainer.style.display == "none"){
         document.getElementById("showVideoText").innerHTML = "Hide Video"
         videoContainer.style.display = "flex"
+        chart.options.plugins.annotation.annotations.timestampLine.display = true
         document.getElementById("resultsGrid").style.gridTemplateColumns = "1.5fr 1fr"
         videoShown = true
+        
     }else{
         document.getElementById("showVideoText").innerHTML = "Show Video"
         if(videoPicked){document.getElementById("video_player").pause()}
         videoContainer.style.display = "none"
+        chart.options.plugins.annotation.annotations.timestampLine.display = false
         document.getElementById("resultsGrid").style.gridTemplateColumns = "1fr auto"
         videoShown = false
     }
-    showGraph()
+    chart.update()
 }
 
 
