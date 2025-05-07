@@ -101,6 +101,12 @@ function createSettingsObject(){
 
     settingObject["sound"] = currentSound
 
+    controls = document.getElementById("vcChecker").checked
+    settingObject["controls"] = controls
+
+    fullscreen = document.getElementById("fullscreenChecker").checked
+    settingObject["fullscreen"] = fullscreen
+
     return settingObject
 }
 
@@ -245,6 +251,22 @@ function displayScaleLableInputs(){
         accordionContainer.style.maxHeight = accordionContainer.scrollHeight + "px";
     }, 10);
 }
+
+function updateControlSettings(){
+    if(document.getElementById("vcChecker").checked){
+        document.getElementById("fullScreenSwitch").style.display = "block"
+    }else{
+        document.getElementById("fullScreenSwitch").style.display = "none"
+    }
+
+    console.log(document.getElementById("fullscreenChecker").style.display)
+
+    let accordionContainer = document.getElementById("fullScreenSwitch").closest(".settingAccordion");
+    setTimeout(() => {
+        accordionContainer.style.maxHeight = accordionContainer.scrollHeight + "px";
+    }, 20);
+}
+
 
 function reset(){
     if (confirm("Return to start page? This will reset all your data and variables.")){

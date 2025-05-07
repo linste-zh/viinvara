@@ -115,6 +115,14 @@ async function setUpVideo(){
         activeExperimentState.videoElement.ontimeupdate = () => checkIfRatingRequired()
     }
 
+    if(settings["controls"]){
+        activeExperimentState.videoElement.setAttribute("controls", "")
+    }
+
+    if(!settings["fullscreen"]){
+        activeExperimentState.videoElement.setAttribute("controlsList", "nofullscreen")
+    }
+
     activeExperimentState.videoElement.onended = () => {
         end()
     }
