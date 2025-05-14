@@ -18,7 +18,7 @@ TBD
 ## Inspiration
 
 This software is based on [Peter Macintyre’s Idiodynamic Software](https://petermacintyre.weebly.com/idiodynamic-software.html) (e.g. [Macintyre  and Legatto, 2011](https://doi.org/10.1093/applin/amq037)) / the [Anion Variable Tester](https://80113hunterhsu.github.io/VariableTester/) developed by Hunter Hsu.  
-It  was originally created as part of a idiodynamic, linguistic pilotstudy in a seminar project at the [English Department at the Univeristy of Zurich](https://www.es.uzh.ch/en.html).
+It  was originally created as part of a idiodynamic, linguistic pilotstudy in a seminar project at the [English Department of the Univeristy of Zurich](https://www.es.uzh.ch/en.html).
 
 ---
 
@@ -64,7 +64,7 @@ Viinvara should scale well on all laptop screens but does not work well on mobil
 
 Currently, only a local video file can be selected. I am not aware of any size limitations applying.
 
-### Keyboard Keys
+### Keyboard Input
 
 When a user rating is actively being requested, it can be provided either by clicking the on-screen buttons or by using the keyboard keys. The keys are mapped spatially irrelevant of the value they represent, meaning the left-most point on the scale = key "1"; the second = key "2", etc.
 
@@ -90,8 +90,9 @@ To hide the video and time indication line in the graph, click on "Hide Video"
 
 ### Download as CSV or JPEG
 
-Data can be saved anywhere on your device as a CSV (Timestamp and Rating), or JPEG (graph). The default name has format is "Year_Month_Date_ParticipantName_Variable". 
+Data can be saved anywhere on your device as a CSV (Timestamp and Rating), or JPEG (graph). The default name has format is "Year_Month_Date_ParticipantName_Variable".
 
+---
 
 # Use of AI and online Sources Disclaimer
 
