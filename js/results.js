@@ -215,7 +215,7 @@ function createCSV(){
     csvLink.setAttribute('href', csvURL)
 
     currentDate = new Date()
-    const fileName = `${currentDate.getYear()}/${currentDate.getMonth()+1}/${currentDate.getDate()}_${experimentData["userName"]}_${experimentData["lingVar"]}`
+    const fileName = `${currentDate.getFullYear()}/${currentDate.getMonth()+1}/${currentDate.getDate()}_${experimentData["userName"]}_${experimentData["lingVar"]}`
     console.log(fileName)
     csvLink.setAttribute('download', fileName)
 }
@@ -229,7 +229,7 @@ function createJpeg(){
         jpegLink.setAttribute('href', canvasUrl)
 
         currentDate = new Date()
-        const fileName = `${currentDate.getYear()}/${currentDate.getMonth()+1}/${currentDate.getDate()}_${experimentData["userName"]}_${experimentData["lingVar"]}`
+        const fileName = `${currentDate.getFullYear()}/${currentDate.getMonth()+1}/${currentDate.getDate()}_${experimentData["userName"]}_${experimentData["lingVar"]}`
         jpegLink.setAttribute('download', fileName)
     }, 500)
 }
