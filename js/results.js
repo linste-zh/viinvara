@@ -294,3 +294,7 @@ function pickSrc(){
         input.click();
     });
 }
+
+function refresh(){
+    chart.resize();
+}

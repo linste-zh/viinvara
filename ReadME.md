@@ -1,11 +1,11 @@
-# viinvara
-cite as (APA 7): Steiner, Linda. (2025). *viinvara* (Version 1.2) [Computer software]. GitHub. https://linste-zh.github.io/ViInVaRa/
+# Viinvara
+cite as (APA 7): Steiner, Linda. (2025). *Viinvara* (Version 1.2) [Computer software]. GitHub. https://github.com/linste-zh/viinvara
 
 ---
 
 ## The "video interval variable rater"
 
-viinvara allows users to rate some variable on a scale while watching a video. The conditions are customisable. Results are presented in an interactive graph and can be downloaded as a CSV or JPEG.
+Viinvara allows users to rate some variable on a scale while watching a video. The conditions are customisable. Results are presented in an interactive graph and can be downloaded as a CSV or JPEG.
 
 ## Feedback and Error Reports
 
