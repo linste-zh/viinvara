@@ -1,1 +1,0 @@
-Simple local software for allowing user to rate some variable on a scale while watching a video. Displays datapoints in graph at end and can be exported as CSV. Based on MacIntyre’s Idiodynamic Software (https://80113hunterhsu.github.io/VariableTester/)
