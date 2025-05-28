@@ -54,6 +54,9 @@
                                 <input id="scale_start_input" class="nrInputSmall" type="number" value="1" onkeyup=updateScale(this) onchange=updateScale(this)>
                                 to
                                 <input id="scale_end_input" class="nrInputSmall" type="number" value="9" onkeyup=updateScale(this) onchange=updateScale(this)>
+                                <div class="tooltipTrigger">
+                                    <img src="./media/help_icon.png" class="tooltipSymbol" onclick="openInfoBox('ratingScale')">
+                                </div>
                             </div>
                             <div class="settingRow">
                                 <b>Add labels:</b> 
@@ -63,6 +66,9 @@
                                     <span class="slider"></span>
                                 </label>
                                 yes
+                                <div class="tooltipTrigger">
+                                    <img src="./media/help_icon.png" class="tooltipSymbol" onclick="openInfoBox('labels')">
+                                </div>
                             </div>
                             <div class="settingRow" id="labelSettings"></div>
                         </div>
@@ -74,7 +80,10 @@
                             <div class="settingRow">
                                 <b>Interval:</b>
                                 <input id="interval_input" class="nrInputBig" type="number" min="1" max="3600" value="60" onkeyup=enforceInterval(this)>
-                                s
+                                seconds
+                                <div class="tooltipTrigger">
+                                    <img src="./media/help_icon.png" class="tooltipSymbol" onclick="openInfoBox('interval')">
+                                </div>
                             </div>
                             <div class="settingRow">
                                 <b>Rating at Start of Video:</b> 
@@ -84,6 +93,9 @@
                                     <span class="slider"></span>
                                 </label>
                                 yes
+                                <div class="tooltipTrigger">
+                                    <img src="./media/help_icon.png" class="tooltipSymbol" onclick="openInfoBox('ratingStart')">
+                                </div>
                             </div>
                             <div class="settingRow">
                                 <b>Rating at End of Video:</b> 
@@ -93,6 +105,9 @@
                                     <span class="slider"></span>
                                 </label>
                                 yes
+                                <div class="tooltipTrigger">
+                                    <img src="./media/help_icon.png" class="tooltipSymbol" onclick="openInfoBox('ratingEnd')">
+                                </div>
                             </div>
                         </div>
                         <div class="settingAccordionTrigger" onclick="toggleAccordion(this)">
@@ -104,10 +119,31 @@
                                 <b>Pause to rate:</b> 
                                 no
                                 <label class="switch">
-                                    <input type="checkbox" id="pauseChecker">
+                                    <input type="checkbox" id="pauseChecker" onchange="updateNoRatingSettings()">
                                     <span class="slider"></span>
                                 </label>
                                 yes
+                                <div class="tooltipTrigger">
+                                    <img src="./media/help_icon.png" class="tooltipSymbol" onclick="openInfoBox('pause')">
+                                </div>
+                            </div>
+                            <div class="settingRow" id = "noRatingProvided" style="flex-direction: column; justify-content: center; align-items: stretch;">
+                                <div class="tooltipTrigger" style="justify-content: space-between;">
+                                    <b>Behaviour when rating not provided in time:</b>
+                                    <img src="./media/help_icon.png" class="tooltipSymbol" onclick="openInfoBox('notRated')">
+                                </div>  
+                                <div>
+                                    <input type="radio" id="emergencyPause" class="radioButton" name="notRatedBehaviour" value="pause">
+                                    <label for="emergencyPause">pause</label>
+                                </div>
+                                <div>
+                                    <input type="radio" id="neutralRate" class="radioButton" name="notRatedBehaviour" value="neutral">
+                                    <label for="neutralRate">rate neutral</label>
+                                </div>
+                                <div>
+                                    <input type="radio" id="leaveOut" class="radioButton" name="notRatedBehaviour" value="empty" checked="checked">
+                                    <label for="leaveOut">leave out</label>
+                                </div>
                             </div>
                             <div class="settingRow">
                                 <b style="float: left; margin-right: 5px">Notification Sound at Interval:</b> 
@@ -118,16 +154,10 @@
                                     <option value="honk.mp3">Honk</option>
                                     <option value="ping.mp3">Ping</option>
                                 </select>
-                                <img id="soundIcon" onclick="testSound()" src="./media/play_icon.png" alt="Test Sound Icon"> 
-                            </div>
-                            <div class="settingRow">
-                                <b>Behaviour when rating not provided in time:</b></br>
-                                <input type="radio" id="emergencyPause" class="radioButton" name="notRatedBehaviour" value="pause">
-                                <label for="emergencyPause">pause</label><br>
-                                <input type="radio" id="neutralRate" class="radioButton" name="notRatedBehaviour" value="neutral">
-                                <label for="neutralRate">rate neutral</label><br>
-                                <input type="radio" id="leaveOut" class="radioButton" name="notRatedBehaviour" value="empty" checked="checked">
-                                <label for="leaveOut">leave out</label><br>
+                                <img id="soundIcon" onclick="testSound()" src="./media/play_icon.png" alt="Test Sound Icon">
+                                <div class="tooltipTrigger">
+                                    <img src="./media/help_icon.png" class="tooltipSymbol" onclick="openInfoBox('sound')">
+                                </div> 
                             </div>
                         </div>
                         <div class="settingAccordionTrigger" onclick="toggleAccordion(this)">
@@ -143,6 +173,9 @@
                                     <span class="slider"></span>
                                 </label>
                                 yes
+                                <div class="tooltipTrigger">
+                                    <img src="./media/help_icon.png" class="tooltipSymbol" onclick="openInfoBox('controls')">
+                                </div>
                             </div>
                             <div id="fullScreenSwitch" class="settingRow" style = "display: none">
                                 <b>Allow Fullscreen:</b> 
@@ -152,6 +185,9 @@
                                     <span class="slider"></span>
                                 </label>
                                 yes
+                                <div class="tooltipTrigger">
+                                    <img src="./media/help_icon.png" class="tooltipSymbol" onclick="openInfoBox('fullscreen')">
+                                </div>
                             </div>
                             <div class="settingRow">
                                 <i>(video file selected on next screen)</i>
@@ -168,8 +204,8 @@
             </audio>
         </main>
         <footer class = "footer">
-            <span class="footerNote">14/05/2025</span>
-            <span class="footerNote">V1.3</span>
+            <span class="footerNote">28/05/2025</span>
+            <span class="footerNote">V1.4</span>
             <span class="footerNote">© Linda Steiner (linste.zh@gmail.com)</span>
             <span class="footerNote">UZH - Zurich</span>
             <span class="footerNote"><a href="https://github.com/linste-zh/viinvara" target="_blank">Project Git Page</a></span>

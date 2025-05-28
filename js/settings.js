@@ -254,7 +254,7 @@ function displayScaleLableInputs(){
 
 function updateControlSettings(){
     if(document.getElementById("vcChecker").checked){
-        document.getElementById("fullScreenSwitch").style.display = "block"
+        document.getElementById("fullScreenSwitch").style.display = "flex"
     }else{
         document.getElementById("fullScreenSwitch").style.display = "none"
     }
@@ -262,6 +262,19 @@ function updateControlSettings(){
     console.log(document.getElementById("fullscreenChecker").style.display)
 
     let accordionContainer = document.getElementById("fullScreenSwitch").closest(".settingAccordion");
+    setTimeout(() => {
+        accordionContainer.style.maxHeight = accordionContainer.scrollHeight + "px";
+    }, 20);
+}
+
+function updateNoRatingSettings(){
+    if(document.getElementById("pauseChecker").checked){
+        document.getElementById("noRatingProvided").style.display = "none"
+    }else{
+        document.getElementById("noRatingProvided").style.display = "block"
+    }
+
+    let accordionContainer = document.getElementById("pauseChecker").closest(".settingAccordion");
     setTimeout(() => {
         accordionContainer.style.maxHeight = accordionContainer.scrollHeight + "px";
     }, 20);

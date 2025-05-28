@@ -172,6 +172,11 @@
 
 .settingRow{
   margin: 5px 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 5px;
 }
 
 #soundIcon{
@@ -254,4 +259,68 @@ input:checked + .slider:before {
   -webkit-transform: translateX(12px);
   -ms-transform: translateX(12px);
   transform: translateX(12px);
+}
+
+
+.tooltipTrigger{
+  flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: right;
+}
+
+.tooltipSymbol{
+  height: 15px;
+  width: auto;
+  filter: invert(0.5);
+}
+
+.tooltipSymbol:hover{
+  filter: invert(0);
+}
+
+
+.backgroundCover{
+  position:fixed;
+  width:100%;
+  height:100%;
+  top:0px;
+  left:0px;
+  z-index:1000;
+  background-color: rgba(120, 120, 120, 0.712);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.infoBox{
+  background-color: white;
+  min-width: 200px;
+  max-width: 70%;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+}
+
+.infoBox .infoHeader{
+  flex: 0 0 20%;
+  width: 100%;
+  background-color: rgba(19,73,233,1);
+  position: relative;
+  display: block;
+}
+
+.closeButton{
+  float: right;
+  max-height: 90%;
+  cursor: pointer;
+}
+
+
+.infoBox .text{
+  flex: 1;
+  position: relative;
+  padding: 15px;
 }
