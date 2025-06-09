@@ -49,6 +49,7 @@ function setup(){
     console.log(experimentData)
     console.log(settings)
     console.log(scale)
+    console.log(localStorage.getItem("currentTimeStamp"))
 }
 
 window.addEventListener("DOMContentLoaded", () => {
@@ -61,15 +62,12 @@ function start(){
     activeExperimentState.ratingElement.innerHTML = ""
     applyScale()
     activeExperimentState.ratingElement.style.visibility = "hidden"
-   
-    var startTime = Math.max(activeExperimentState.currentTimeStamp - (activeExperimentState.interval / 2), 0)
-    console.log("start at: " + startTime)
 
     if(activeExperimentState.currentInterval == 0 && settings["inputAtStart"] && !intervalContained(0)){
         activateRating()
         const startInterval = setInterval(function () {
             if(!activeExperimentState.pendingRating){
-                playVideo(startTime)
+                playVideo()
                 clearInterval(startInterval)
             }
         }, 500);
@@ -77,7 +75,7 @@ function start(){
         if(activeExperimentState.pendingRating){
             activateRating()
         }
-        playVideo(startTime)
+        playVideo()
     }
 }
 window.start = start

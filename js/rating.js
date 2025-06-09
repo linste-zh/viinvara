@@ -86,7 +86,6 @@ function activateRating(pausingBehaviour = () => {}){
     activeExperimentState.pendingRating = true
     pausingBehaviour()
     playSound()
-    let timeInS = Math.floor(activeExperimentState.videoElement.currentTime)
     activeExperimentState.ratingElement.style.visibility = "visible"
     console.log("made visible")
 }

@@ -1,4 +1,4 @@
-import {activeExperimentState, experimentData, settings, start} from './experiment.js';
+import {activeExperimentState, experimentData, settings, start, end} from './experiment.js';
 import {checkIfRatingRequired, intervalContained} from './rating.js';
 
 
@@ -8,6 +8,7 @@ async function setUpVideo(){
     activeExperimentState.videoContainer.innerHTML = '<video id="video_player" class="videoPlayer" type="video/mp4"></video>'
     activeExperimentState.videoElement = document.getElementById("video_player")
     activeExperimentState.videoElement.src = videoSrc + "#t=" + Math.max(activeExperimentState.currentTimeStamp - (activeExperimentState.interval / 2), 0, activeExperimentState.currentInterval)
+    console.log("start at: " + Math.max(activeExperimentState.currentTimeStamp - (activeExperimentState.interval / 2), 0, activeExperimentState.currentInterval))
 
     if(settings["pausing"]){
         activeExperimentState.videoElement.ontimeupdate = () => checkIfRatingRequired(pauseVideo)
@@ -87,13 +88,10 @@ function inquire_data_retention(){
     }
 }
 
-let pauseVideo = () => {activeExperimentState.videoElement.pause()}
+const pauseVideo = () => {activeExperimentState.videoElement.pause()}
 
-function playVideo(startTime){
+function playVideo(){
     activeExperimentState.videoElement.play()
-    if(startTime){
-        activeExperimentState.videoElement.currentTime = startTime
-    }
 }
 
 export{
