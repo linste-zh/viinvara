@@ -36,7 +36,6 @@ function setup(){
             middle = fullScale[Math.floor(fullScale.length / 2)] - 0.5;
         }
         activeExperimentState.neutralRating = middle
-        console.log("neutral rating: " + middle)
     }
 
     document.getElementById("soundPlayer").src = settings["sound"] === "none" ? "" : settings["sound"];
@@ -53,7 +52,6 @@ function setup(){
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-    console.log("setup happening")
     setup();
 });
 window.setup = setup

@@ -17,8 +17,6 @@ function applyScale(){
     }else{
         activeExperimentState.ratingElement.style.gridTemplateRows = "100% 0%;";
     }
-    console.log(activeExperimentState.ratingElement.style.gridTemplateRows)
-
     
     Object.values(scale).forEach(index => {
         let button = document.createElement('button');
@@ -51,11 +49,9 @@ function checkIfRatingRequired(pausingBehaviour = () => {}){
     activeExperimentState.currentTimeStamp = Math.floor(activeExperimentState.videoElement.currentTime * 100)/100
 
     activeExperimentState.currentInterval = Math.floor(activeExperimentState.currentTimeStamp / activeExperimentState.interval) * activeExperimentState.interval
-    console.log("current interval: " + activeExperimentState.currentInterval)
 
     let timeUntilNextRating = activeExperimentState.currentInterval + activeExperimentState.interval - activeExperimentState.currentTimeStamp 
     if(activeExperimentState.pendingRating && timeUntilNextRating < 0.5){
-        console.log(timeUntilNextRating)
         notRatedInTime()
     }
 
@@ -82,12 +78,10 @@ function notRatedInTime(){
 }
 
 function activateRating(pausingBehaviour = () => {}){
-    console.log("rating activated")
     activeExperimentState.pendingRating = true
     pausingBehaviour()
     playSound()
     activeExperimentState.ratingElement.style.visibility = "visible"
-    console.log("made visible")
 }
 
 class DataPoint{
@@ -128,7 +122,6 @@ function submit(rating){
     let dp = new DataPoint(activeExperimentState.currentTimeStamp, activeExperimentState.currentInterval, rating)
     addDataPoint(dp)
     activeExperimentState.ratingElement.style.visibility = "hidden"
-    console.log("hidden by submit")
     playVideo()
 }
 
@@ -140,7 +133,6 @@ function addDataPoint(dp){
     localStorage.setItem("experimentDataObject", JSON.stringify(experimentData))
     
     console.log(experimentData)
-    console.log(localStorage.getItem("experimentDataObject"))
 
     activeExperimentState.pendingRating = false
 }

@@ -34,12 +34,10 @@ async function setUpVideo(){
 
     activeExperimentState.ratingElement.innerHTML='<div class="ratingGridDiv"><button id="startButton" class="bigButton">start</button></div>'
     document.getElementById('startButton').addEventListener("click", () => {
-        console.log("start button clicked")
         start()
     })
 }
 document.getElementById("setUpButton").addEventListener("click", () => {
-    console.log("set up button clicked")
     setUpVideo();
 });
 window.setUpVideo = setUpVideo
@@ -72,20 +70,18 @@ function pickSrc(){
 
 function inquire_data_retention(){
     if (confirm("It appears you already have some data points saved. Do you want to keep them? \nClick 'CANCEL' to REMOVE the old data points or 'OK' to keep them. \nIf you keep your data points, we will continue the video at the last checked interval, so make sure you pick the same video file again!")){
-        console.log(localStorage.getItem("experimentDataObject"))
         activeExperimentState.currentTimeStamp = parseFloat(localStorage.getItem("currentTimeStamp"))
         activeExperimentState.currentInterval = Math.floor(activeExperimentState.currentTimeStamp / activeExperimentState.interval) * activeExperimentState.interval 
         if(!intervalContained(activeExperimentState.currentInterval)){
             activeExperimentState.pendingRating = true
         }
-        
-        console.log(activeExperimentState)
     }else{
         experimentData["dataInputs"] = []
         localStorage.setItem("experimentDataObject", JSON.stringify(experimentData))
         localStorage.setItem("currentTimeStamp", 0)
-        console.log(localStorage.getItem("experimentDataObject"))
     }
+    console.log(localStorage.getItem("experimentDataObject"))
+    console.log(activeExperimentState)
 }
 
 const pauseVideo = () => {activeExperimentState.videoElement.pause()}
