@@ -113,7 +113,7 @@ html, body{
     background-color: rgba(255, 255, 255, 0.6);
     box-shadow: 0 0 10px 15px rgba(255, 255, 255, 0.6);
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%/10), max(100%)), 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(calc(100% / 10), 1fr));
     grid-template-rows: 80% 20%;
     align-items: center;
     justify-items: center;

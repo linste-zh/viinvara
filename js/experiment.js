@@ -1,11 +1,14 @@
-const activeExperimentState ={
-    currentTimeStamp: 0,
+const activeExperimentState = {
+    currentInterval: 0,
     pendingRating: false,
-    interval: 60
+    interval: 60,
+    currentTimeStamp: 0
     //videoContainer
     //videoElement
     //ratingElement
 }
+
+
 const experimentData = JSON.parse(localStorage.getItem("experimentDataObject"))
 const scale = JSON.parse(localStorage.getItem("scaleObject"))
 const settings = JSON.parse(localStorage.getItem("settingsObject"))
@@ -34,10 +37,10 @@ function setup(){
         console.log("neutral rating: " + middle)
     }
 
-    document.getElementById("soundPlayer").src = settings["sound"]
+    document.getElementById("soundPlayer").src = settings["sound"] === "none" ? "" : settings["sound"];
 
 
-    instruction = String("<b>" + experimentData["userName"] + "</b>, please rate this video based on <b>" + experimentData["lingVar"] + "</b>")
+    let instruction = String("<b>" + experimentData["userName"] + "</b>, please rate this video based on <b>" + experimentData["lingVar"] + "</b>")
     document.getElementById("instruction").innerHTML = instruction
 
     console.log(activeExperimentState)
@@ -45,21 +48,21 @@ function setup(){
     console.log(settings)
     console.log(scale)
 }
+window.addEventListener("DOMContentLoaded", () => {
+    console.log("setup happening")
+    setup();
+});
+window.setup = setup
 
 function start(){
     activeExperimentState.ratingElement.innerHTML = ""
     applyScale()
     activeExperimentState.ratingElement.style.visibility = "hidden"
+   
+    var startTime = Math.max(activeExperimentState.currentTimeStamp - (activeExperimentState.interval / 2), 0)
+    console.log("start at: " + startTime)
 
-    var startTime = 0;
-    existingInputs = experimentData["dataInputs"]
-    if(existingInputs.length > 0){
-        lastDP = existingInputs[existingInputs.length - 1]
-        startTime = lastDP["time"]
-        console.log("start at: " + startTime)
-    }
-
-    if(settings["inputAtStart"] && !timePointContained(0)){
+    if(activeExperimentState.currentInterval == 0 && settings["inputAtStart"] && !intervalContained(0)){
         activateRating()
         setInterval(function () {
             if(!activeExperimentState.pendingRating){
@@ -67,6 +70,9 @@ function start(){
             }
         }, 500);
     }else{
+        if(activeExperimentState.pendingRating){
+            activateRating()
+        }
         playVideo(startTime)
     }
 }
@@ -99,6 +105,23 @@ function exitExperiment(){
     }
 }
 
+function inquire_data_retention(){
+    if (confirm("It appears you already have some data points saved. Do you want to keep them? \nClick 'CANCEL' to REMOVE the old data points or 'OK' to keep them. \nIf you keep your data points, we will continue the video at the last checked interval, so make sure you pick the same video file again!")){
+        console.log(localStorage.getItem("experimentDataObject"))
+        activeExperimentState.currentTimeStamp = parseFloat(localStorage.getItem("currentTimeStamp"))
+        activeExperimentState.currentInterval = Math.floor(activeExperimentState.currentTimeStamp / activeExperimentState.interval) * activeExperimentState.interval 
+        if(!intervalContained(activeExperimentState.currentInterval)){
+            activeExperimentState.pendingRating = true
+        }
+        
+        console.log(activeExperimentState)
+    }else{
+        experimentData["dataInputs"] = []
+        localStorage.setItem("experimentDataObject", JSON.stringify(experimentData))
+        localStorage.setItem("currentTimeStamp", 0)
+        console.log(localStorage.getItem("experimentDataObject"))
+    }
+}
 //__________________________________________________________________
 //VIDEO SETTINGS
 //__________________________________________________________________
@@ -107,7 +130,7 @@ async function setUpVideo(){
 
     videoContainer.innerHTML = '<video id="video_player" class="videoPlayer" type="video/mp4"></video>'
     activeExperimentState.videoElement = document.getElementById("video_player")
-    activeExperimentState.videoElement.src = videoSrc
+    activeExperimentState.videoElement.src = videoSrc + "#t=" + Math.max(activeExperimentState.currentTimeStamp - (activeExperimentState.interval / 2), 0, activeExperimentState.currentInterval)
 
     if(settings["pausing"]){
         activeExperimentState.videoElement.ontimeupdate = () => checkIfRatingRequired(pauseVideo)
@@ -137,13 +160,7 @@ async function setUpVideo(){
 function pickSrc(){
     return new Promise((resolve, reject) => {
         if(experimentData["dataInputs"].length > 0){
-            if (confirm("It appears you already have some data points saved. Do you want to keep them? \nClick 'CANCEL' to REMOVE the old data points or 'OK' to keep them. \nIf you keep your data points, we will continue the video at the last checked interval, so make sure you pick the same video file again!")){
-                console.log(localStorage.getItem("experimentDataObject"))
-            }else{
-                experimentData["dataInputs"] = []
-                localStorage.setItem("experimentDataObject", JSON.stringify(experimentData))
-                console.log(localStorage.getItem("experimentDataObject"))
-            }
+            inquire_data_retention()
         }
         const input = document.createElement('input');
         input.type = 'file';
@@ -164,10 +181,10 @@ function pickSrc(){
     });
 }
 
-pauseVideo = () => {activeExperimentState.videoElement.pause()}
+
+let pauseVideo = () => {activeExperimentState.videoElement.pause()}
 
 function playVideo(startTime){
-    activeExperimentState.ratingElement.style.visibility = "hidden"
     activeExperimentState.videoElement.play()
     if(startTime){
         activeExperimentState.videoElement.currentTime = startTime
@@ -222,14 +239,20 @@ function applyScale(){
 }
 
 function checkIfRatingRequired(pausingBehaviour = () => {}){
-    timeUntilNextRating = activeExperimentState.currentTimeStamp + activeExperimentState.interval - activeExperimentState.videoElement.currentTime  
+    localStorage.setItem("currentTimeStamp", Math.floor(activeExperimentState.videoElement.currentTime * 100)/100)
+    activeExperimentState.currentTimeStamp = Math.floor(activeExperimentState.videoElement.currentTime * 100)/100
+
+    activeExperimentState.currentInterval = Math.floor(activeExperimentState.currentTimeStamp / activeExperimentState.interval) * activeExperimentState.interval
+    console.log("current interval: " + activeExperimentState.currentInterval)
+
+    timeUntilNextRating = activeExperimentState.currentInterval + activeExperimentState.interval - activeExperimentState.currentTimeStamp 
     if(activeExperimentState.pendingRating && timeUntilNextRating < 0.5){
         console.log(timeUntilNextRating)
         notRatedInTime()
     }
 
     timeInS = Math.floor(activeExperimentState.videoElement.currentTime)
-    if(timePointContained(timeInS)){        
+    if(intervalContained(activeExperimentState.currentInterval)){        
         return false
     }else if(timeInS > 0 && timeInS % activeExperimentState.interval == 0 && !activeExperimentState.pendingRating){
         activateRating(pausingBehaviour)
@@ -254,30 +277,27 @@ function notRatedInTime(){
 function activateRating(pausingBehaviour = () => {}){
     console.log("rating activated")
     activeExperimentState.pendingRating = true
+    activeExperimentState.currentInterval = activeExperimentState.currentInterval + activeExperimentState.interval
     pausingBehaviour()
     playSound()
     timeInS = Math.floor(activeExperimentState.videoElement.currentTime)
-    activeExperimentState.currentTimeStamp = timeInS
-    activeExperimentState.ratingElement.style = "visibility: visible"
+    activeExperimentState.ratingElement.style.visibility = "visible"
+    console.log("made visible")
 }
 
 class DataPoint{
-    constructor(time, rating){
-        this.time = time;
+    constructor(time, interval, rating){
+        this.timeOfRating = time;
+        this.associatedInterval = interval;
         this.rating = rating;
     }
-
-    getTime(){
-        return this.time
-    }
-    
 }
 
-function timePointContained(time){
+function intervalContained(interval){
     inputs = experimentData["dataInputs"]
 
     for (var i in inputs){
-        if(inputs[i].time == time){
+        if(inputs[i].associatedInterval == interval){
             return true
         }
     }
@@ -300,8 +320,10 @@ function keyPressed(e){
 }
 
 function submit(rating){
-    dp = new DataPoint(activeExperimentState.currentTimeStamp, rating)
+    dp = new DataPoint(activeExperimentState.currentTimeStamp, activeExperimentState.currentInterval, rating)
     addDataPoint(dp)
+    activeExperimentState.ratingElement.style.visibility = "hidden"
+    console.log("hidden by submit")
     playVideo()
 }
 
@@ -326,3 +348,21 @@ function playSound(){
     activeExperimentState.videoElement.volume = 0.7
     document.getElementById("soundPlayer").play()
 }
+
+export {
+    setup,
+    start,
+    end,
+    exitExperiment,
+    setUpVideo,
+    pauseVideo,
+    playVideo,
+    applyScale,
+    activateRating,
+    addDataPoint,
+    submit,
+    inquire_data_retention,
+    checkIfRatingRequired,
+    playSound,
+    activeExperimentState
+};

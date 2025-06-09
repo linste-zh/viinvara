@@ -70,7 +70,7 @@ When a user rating is actively being requested, it can be provided either by cli
 
 ### Reloading the Page
 
-If they page is reloaded while the experiment is active, the video source needs to be reloaded. During this process, you will be prompted on whether you want to continue with your existing data points ("OK") or remove them and start the experiment again from scratch ("CANCEL"). If the old datapoints are kept, the video is loaded at the last rated timestamp.
+If they page is reloaded while the experiment is active, the video source needs to be reloaded. During this process, you will be prompted on whether you want to continue with your existing data points ("OK") or remove them and start the experiment again from scratch ("CANCEL"). If the old datapoints are kept, the video is loaded at the last rated interval.
 
 ### Returning to Start Page
 
