@@ -5,6 +5,8 @@
         <link href="./css/basicLayout.css" type="text/css" rel="stylesheet">
         <link href="./css/experiment.css" type="text/css" rel="stylesheet">
         <script type="module" src="./js/experiment.js"></script>
+        <script type="module" src="./js/video.js"></script>
+        <script type="module" src="./js/rating.js"></script>
         <script src="./js/settings.js"></script>
         <meta charset="UTF-8">
         <link rel="icon" type="image/x-icon" href="./media/viinvara.ico">
@@ -26,7 +28,7 @@
                     <button onclick="exitExperiment()">continue <img class="exitIcon" src="./media/exit_icon.png"></button>
                 </div>
                 <div id="videoContainer" class="videoContainer">
-                    <button class="bigButton" onclick='setUpVideo()'>pick source</button>
+                    <button id="setUpButton" class="bigButton">pick source</button>
                 </div>
                 <div class="ratingScaleContainer">
                     <div id="ratingScale" class="ratingScale"></div>
