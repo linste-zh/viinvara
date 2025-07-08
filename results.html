@@ -24,8 +24,8 @@
                     <h1>Here are your results!</h1>
                 </div>
                 <div id="displayMenu">
-                    <div class="displayOption" id="intervalButton" onclick="toggleGraph('interval')">Ratings at Interval</div>
-                    <div class="displayOption" id="timestampButton" onclick="toggleGraph('timestamp')">Ratings at Timestamp</div>
+                    <div class="displayOption" id="intervalButton" onclick="toggleGraph('interval')">Interval Graph</div>
+                    <div class="displayOption" id="timestampButton" onclick="toggleGraph('timestamp')">Timestamp Graph</div>
                 </div>
                 <section class="results" id="resultsGrid">
                     <div id="graphContainer">
@@ -43,8 +43,8 @@
                     </div>
                 </section>
                 <div id="exportCSV" class="csvContainer">
-                    <a id="csvLink" onclick="createCSV()">Click to Download CSV</a>
-                    <a id="jpegLink" onclick="createJpeg()">Click to Download JPEG</a>
+                    <a id="csvLink" onclick="createCSV()">Download Data</a>
+                    <a id="jpegLink" onclick="createJpeg()">Download Current Graph</a>
                 </div>
             </div>
         </main>

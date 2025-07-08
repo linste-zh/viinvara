@@ -3,6 +3,7 @@ const timestampValues = []
 const ratingValues = []
 const experimentData = JSON.parse(localStorage.getItem("experimentDataObject"))
 const scale = JSON.parse(localStorage.getItem("scaleObject"))
+const settings = JSON.parse(localStorage.getItem("settingsObject"))
 var videoShown = false
 var videoPicked = false
 var timeStamp = 0
@@ -11,7 +12,6 @@ var chart
 
 
 function setUp(){
-    console.log("setup is happening")
     document.getElementsByTagName("body")[0].style = localStorage.getItem("theme")
 
     inputs = experimentData["dataInputs"]
@@ -22,9 +22,7 @@ function setUp(){
         timestampValues.push(inputs[i].timeOfRating)
         ratingValues.push(inputs[i].rating)
     }
-    console.log(intervalValues)
-    console.log(timestampValues)
-    console.log(ratingValues)
+
 
     document.getElementById("videoContainer").style.display = "none"
 
@@ -57,6 +55,12 @@ function showGraph(variable = intervalValues){
     }
 
     var middle_rating = scale[Math.floor(Object.values(scale).length / 2)]
+    lastDataPoint = experimentData[Object.values(experimentData).length - 1]
+    if(variable == timestampValues && timestampValues[timestampValues.length - 1] > intervalValues[intervalValues.length - 1]){
+        var maxX = timestampValues[timestampValues.length - 1] + settings["interval"]
+    }else{
+        var maxX = intervalValues[intervalValues.length - 1]
+    }
 
     if(Object.values(scale).length % 2 != 0){
         middle = middle_rating["value"];
@@ -108,7 +112,7 @@ function showGraph(variable = intervalValues){
                     type: 'linear',
                     position: 'bottom',
                     min: 0,
-                    max: variable[variable.length - 1]
+                    max: maxX
                 },
                 y: {
                     min: scale[0]["value"],
@@ -135,25 +139,6 @@ function showGraph(variable = intervalValues){
                     document.getElementById('video_player').currentTime = timeStamp;
                 }
             },
-            onmousenter: function (e, item) {
-                console.log("entered")
-                //chart.options.plugins.annotation.annotations.hoverLine.display = true;
-                chart.update()
-            },
-            onmouseleave: function (e, item) {
-                console.log("left")
-                //chart.options.plugins.annotation.annotations.hoverLine.display = false;
-                chart.update()
-            },
-            onHover: function (e, item) {
-                const canvasPosition = Chart.helpers.getRelativePosition(e, chart);
-                const dataX = chart.scales.x.getValueForPixel(canvasPosition.x);
-
-                hoverTime = dataX
-                //chart.options.plugins.annotation.annotations.hoverLine.display = true;
-                //chart.options.plugins.annotation.annotations.hoverLine.value = hoverTime;
-                chart.update()
-            },
             plugins: {
                 annotation: {
                     interaction: {
@@ -177,31 +162,17 @@ function showGraph(variable = intervalValues){
                             borderColor: '#74d4f8',
                             borderWidth: 1.5,
                             display: false
-                            /*label: {
-                                display: true,
-                                content: '<>',
-                                position: 'start'
-                            }*/
-                        },
-                        /*hoverLine: {
-                            type: 'line',
-                            mode: 'vertical',
-                            scaleID: 'x',
-                            value: timeStamp,
-                            borderColor: 'red',
-                            borderWidth: 2,
-                            borderDash: [5, 15]
-                        }*/
+                        }
                     }
                 }
             }
         }
     })
 
-    /*setInterval(() => {
+    if (videoShown && videoPicked) {
+        chart.options.plugins.annotation.annotations.timestampLine.display = true
         chart.update()
-        console.log("chart updated")
-    }, 500)*/
+    }
 }
 
 function playVideo(time){
@@ -241,22 +212,20 @@ function createCSV(){
 
     currentDate = new Date()
     const fileName = `${currentDate.getFullYear()}/${currentDate.getMonth()+1}/${currentDate.getDate()}_${experimentData["userName"]}_${experimentData["lingVar"]}`
-    //console.log(fileName)
+
     csvLink.setAttribute('download', fileName)
 }
 
 function createJpeg(){
     var canvas = document.getElementById("resultChart");
-    setTimeout(() => {
-        var canvasUrl = canvas.toDataURL("image/jpeg");
+    var canvasUrl = canvas.toDataURL("image/jpeg");
 
-        jpegLink = document.getElementById("jpegLink")
-        jpegLink.setAttribute('href', canvasUrl)
+    jpegLink = document.getElementById("jpegLink")
+    jpegLink.setAttribute('href', canvasUrl)
 
-        currentDate = new Date()
-        const fileName = `${currentDate.getFullYear()}/${currentDate.getMonth()+1}/${currentDate.getDate()}_${experimentData["userName"]}_${experimentData["lingVar"]}`
-        jpegLink.setAttribute('download', fileName)
-    }, 500)
+    currentDate = new Date()
+    const fileName = `${currentDate.getFullYear()}/${currentDate.getMonth()+1}/${currentDate.getDate()}_${experimentData["userName"]}_${experimentData["lingVar"]}`
+    jpegLink.setAttribute('download', fileName)
 }
 
 function toggleVideo(){
@@ -322,4 +291,5 @@ function pickSrc(){
 
 function refresh(){
     chart.resize();
+    chart.update();
 }
