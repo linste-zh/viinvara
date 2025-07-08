@@ -14,10 +14,9 @@
     </head>
 
     
-
     <body>
         <header class = "header">
-            <a class="iconWrapper" onclick="reset()"><img class="home icon" src="./media/home_icon.png" alt="Home Icon"></a>
+            <a class="iconWrapper" id="homeButton" onclick="reset()"><img class="home icon" src="./media/home_icon.png" alt="Home Icon"></a>
             <h1>Viinvara</h1>
             <!--<a class="iconWrapper" onclick=""><img class="help icon" src="./media/help_icon.png" alt="Help Icon"></a>-->        
         </header>
@@ -25,7 +24,7 @@
             <div class="pageContent">
                 <div class="textPanel">
                     <span id="instruction">Rate your Video</span>
-                    <button onclick="exitExperiment()">continue <img class="exitIcon" src="./media/exit_icon.png"></button>
+                    <button id="exitButton">continue <img class="exitIcon" src="./media/exit_icon.png"></button>
                 </div>
                 <div id="videoContainer" class="videoContainer">
                     <button id="setUpButton" class="bigButton">pick source</button>

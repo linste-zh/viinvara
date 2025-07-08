@@ -23,6 +23,11 @@
                 <div class="textPanel" id="instruction">
                     <h1>Here are your results!</h1>
                 </div>
+                <div id="displayMenu">
+                    <div class="displayOption" onclick="showGraph('i')">Ratings at Interval</div>
+                    <div class="displayOption" onclick="showGraph('ts')">Ratings at Timestamp</div>
+                    <div class="displayOption" onclick="showData()">Tabular Data</div>
+                </div>
                 <section class="results" id="resultsGrid">
                     <div id="graphContainer">
                         <canvas id="resultChart"></canvas>
@@ -34,13 +39,13 @@
                         </div>
                         <div id="videoContainer" class="videoContainer">
                             <b>please select your video file again</b>
-                            <button class="bigButton" onclick='setUpVideo()'>pick source</button>
+                            <button id="setUpButton" class="bigButton" onclick="setUpVideo()">pick source</button>
                         </div>
                     </div>
                 </section>
                 <div id="exportCSV" class="csvContainer">
-                    <a id="csvLink">Click to Download CSV</a>
-                    <a id="jpegLink">Click to Download JPEG</a>
+                    <a id="csvLink" onclick="createCSV()">Click to Download CSV</a>
+                    <a id="jpegLink" onclick="createJpeg()">Click to Download JPEG</a>
                 </div>
             </div>
         </main>

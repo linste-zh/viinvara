@@ -31,15 +31,18 @@ function setup(){
 
     if(settings["notRatedBehaviour"] == "neutral"){
         if(fullScale.length % 2 != 0){
-            middle = fullScale[Math.floor(fullScale.length / 2)];
+            var middle = fullScale[Math.floor(fullScale.length / 2)];
         }else{
-            middle = fullScale[Math.floor(fullScale.length / 2)] - 0.5;
+            var middle = fullScale[Math.floor(fullScale.length / 2)] - 0.5;
         }
         activeExperimentState.neutralRating = middle
     }
 
     document.getElementById("soundPlayer").src = settings["sound"] === "none" ? "" : settings["sound"];
 
+    if(experimentData["dataInputs"].length == 0){
+        localStorage.setItem("currentTimeStamp", 0)    
+    }
 
     let instruction = String("<b>" + experimentData["userName"] + "</b>, please rate this video based on <b>" + experimentData["lingVar"] + "</b>")
     document.getElementById("instruction").innerHTML = instruction
@@ -79,7 +82,8 @@ function start(){
 window.start = start
 
 function end(){
-    if(settings["inputAtEnd"]){
+    if(settings["inputAtEnd"] || activeExperimentState.pendingRating){
+        activeExperimentState.currentInterval += activeExperimentState.interval
         activateRating()
         const endInterval = setInterval(function () {
             if(!activeExperimentState.pendingRating){
@@ -106,6 +110,10 @@ function exitExperiment(){
         console.log("cancelled")
     }
 }
+document.getElementById("exitButton").addEventListener("click", () => {
+    exitExperiment();
+});
+window.exitExperiment = exitExperiment
 
 
 export {

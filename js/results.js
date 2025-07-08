@@ -1,4 +1,6 @@
-let timeValues, ratingValues
+const intervalValues = []
+const timestampValues = []
+const ratingValues = []
 const experimentData = JSON.parse(localStorage.getItem("experimentDataObject"))
 const scale = JSON.parse(localStorage.getItem("scaleObject"))
 var videoShown = false
@@ -6,24 +8,30 @@ var videoPicked = false
 var timeStamp = 0
 var chart
 
+
+
 function setUp(){
+    console.log("setup is happening")
     document.getElementsByTagName("body")[0].style = localStorage.getItem("theme")
 
     inputs = experimentData["dataInputs"]
-    timeValues = []
-    ratingValues = []
+    console.log(experimentData["dataInputs"])
 
     for (var i in inputs){
-        timeValues.push(inputs[i].time)
+        intervalValues.push(inputs[i].associatedInterval)
+        timestampValues.push(inputs[i].timeOfRating)
         ratingValues.push(inputs[i].rating)
     }
+    console.log(intervalValues)
+    console.log(timestampValues)
+    console.log(ratingValues)
 
     document.getElementById("videoContainer").style.display = "none"
 
 
     showGraph()
-    createCSV()
-    createJpeg()
+    //createCSV()
+    //createJpeg()
 }
 
 function showGraph(){
@@ -67,11 +75,11 @@ function showGraph(){
     chart = new Chart(ctx, {
         type: "line",
         data: {
-          labels: timeValues,
+          labels: intervalValues,
           datasets: [{
             label: experimentData["userName"] + " rating " + experimentData["lingVar"],
             borderColor: "rgba(0, 0, 0, 0.47)",
-            data: timeValues.map((t, i) => ({ x: t, y: ratingValues[i] })),
+            data: timestampValues.map((t, i) => ({ x: t, y: ratingValues[i] })),
             fill: true,
             clip: false,
           }]
@@ -83,7 +91,7 @@ function showGraph(){
                     type: 'linear',
                     position: 'bottom',
                     min: 0,
-                    max: timeValues[timeValues.length - 1]
+                    max: intervalValues[intervalValues.length - 1]
                 },
                 y: {
                     min: scale[0]["value"],
@@ -216,7 +224,7 @@ function createCSV(){
 
     currentDate = new Date()
     const fileName = `${currentDate.getFullYear()}/${currentDate.getMonth()+1}/${currentDate.getDate()}_${experimentData["userName"]}_${experimentData["lingVar"]}`
-    console.log(fileName)
+    //console.log(fileName)
     csvLink.setAttribute('download', fileName)
 }
 
@@ -254,7 +262,7 @@ function toggleVideo(){
         document.getElementById("resultsGrid").style.gridTemplateColumns = "1fr auto"
         videoShown = false
     }
-    chart.update()
+    refresh()
 }
 
 
