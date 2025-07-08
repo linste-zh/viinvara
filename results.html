@@ -24,9 +24,8 @@
                     <h1>Here are your results!</h1>
                 </div>
                 <div id="displayMenu">
-                    <div class="displayOption" onclick="showGraph('i')">Ratings at Interval</div>
-                    <div class="displayOption" onclick="showGraph('ts')">Ratings at Timestamp</div>
-                    <div class="displayOption" onclick="showData()">Tabular Data</div>
+                    <div class="displayOption" id="intervalButton" onclick="toggleGraph('interval')">Ratings at Interval</div>
+                    <div class="displayOption" id="timestampButton" onclick="toggleGraph('timestamp')">Ratings at Timestamp</div>
                 </div>
                 <section class="results" id="resultsGrid">
                     <div id="graphContainer">

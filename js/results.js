@@ -28,13 +28,30 @@ function setUp(){
 
     document.getElementById("videoContainer").style.display = "none"
 
+    document.getElementById("intervalButton").click()
 
-    showGraph()
+    //showGraph()
     //createCSV()
     //createJpeg()
 }
 
-function showGraph(){
+function toggleGraph(button){
+    ib = document.getElementById("intervalButton")
+    tsb = document.getElementById("timestampButton")
+    if(button == "interval"){
+        ib.classList.add("activeOption")
+        tsb.classList.remove("activeOption")
+        showGraph(intervalValues)
+    }else if (button == "timestamp"){
+        tsb.classList.add("activeOption")
+        ib.classList.remove("activeOption")
+        showGraph(timestampValues)
+    }
+    
+    
+}
+
+function showGraph(variable = intervalValues){
     if (chart) {
         chart.destroy();
     }
@@ -79,7 +96,7 @@ function showGraph(){
           datasets: [{
             label: experimentData["userName"] + " rating " + experimentData["lingVar"],
             borderColor: "rgba(0, 0, 0, 0.47)",
-            data: timestampValues.map((t, i) => ({ x: t, y: ratingValues[i] })),
+            data: variable.map((t, i) => ({ x: t, y: ratingValues[i] })),
             fill: true,
             clip: false,
           }]
@@ -91,7 +108,7 @@ function showGraph(){
                     type: 'linear',
                     position: 'bottom',
                     min: 0,
-                    max: intervalValues[intervalValues.length - 1]
+                    max: variable[variable.length - 1]
                 },
                 y: {
                     min: scale[0]["value"],
