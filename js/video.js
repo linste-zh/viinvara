@@ -7,6 +7,7 @@ async function setUpVideo(){
 
     activeExperimentState.videoContainer.innerHTML = '<video id="video_player" class="videoPlayer" type="video/mp4"></video>'
     activeExperimentState.videoElement = document.getElementById("video_player")
+
     activeExperimentState.videoElement.src = videoSrc + "#t=" + Math.max(activeExperimentState.currentTimeStamp - (activeExperimentState.interval / 2), 0, activeExperimentState.currentInterval)
     console.log("start at: " + Math.max(activeExperimentState.currentTimeStamp - (activeExperimentState.interval / 2), 0, activeExperimentState.currentInterval))
 

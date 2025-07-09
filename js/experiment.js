@@ -1,11 +1,12 @@
 import { playVideo, pauseVideo } from './video.js';
-import { applyScale, activateRating, keyPressed, intervalContained } from './rating.js';
+import { applyScale, activateRating, keyPressed, intervalContained, submit } from './rating.js';
 
 const activeExperimentState = {
     currentInterval: 0,
     pendingRating: false,
     interval: 60,
-    currentTimeStamp: 0
+    currentTimeStamp: 0,
+    videoOver: false
     //videoContainer
     //videoElement
     //ratingElement
@@ -14,6 +15,7 @@ const activeExperimentState = {
 const experimentData = JSON.parse(localStorage.getItem("experimentDataObject"))
 const scale = JSON.parse(localStorage.getItem("scaleObject"))
 const settings = JSON.parse(localStorage.getItem("settingsObject"))
+var hasEnded = false
 
 function setup(){
     document.getElementsByTagName("body")[0].style = localStorage.getItem("theme")
@@ -60,6 +62,10 @@ window.addEventListener("DOMContentLoaded", () => {
 window.setup = setup
 
 function start(){
+    settings["videoDuration"] = activeExperimentState.videoElement.duration
+    console.log(settings)
+    localStorage.setItem("settingsObject", JSON.stringify(settings))
+
     activeExperimentState.ratingElement.innerHTML = ""
     applyScale()
     activeExperimentState.ratingElement.style.visibility = "hidden"
@@ -82,11 +88,36 @@ function start(){
 window.start = start
 
 function end(){
-    if(settings["inputAtEnd"] || activeExperimentState.pendingRating){
-        activeExperimentState.currentInterval += activeExperimentState.interval
-        activateRating()
-        const endInterval = setInterval(function () {
+    console.log("pending rating: " + activeExperimentState.pendingRating)
+
+    activeExperimentState["videoOver"] = true
+    if(activeExperimentState.pendingRating && !intervalContained(activeExperimentState.currentInterval)){
+        console.log("Called due to pending rating")
+        let behaviour = settings["notRatedBehaviour"]
+        if(behaviour == "pause"){
+            let endInterval = setInterval(function () {
             if(!activeExperimentState.pendingRating){
+                clearInterval(endInterval)
+                window.location.href="results.html"
+            }
+        }, 500);
+        }else if(behaviour == "empty"){
+            activeExperimentState.pendingRating = false
+            console.log("triggered")
+            end()
+        }else if(behaviour == "neutral"){
+            submit(activeExperimentState.neutralRating)
+            hasEnded = false
+            end()
+        }
+    }else if(settings["inputAtEnd"] && !intervalContained(settings.videoDuration)){
+        console.log("Called input at end")
+        activeExperimentState.currentInterval = settings.videoDuration
+        activateRating()
+        let endInterval = setInterval(function () {
+            console.log("awaiting rating: " + activeExperimentState.pendingRating)
+            if(!activeExperimentState.pendingRating){
+                console.log("no longer pending rating")
                 clearInterval(endInterval)
                 window.location.href="results.html"
             }

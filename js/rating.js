@@ -49,6 +49,7 @@ function checkIfRatingRequired(pausingBehaviour = () => {}){
     activeExperimentState.currentTimeStamp = Math.floor(activeExperimentState.videoElement.currentTime * 100)/100
 
     activeExperimentState.currentInterval = Math.floor(activeExperimentState.currentTimeStamp / activeExperimentState.interval) * activeExperimentState.interval
+    console.log("current interval: " + activeExperimentState.currentInterval)
 
     let timeUntilNextRating = activeExperimentState.currentInterval + activeExperimentState.interval - activeExperimentState.currentTimeStamp 
     if(activeExperimentState.pendingRating && timeUntilNextRating < 0.5){
@@ -73,7 +74,7 @@ function notRatedInTime(){
     }else if(behaviour == "empty"){
         activeExperimentState.pendingRating = false
     }else if(behaviour == "neutral"){
-        submit(middle)
+        submit(activeExperimentState.neutralRating)
     }
 }
 
@@ -122,7 +123,9 @@ function submit(rating){
     let dp = new DataPoint(activeExperimentState.currentTimeStamp, activeExperimentState.currentInterval, rating)
     addDataPoint(dp)
     activeExperimentState.ratingElement.style.visibility = "hidden"
-    playVideo()
+    if(!activeExperimentState.videoOver){
+        playVideo()
+    }
 }
 
 function addDataPoint(dp){
@@ -135,6 +138,7 @@ function addDataPoint(dp){
     console.log(experimentData)
 
     activeExperimentState.pendingRating = false
+    console.log("activeExperiment.pending set to: " + activeExperimentState.pendingRating)
 }
 
 function playSound(){
