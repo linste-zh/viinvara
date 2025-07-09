@@ -69,7 +69,6 @@ function notRatedInTime(){
     let behaviour = settings["notRatedBehaviour"]
 
     if(behaviour == "pause"){
-        console.log("paused due to notRatedInTime")
         pauseVideo()
     }else if(behaviour == "empty"){
         activeExperimentState.pendingRating = false
@@ -138,7 +137,6 @@ function addDataPoint(dp){
     console.log(experimentData)
 
     activeExperimentState.pendingRating = false
-    console.log("activeExperiment.pending set to: " + activeExperimentState.pendingRating)
 }
 
 function playSound(){

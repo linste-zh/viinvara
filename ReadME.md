@@ -1,5 +1,5 @@
 # Viinvara
-cite as (APA 7): Steiner, Linda. (2025). *Viinvara* (Version 1.2) [Computer software]. GitHub. https://linste-zh.github.io/viinvara/
+cite as (APA 7): Steiner, Linda. (2025). *Viinvara* (Version 2.0) [Computer software]. GitHub. https://linste-zh.github.io/viinvara/
 
 ---
 
@@ -82,6 +82,10 @@ The continue button allows you to end the experiment prematurely and proceed to 
 
 ## Results
 
+### Interval vs Timestamp Graph
+
+There are two possible display options: one where the data points are set at their associated intervals (e.g. 10s, 20s, 30s, etc.) and one where they are set at the actual time of input (e.g. 12.3s, 20.5s, 38s, etc.). 
+
 ### Show Video and interact with Graph
 
 On the right hand side, a video player can be activated. Reload the video file from your experiment into it and compare points in the graph to their corresponding time stamps.  
@@ -90,7 +94,7 @@ To hide the video and time indication line in the graph, click on "Hide Video"
 
 ### Download as CSV or JPEG
 
-Data can be saved anywhere on your device as a CSV (Timestamp and Rating), or JPEG (graph). The default name has format is "Year_Month_Date_ParticipantName_Variable".
+Data can be saved anywhere on your device as a CSV (Timestamp and Rating). The currently visible graph can also be downlodaded as a JPEG. In order to download both version of the graph, click the button once with each view active. The default name has format is "Year_Month_Date_ParticipantName_Variable".
 
 ---
 

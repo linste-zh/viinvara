@@ -17,14 +17,12 @@ function loadExperiment(){
         return
     }
     localStorage.setItem("scaleObject", JSON.stringify(scaleObject))
-    console.log(localStorage.getItem("scaleObject"))
 
     settingsObject = createSettingsObject()
     if(!settingsObject){
         return
     }
     localStorage.setItem("settingsObject", JSON.stringify(settingsObject))
-    console.log(localStorage.getItem("settingsObject"))
 
     window.location.href="experiment.html"
 }
@@ -135,7 +133,6 @@ function setSound(){
 //image source: https://www.flaticon.com/free-icon/sound-waves_7582349?term=playing+sound&page=1&position=1&origin=search&related_id=7582349
 function testSound(){
     soundPlayer = document.getElementById("soundPlayer")
-    console.log(currentSound)
 
     if(currentSound == "none"){
         return
@@ -258,8 +255,6 @@ function updateControlSettings(){
     }else{
         document.getElementById("fullScreenSwitch").style.display = "none"
     }
-
-    console.log(document.getElementById("fullscreenChecker").style.display)
 
     let accordionContainer = document.getElementById("fullScreenSwitch").closest(".settingAccordion");
     setTimeout(() => {

@@ -63,7 +63,6 @@ window.setup = setup
 
 function start(){
     settings["videoDuration"] = activeExperimentState.videoElement.duration
-    console.log(settings)
     localStorage.setItem("settingsObject", JSON.stringify(settings))
 
     activeExperimentState.ratingElement.innerHTML = ""
@@ -88,11 +87,8 @@ function start(){
 window.start = start
 
 function end(){
-    console.log("pending rating: " + activeExperimentState.pendingRating)
-
     activeExperimentState["videoOver"] = true
     if(activeExperimentState.pendingRating && !intervalContained(activeExperimentState.currentInterval)){
-        console.log("Called due to pending rating")
         let behaviour = settings["notRatedBehaviour"]
         if(behaviour == "pause"){
             let endInterval = setInterval(function () {
@@ -103,7 +99,6 @@ function end(){
         }, 500);
         }else if(behaviour == "empty"){
             activeExperimentState.pendingRating = false
-            console.log("triggered")
             end()
         }else if(behaviour == "neutral"){
             submit(activeExperimentState.neutralRating)
@@ -111,13 +106,10 @@ function end(){
             end()
         }
     }else if(settings["inputAtEnd"] && !intervalContained(settings.videoDuration)){
-        console.log("Called input at end")
         activeExperimentState.currentInterval = settings.videoDuration
         activateRating()
         let endInterval = setInterval(function () {
-            console.log("awaiting rating: " + activeExperimentState.pendingRating)
             if(!activeExperimentState.pendingRating){
-                console.log("no longer pending rating")
                 clearInterval(endInterval)
                 window.location.href="results.html"
             }
@@ -138,7 +130,6 @@ function exitExperiment(){
         if(activeExperimentState.videoElement){
             playVideo()
         }
-        console.log("cancelled")
     }
 }
 document.getElementById("exitButton").addEventListener("click", () => {

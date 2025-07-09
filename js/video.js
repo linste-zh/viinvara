@@ -9,7 +9,6 @@ async function setUpVideo(){
     activeExperimentState.videoElement = document.getElementById("video_player")
 
     activeExperimentState.videoElement.src = videoSrc + "#t=" + Math.max(activeExperimentState.currentTimeStamp - (activeExperimentState.interval / 2), 0, activeExperimentState.currentInterval)
-    console.log("start at: " + Math.max(activeExperimentState.currentTimeStamp - (activeExperimentState.interval / 2), 0, activeExperimentState.currentInterval))
 
     if(settings["pausing"]){
         activeExperimentState.videoElement.ontimeupdate = () => checkIfRatingRequired(pauseVideo)

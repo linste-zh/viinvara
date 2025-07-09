@@ -56,7 +56,6 @@ function showGraph(variable = intervalValues){
 
     var middle_rating = scale[Math.floor(Object.values(scale).length / 2)]
     lastDataPoint = experimentData[Object.values(experimentData).length - 1]
-    console.log(settings["videoDuration"])
     maxX = Math.ceil(settings["videoDuration"])
 
     if(Object.values(scale).length % 2 != 0){
