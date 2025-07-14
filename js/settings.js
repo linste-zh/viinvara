@@ -5,26 +5,42 @@ scaleChanged = true
 currentSound = "none"
 
 function loadExperiment(){
-    experimentDataObject = createDataExperimentObject()
-    if(!experimentDataObject){
-        return
-    }
-    localStorage.setItem("experimentDataObject", JSON.stringify(experimentDataObject))
-    console.log(localStorage.getItem("experimentDataObject"))
-
-    scaleObject = createScaleObject()
-    if(!scaleObject){
-        return
-    }
-    localStorage.setItem("scaleObject", JSON.stringify(scaleObject))
-
-    settingsObject = createSettingsObject()
-    if(!settingsObject){
-        return
-    }
-    localStorage.setItem("settingsObject", JSON.stringify(settingsObject))
-
+    createObjects()
     window.location.href="experiment.html"
+}
+
+function createObjects(includeExperimentData = true, includeScaleObject = true, includeSettingsObject = true){
+    createdObjects = {}
+
+    if(includeExperimentData){
+        experimentDataObject = createDataExperimentObject()
+        if(!experimentDataObject){
+            return
+        }
+        localStorage.setItem("experimentDataObject", JSON.stringify(experimentDataObject))
+        console.log(localStorage.getItem("experimentDataObject"))
+        createdObjects["experimentData"] = experimentDataObject
+    }
+    
+    if(includeScaleObject){
+        scaleObject = createScaleObject()
+        if(!scaleObject){
+            return
+        }
+        localStorage.setItem("scaleObject", JSON.stringify(scaleObject))
+        createdObjects["scale"] = scaleObject
+    }
+
+    if(includeSettingsObject){
+        settingsObject = createSettingsObject()
+        if(!settingsObject){
+            return
+        }
+        localStorage.setItem("settingsObject", JSON.stringify(settingsObject))
+        createdObjects["settings"] = settingsObject
+    }
+    
+    return createdObjects
 }
 
 function createDataExperimentObject(){
@@ -285,5 +301,28 @@ function reset(){
         window.location.href="index.html"
     }else{
         console.log("cancelled")
+    }
+}
+
+
+/*partially done with ChatGPT*/
+function exportSettings(){
+    fullSettingsObject = createObjects(createDataExperimentObject = false)
+    lingVar = document.getElementById("varField").value
+    if(fullSettingsObject){
+        dataStr  = JSON.stringify(fullSettingsObject)
+        const blob = new Blob([dataStr], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+
+        currentDate = new Date()
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${currentDate.getFullYear()}/${currentDate.getMonth()+1}/${currentDate.getDate()}_Viinvara_ExperimentSettings.json`
+        a.click();
+
+        URL.revokeObjectURL(url);
+    }else{
+        alert("Could not download settings. Check if all fields are filled.")
+        return false
     }
 }

@@ -50,6 +50,18 @@
                         </div>
                         <div class="settingAccordion">
                             <div class="settingRow">
+                                <b>Input Type:</b> 
+                                Buttons
+                                <label class="switch">
+                                    <input type="checkbox" id="labelChecker" onchange="updateInputSettings()">
+                                    <span class="slider"></span>
+                                </label>
+                                Slider
+                                <div class="tooltipTrigger">
+                                    <img src="./media/help_icon.png" class="tooltipSymbol" onclick="openInfoBox('inputType')">
+                                </div>
+                            </div>
+                            <div class="settingRow">
                                 <b>Rating Scale:</b>
                                 <input id="scale_start_input" class="nrInputSmall" type="number" value="1" onkeyup=updateScale(this) onchange=updateScale(this)>
                                 to
@@ -195,6 +207,8 @@
                         </div>
                     </div>
                     <div class="startButtonContainer">
+                        <img src="./media/download_doc.png" class="downloadImg" title="export current settings" onclick="exportSettings()">
+                        <img src="./media/upload_doc.png" class="downloadImg" title="import settings">                        
                         <button class="startButton" onclick="loadExperiment()">Start Experiment</button>
                     </div>
                 </section>
