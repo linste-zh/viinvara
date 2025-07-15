@@ -43,7 +43,7 @@ document.getElementById("setUpButton").addEventListener("click", () => {
 window.setUpVideo = setUpVideo
 
 
-
+/*mostly done using ChatGPT*/
 function pickSrc(){
     return new Promise((resolve, reject) => {
         if(experimentData["dataInputs"].length > 0){

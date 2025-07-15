@@ -18,7 +18,6 @@ function createObjects(includeExperimentData = true, includeScaleObject = true, 
             return
         }
         localStorage.setItem("experimentDataObject", JSON.stringify(experimentDataObject))
-        console.log(localStorage.getItem("experimentDataObject"))
         createdObjects["experimentData"] = experimentDataObject
     }
     
@@ -326,3 +325,47 @@ function exportSettings(){
         return false
     }
 }
+
+/*partially done with ChatGPT*/
+async function importSettings(){
+    const file = await pickFile()
+    const fileContent = await readFileAsText(file);
+    const content = JSON.parse(fileContent);
+
+    console.log("Imported settings:", content);
+    let scale = content["scale"]
+    console.log(scale)
+    let settings = content["settings"]
+    console.log(settings)
+
+}
+
+function pickFile(){
+     return new Promise((resolve, reject) => {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = ".json"
+        input.style = "display: none;"
+        input.onchange = () => {
+            let files =   Array.from(input.files);
+            let chosenDoc = files[0]
+            if (chosenDoc) {
+                resolve(chosenDoc);
+            }else{
+                reject("No JSON file selected.");
+            }
+        }
+
+        input.click();
+    });
+}
+
+function readFileAsText(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = () => reject(reader.error);
+        reader.readAsText(file);
+    });
+}
+
