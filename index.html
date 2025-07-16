@@ -53,7 +53,7 @@
                                 <b>Input Type:</b> 
                                 Buttons
                                 <label class="switch">
-                                    <input type="checkbox" id="labelChecker" onchange="updateInputSettings()">
+                                    <input type="checkbox" id="inputChecker" onchange="updateInputSettings()">
                                     <span class="slider"></span>
                                 </label>
                                 Slider
@@ -145,16 +145,16 @@
                                     <img src="./media/help_icon.png" class="tooltipSymbol" onclick="openInfoBox('notRated')">
                                 </div>  
                                 <div>
-                                    <input type="radio" id="emergencyPause" class="radioButton" name="notRatedBehaviour" value="pause" checked="checked">
-                                    <label for="emergencyPause">pause</label>
+                                    <input type="radio" id="pause" class="radioButton" name="notRatedBehaviour" value="pause" checked="checked">
+                                    <label for="pause">pause</label>
                                 </div>
                                 <div>
-                                    <input type="radio" id="neutralRate" class="radioButton" name="notRatedBehaviour" value="neutral">
-                                    <label for="neutralRate">rate neutral</label>
+                                    <input type="radio" id="neutral" class="radioButton" name="notRatedBehaviour" value="neutral">
+                                    <label for="neutral">rate neutral</label>
                                 </div>
                                 <div>
-                                    <input type="radio" id="leaveOut" class="radioButton" name="notRatedBehaviour" value="empty">
-                                    <label for="leaveOut">leave out</label>
+                                    <input type="radio" id="empty" class="radioButton" name="notRatedBehaviour" value="empty">
+                                    <label for="empty">leave out</label>
                                 </div>
                             </div>
                             <div class="settingRow">
@@ -208,7 +208,7 @@
                     </div>
                     <div class="startButtonContainer">
                         <img src="./media/download_doc.png" class="downloadImg" title="export current settings" onclick="exportSettings()">
-                        <img src="./media/upload_doc.png" class="downloadImg" title="import settings" onclick="importSettings()">                        
+                        <img src="./media/upload_doc.png" class="downloadImg" title="import settings from file" onclick="importSettings()">                        
                         <button class="startButton" onclick="loadExperiment()">Start Experiment</button>
                     </div>
                 </section>

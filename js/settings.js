@@ -332,12 +332,13 @@ async function importSettings(){
     const fileContent = await readFileAsText(file);
     const content = JSON.parse(fileContent);
 
-    console.log("Imported settings:", content);
-    let scale = content["scale"]
-    console.log(scale)
-    let settings = content["settings"]
-    console.log(settings)
+    if(!content.hasOwnProperty("scale") || !content.hasOwnProperty("settings") ){
+        alert("The provided JSON does not contain the expected content.  Please try a different file.")
+        return
+    }
 
+    fillOutScaleSettings(content["scale"])
+    fillOutSettings(content["settings"])
 }
 
 function pickFile(){
@@ -369,3 +370,43 @@ function readFileAsText(file) {
     });
 }
 
+function fillOutScaleSettings(scaleInfo){
+    startValue = scaleInfo["0"]
+    endValue = scaleInfo[Object.keys(scaleInfo)[Object.keys(scaleInfo).length - 1]]
+    document.getElementById("scale_start_input").value = startValue.value
+    document.getElementById("scale_end_input").value = endValue.value
+    fullScale = getCurrentFullScale()
+    scaleChanged = true
+
+    fullScaleLabels = []
+    document.getElementById("labelChecker").checked = false
+    for(key in scaleInfo){
+        scale = scaleInfo[key]
+        fullScaleLabels.push(scale.label)
+        if(scale.label != ""){
+            document.getElementById("labelChecker").checked = true
+        }
+    }
+    updateLabelSettings()
+}   
+
+function fillOutSettings(settingsInfo){
+    document.getElementById("interval_input").value = settingsInfo["interval"]
+    document.getElementById("pauseChecker").checked = settingsInfo["pausing"]
+    updateNoRatingSettings()
+    
+    document.getElementById("startInputChecker").checked = settingsInfo["inputAtStart"]
+    document.getElementById("endInputChecker").checked = settingsInfo["inputAtEnd"]
+    
+    document.getElementById(settingsInfo["notRatedBehaviour"]).checked = true
+
+    sound = settingsInfo["sound"]
+    sound = sound.replace('./media/', '')
+    console.log(sound)
+    document.getElementById("notificationSound").value = sound
+    setSound()
+    
+    document.getElementById("vcChecker").checked = settingsInfo["controls"]
+    document.getElementById("fullscreenChecker").checked = settingsInfo["fullscreen"]
+    updateControlSettings()
+}
