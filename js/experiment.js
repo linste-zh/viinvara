@@ -26,7 +26,7 @@ function setup(){
 
     activeExperimentState.interval = settings["interval"]
 
-    fullScale = []
+    var fullScale = []
     for(var index in scale){
         fullScale.push(scale[index]["value"])
     }

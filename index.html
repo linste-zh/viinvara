@@ -4,7 +4,12 @@
         <title>Welcome</title>
         <link href="./css/basicLayout.css" type="text/css" rel="stylesheet">
         <link href="./css/index.css" type="text/css" rel="stylesheet">
-        <script src="./js/settings.js"></script>
+        <script type="module" src="./js/settings.js"></script>
+        <script type="module" src="./js/scaleSettings.js"></script>
+        <script type="module" src="./js/experimentSettings.js"></script>
+        <script type="module" src="./js/experimentDataSettings.js"></script>
+        <script type="module" src="./js/settingsImportExport.js"></script>
+        <script src="./js/headerFunctions.js"></script>
         <script src="./js/index.js"></script>
         <meta charset="UTF-8">
         <link rel="icon" type="image/x-icon" href="./media/viinvara.ico">
@@ -12,7 +17,7 @@
     </head>
     <body onload="chooseTheme('blue')">
         <header class = "header">
-            <a class="iconWrapper" onclick="reset()"><img class="home icon" src="./media/home_icon.png" alt="Home Icon"></a>
+            <a id="homeButton" class="iconWrapper" onclick="reset()"><img class="home icon" src="./media/home_icon.png" alt="Home Icon"></a>
             <h1>Viinvara</h1>
             <!--<a class="iconWrapper" onclick=""><img class="help icon" src="./media/help_icon.png" alt="Help Icon"></a>-->        
         </header>
@@ -49,7 +54,7 @@
                             <img id="accordionArrow" class="arrowIcon" src="./media/arrow_icon.png">
                         </div>
                         <div class="settingAccordion">
-                            <div class="settingRow">
+                            <!-- div class="settingRow">
                                 <b>Input Type:</b> 
                                 Buttons
                                 <label class="switch">
@@ -60,12 +65,12 @@
                                 <div class="tooltipTrigger">
                                     <img src="./media/help_icon.png" class="tooltipSymbol" onclick="openInfoBox('inputType')">
                                 </div>
-                            </div>
+                            </div-->
                             <div class="settingRow">
                                 <b>Rating Scale:</b>
                                 <input id="scale_start_input" class="nrInputSmall" type="number" value="1" onkeyup=updateScale(this) onchange=updateScale(this)>
                                 to
-                                <input id="scale_end_input" class="nrInputSmall" type="number" value="9" onkeyup=updateScale(this) onchange=updateScale(this)>
+                                <input id="scale_end_input" class="nrInputSmall" type="number" value="5" onkeyup=updateScale(this) onchange=updateScale(this)>
                                 <div class="tooltipTrigger">
                                     <img src="./media/help_icon.png" class="tooltipSymbol" onclick="openInfoBox('ratingScale')">
                                 </div>
@@ -207,9 +212,9 @@
                         </div>
                     </div>
                     <div class="startButtonContainer">
-                        <img src="./media/download_doc.png" class="downloadImg" title="export current settings" onclick="exportSettings()">
-                        <img src="./media/upload_doc.png" class="downloadImg" title="import settings from file" onclick="importSettings()">                        
-                        <button class="startButton" onclick="loadExperiment()">Start Experiment</button>
+                        <img id="settingsExportButton" src="./media/download_doc.png" class="downloadImg" title="export current settings" >
+                        <img id="settingsImportButton" src="./media/upload_doc.png" class="downloadImg" title="import settings from file" onclick="importSettings()">                        
+                        <button id="experimentStartButton" class="startButton" onclick="loadExperiment()">Start Experiment</button>
                     </div>
                 </section>
             </div>

@@ -6,15 +6,15 @@
         <link href="./css/basicLayout.css" type="text/css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.9/dist/chart.umd.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.1.0/dist/chartjs-plugin-annotation.min.js"></script>        
-        <script src="./js/settings.js"></script>
         <script src="./js/results.js"></script>
+        <script src="./js/headerFunctions.js"></script>
         <meta charset="UTF-8">
         <link rel="icon" type="image/x-icon" href="./media/viinvara.ico">
         <!--Font in icon: Imprint MT Shadow-->
     </head>
     <body onload="setUp()" onresize="refresh()">
         <header class = "header">
-            <a class="iconWrapper" onclick="reset()"><img class="home icon" src="./media/home_icon.png" alt="Home Icon"></a>
+            <a id="homeButton" class="iconWrapper" onclick="reset()"><img class="home icon" src="./media/home_icon.png" alt="Home Icon"></a>
             <h1>Viinvara</h1>
             <!--<a class="iconWrapper" onclick=""><img class="help icon" src="./media/help_icon.png" alt="Help Icon"></a>-->        
         </header>
