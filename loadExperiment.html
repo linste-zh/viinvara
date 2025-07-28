@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Results</title>
+        <link href="./css/results.css" type="text/css" rel="stylesheet">
+        <link href="./css/basicLayout.css" type="text/css" rel="stylesheet">
+        <script type="module" src="./js/settings.js"></script>
+        <script type="module" src="./js/settingsImportExport.js"></script>
+        <script src="./js/headerFunctions.js"></script>
+        <meta charset="UTF-8">
+        <link rel="icon" type="image/x-icon" href="./media/viinvara.ico">
+        <!--Font in icon: Imprint MT Shadow-->
+    </head>
+    <body onload="setUp()" onresize="refresh()">
+        <header class = "header">
+            <a id="homeButton" class="iconWrapper" onclick="reset()"><img class="home icon" src="./media/home_icon.png" alt="Home Icon"></a>
+            <h1>Viinvara</h1>
+            <!--<a class="iconWrapper" onclick=""><img class="help icon" src="./media/help_icon.png" alt="Help Icon"></a>-->        
+        </header>
+        <main class="mainBody">
+            <div class="pageContent">
+                <div class="textPanel">
+                    <span id="instruction">Rate your Video</span>
+                    <button id="exitButton">continue <img class="exitIcon" src="./media/exit_icon.png"></button>
+                </div>
+            </div>
+        </main>
+        <footer class = "footer">
+            <span class="footerNote">09/07/2025</span>
+            <span class="footerNote">V2.0</span>
+            <span class="footerNote">© Linda Steiner (linste.zh@gmail.com)</span>
+            <span class="footerNote">UZH - Zurich</span>
+            <span class="footerNote"><a href="https://github.com/linste-zh/viinvara" target="_blank">Project Git Page</a></span>
+        </footer>
+    </body>
+</html>

@@ -8,6 +8,7 @@ function exportSettings(){
     var fullSettingsObject = createObjects(false)
     var lingVar = document.getElementById("varField").value
     if(fullSettingsObject){
+        fullSettingsObject["theme"] = localStorage.getItem("theme")
         let dataStr  = JSON.stringify(fullSettingsObject)
         const blob = new Blob([dataStr], { type: 'text/plain' });
         const url = URL.createObjectURL(blob);
@@ -38,6 +39,8 @@ async function importSettings(){
         return
     }
 
+    document.getElementsByTagName("body")[0].style = content["theme"]
+    localStorage.setItem("theme", content["theme"])
     fillOutScaleSettings(content["scale"])
     fillOutSettings(content["settings"])
 }
