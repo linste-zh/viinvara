@@ -37,10 +37,7 @@ async function setUpVideo(){
         start()
     })
 }
-document.getElementById("setUpButton").addEventListener("click", () => {
-    setUpVideo();
-});
-window.setUpVideo = setUpVideo
+
 
 
 /*mostly done using ChatGPT*/
@@ -92,5 +89,6 @@ function playVideo(){
 
 export{
     pauseVideo,
-    playVideo
+    playVideo,
+    setUpVideo
 }

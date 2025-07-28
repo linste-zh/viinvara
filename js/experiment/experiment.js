@@ -55,12 +55,7 @@ function setup(){
     console.log(scale)
     console.log(localStorage.getItem("currentTimeStamp"))
 }
-if(window.location.pathname == "index.html"){
-    window.addEventListener("DOMContentLoaded", () => {
-        setup();
-    });
-    window.setup = setup
-}
+
 
 function start(){
     settings["videoDuration"] = activeExperimentState.videoElement.duration
@@ -132,12 +127,6 @@ function exitExperiment(){
             playVideo()
         }
     }
-}
-if(window.location.pathname == "index.html"){
-    document.getElementById("exitButton").addEventListener("click", () => {
-        exitExperiment();
-    });
-    window.exitExperiment = exitExperiment
 }
 
 
