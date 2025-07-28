@@ -55,11 +55,12 @@ function setup(){
     console.log(scale)
     console.log(localStorage.getItem("currentTimeStamp"))
 }
-
-window.addEventListener("DOMContentLoaded", () => {
-    setup();
-});
-window.setup = setup
+if(window.location.pathname == "index.html"){
+    window.addEventListener("DOMContentLoaded", () => {
+        setup();
+    });
+    window.setup = setup
+}
 
 function start(){
     settings["videoDuration"] = activeExperimentState.videoElement.duration
@@ -132,10 +133,12 @@ function exitExperiment(){
         }
     }
 }
-document.getElementById("exitButton").addEventListener("click", () => {
-    exitExperiment();
-});
-window.exitExperiment = exitExperiment
+if(window.location.pathname == "index.html"){
+    document.getElementById("exitButton").addEventListener("click", () => {
+        exitExperiment();
+    });
+    window.exitExperiment = exitExperiment
+}
 
 
 export {

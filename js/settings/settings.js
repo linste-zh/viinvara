@@ -6,10 +6,7 @@ function loadExperiment(){
     createObjects()
     window.location.href="experiment.html"
 }
-document.getElementById("experimentStartButton").addEventListener("click", () => {
-    loadExperiment();
-});
-window.loadExperiment = loadExperiment
+
 
 function createObjects(includeExperimentData = true, includeScaleObject = true, includeSettingsObject = true){
     var createdObjects = {}
@@ -46,5 +43,6 @@ function createObjects(includeExperimentData = true, includeScaleObject = true, 
 
 
 export{
-    createObjects
+    createObjects,
+    loadExperiment
 }

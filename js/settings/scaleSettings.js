@@ -1,8 +1,8 @@
 var fullScale = []
 var fullScaleLabels = []
 var scaleChanged = true
-var scale_start = parseInt(document.getElementById("scale_start_input").value)
-var scale_end = parseInt(document.getElementById("scale_end_input").value)
+var scale_start
+var scale_end
 
 function createScaleObject(){
     let wantLabels = document.getElementById("labelChecker").checked
@@ -67,11 +67,6 @@ function updateScale(el){
     ensureMinLengthLabelsArray()
     updateLabelSettings()
 }
-document.getElementById("scale_start_input").addEventListener("keyup", () => {updateScale(this)});
-document.getElementById("scale_start_input").addEventListener("change", () => {updateScale(this)});
-document.getElementById("scale_end_input").addEventListener("keyup", () => {updateScale(this)});
-document.getElementById("scale_end_input").addEventListener("change", () => {updateScale(this)});
-window.updateScale = updateScale
 
 function ensureMinLengthLabelsArray(){
     while(fullScale.length > fullScaleLabels.length){
@@ -94,8 +89,7 @@ function updateLabelSettings(){
         accordionContainer.style.maxHeight = accordionContainer.scrollHeight + "px"
     }, 20)
 }
-document.getElementById("labelChecker").addEventListener("change", updateLabelSettings)
-window.updateLabelSettings = updateLabelSettings
+
 
 
 function displayScaleLableInputs(){

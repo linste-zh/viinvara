@@ -45,8 +45,7 @@ function enforceInterval(){
         el.value = 3600;
     }
 }
-document.getElementById("interval_input").addEventListener("keyup", enforceInterval)
-window.enforceInterval = enforceInterval
+
 
 function setSound(){
     let picked = document.getElementById("notificationSound").value
@@ -56,8 +55,7 @@ function setSound(){
     currentSound = "./media/" + picked
     document.getElementById("soundPlayer").src = currentSound
 }
-document.getElementById("notificationSound").addEventListener("change", setSound)
-window.setSound = setSound
+
 
 //image source: https://www.flaticon.com/free-icon/play_3318660?term=play&page=1&position=1&origin=style&related_id=3318660
 //image source: https://www.flaticon.com/free-icon/sound-waves_7582349?term=playing+sound&page=1&position=1&origin=search&related_id=7582349
@@ -72,8 +70,6 @@ function testSound(){
         soundPlayer.onended = () => {document.getElementById("soundIcon").src = "./media/play_icon.png"}
     }
 }
-document.getElementById("soundIcon").addEventListener("click", testSound)
-window.testSound = testSound
 
 
 function updateControlSettings(){
@@ -88,8 +84,7 @@ function updateControlSettings(){
         accordionContainer.style.maxHeight = accordionContainer.scrollHeight + "px";
     }, 20);
 }
-document.getElementById("vcChecker").addEventListener("change", updateControlSettings)
-window.updateControlSettings = updateControlSettings
+
 
 function updateNoRatingSettings(){
     if(document.getElementById("pauseChecker").checked){
@@ -103,8 +98,7 @@ function updateNoRatingSettings(){
         accordionContainer.style.maxHeight = accordionContainer.scrollHeight + "px"
     }, 20);
 }
-document.getElementById("pauseChecker").addEventListener("change", updateNoRatingSettings)
-window.updateNoRatingSettings = updateNoRatingSettings
+
 
 function fillOutSettings(settingsInfo){
     document.getElementById("interval_input").value = settingsInfo["interval"]
@@ -129,5 +123,10 @@ function fillOutSettings(settingsInfo){
 
 export{
     createSettingsObject,
-    fillOutSettings
+    fillOutSettings,
+    enforceInterval,
+    setSound,
+    testSound,
+    updateControlSettings,
+    updateNoRatingSettings
 }

@@ -25,8 +25,7 @@ function exportSettings(){
         return false
     }
 }
-document.getElementById("settingsExportButton").addEventListener("click", exportSettings)
-window.exportSettings = exportSettings
+
 
 /*partially done with ChatGPT*/
 async function importSettings(){
@@ -41,11 +40,11 @@ async function importSettings(){
 
     document.getElementsByTagName("body")[0].style = content["theme"]
     localStorage.setItem("theme", content["theme"])
+
     fillOutScaleSettings(content["scale"])
     fillOutSettings(content["settings"])
 }
-document.getElementById("settingsImportButton").addEventListener("click", importSettings)
-window.importSettings = importSettings
+
 
 function pickFile(){
      return new Promise((resolve, reject) => {
@@ -74,4 +73,9 @@ function readFileAsText(file) {
         reader.onerror = () => reject(reader.error);
         reader.readAsText(file);
     });
+}
+
+export{
+    importSettings,
+    exportSettings
 }
