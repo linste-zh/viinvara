@@ -2,15 +2,15 @@
 <html>
     <head>
         <title>Results</title>
-        <link href="./css/results.css" type="text/css" rel="stylesheet">
+        <link href="./css/loadExperiment.css" type="text/css" rel="stylesheet">
         <link href="./css/basicLayout.css" type="text/css" rel="stylesheet">
-        <script type="module" src="./js/settings/settingsImportExport.js"></script>
+        <script src="./js/remoteExperiment/loadExperiment.js"></script>
         <script src="./js/headerFunctions.js"></script>
         <meta charset="UTF-8">
         <link rel="icon" type="image/x-icon" href="./media/viinvara.ico">
         <!--Font in icon: Imprint MT Shadow-->
     </head>
-    <body>
+    <body onload="loadTheme()"> 
         <header class = "header">
             <a id="homeButton" class="iconWrapper" onclick="reset()"><img class="home icon" src="./media/home_icon.png" alt="Home Icon"></a>
             <h1>Viinvara</h1>
@@ -18,14 +18,23 @@
         </header>
         <main class="mainBody">
             <div class="pageContent">
-                <div class="">
-                    <label for="nameField">Please enter your participant name or ID: </label>
-                    <input type="text" class = "textInput" id="nameField" autofocus>
+                <div class="textPanel">
+                    <h1>Load Experiment</h1>
+                    <p>
+                        Welcome to Viinvara, the Video Interval Variable Rater software. On this page, you can upload a settings file to start a premade experiment.</br>
+                        Enter your name or participant ID and upload the settings file (JSON file, ".js").</br>
+                        The video needs to be uploaded on the next page.
+                    </p>
                 </div>
-                <div class="infoField">
-                    <span id="instruction">Please provide an experiment setting file with type ".js".</span>
-                    <button id="settingsImportButton" class="downloadImg" title="click to select file" onclick="importSettings()">select file</button>
-                </div> 
+                <div class="experimentInfo" id="experimentInfo">
+                    <div class="nameInput" id="nameInput">
+                        <label for="nameField">Please enter your participant name or ID: </label>
+                        <input type="text" class = "textInput" id="nameField" autofocus>
+                    </div>
+                    <div class="infoField" id="infoField">
+                        <button id="settingsImportButton" class="downloadImg" title="click to select file" onclick="importSettings()">upload settings file</button>
+                    </div> 
+                </div>   
             </div>
         </main>
         <footer class = "footer">

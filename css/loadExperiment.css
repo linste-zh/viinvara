@@ -1,0 +1,54 @@
+.pageContent{
+  min-height: 200px;
+  width: 50%;
+  min-width: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.textPanel{
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.textPanel h1{
+  color: black;
+  margin: 0px;
+}
+
+.textPanel h2{
+  color: black;
+  margin: 0px;
+  font-size: 12pt;
+  font-weight: normal;
+}
+
+.textPanel p{
+  color: black;
+}
+
+.experimentInfo{
+  min-height: 200px;
+  min-width: 400px;
+  background-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 10px 15px rgba(255, 255, 255, 0.6);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  flex: 1 8;
+  align-items: center;
+}
+
+.infoField{
+  max-height: 80%;
+  width: 100%;
+}
+
+.infoText{
+  overflow-y: auto;
+  border: 1px black solid;
+  padding: 5px;
+}
