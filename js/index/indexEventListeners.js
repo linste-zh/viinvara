@@ -1,3 +1,10 @@
+import {setTheme} from '../headerFunctions.js'
+document.getElementById("greenThemeButton").addEventListener("click", () => setTheme("green"))
+document.getElementById("pinkThemeButton").addEventListener("click", () => setTheme("pink"))
+document.getElementById("blueThemeButton").addEventListener("click", () => setTheme("blue"))
+document.getElementById("grayThemeButton").addEventListener("click", () => setTheme("gray"))
+window.setTheme = setTheme
+
 import {loadExperiment} from '../settings/settings.js'
 
 document.getElementById("experimentStartButton").addEventListener("click", loadExperiment)
@@ -34,10 +41,10 @@ document.getElementById("labelChecker").addEventListener("change", updateLabelSe
 window.updateLabelSettings = updateLabelSettings
 
 
-import {exportSettings, importSettings} from '../settings/settingsImportExport.js'
+import {exportMinSettings, importMinSettings} from '../settings/settingsImportExport.js'
 
-document.getElementById("settingsExportButton").addEventListener("click", exportSettings)
-window.exportSettings = exportSettings
+document.getElementById("settingsExportButton").addEventListener("click", exportMinSettings)
+window.exportMinSettings = exportMinSettings
 
-document.getElementById("settingsImportButton").addEventListener("click", importSettings)
-window.importSettings = importSettings
+document.getElementById("settingsImportButton").addEventListener("click", importMinSettings)
+window.importMinSettings = importMinSettings

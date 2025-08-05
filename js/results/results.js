@@ -12,8 +12,6 @@ var chart
 
 
 function setUp(){
-    document.getElementsByTagName("body")[0].style = localStorage.getItem("theme")
-
     inputs = experimentData["dataInputs"]
     console.log(experimentData["dataInputs"])
 

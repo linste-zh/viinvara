@@ -18,7 +18,6 @@ const settings = JSON.parse(localStorage.getItem("settingsObject"))
 var hasEnded = false
 
 function setup(){
-    document.getElementsByTagName("body")[0].style = localStorage.getItem("theme")
     document.getElementsByTagName("body")[0].addEventListener("keydown", (event) => {keyPressed(event)})
     
     activeExperimentState.videoContainer = document.getElementById("videoContainer")

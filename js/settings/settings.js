@@ -3,7 +3,15 @@ import {createSettingsObject} from './experimentSettings.js'
 import {createDataExperimentObject} from './experimentDataSettings.js'
 
 function loadExperiment(){
-    createObjects()
+    var fullSettingObject = createObjects()
+    if(fullSettingObject["experimentData"]["userName"] == ""){
+        alert("please fill out the user name field")
+        return false
+    }
+    if(fullSettingObject["experimentData"]["lingVar"] == ""){
+        alert("please fill out the variable field")
+        return false
+    }
     window.location.href="experiment.html"
 }
 

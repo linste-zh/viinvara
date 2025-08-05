@@ -112,7 +112,6 @@ function fillOutSettings(settingsInfo){
 
     let sound = settingsInfo["sound"]
     sound = sound.replace('./media/', '')
-    console.log(sound)
     document.getElementById("notificationSound").value = sound
     setSound()
     

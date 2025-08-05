@@ -1,12 +1,13 @@
 import {createObjects} from './settings.js'
 import {fillOutScaleSettings} from './scaleSettings.js'
 import {fillOutSettings} from './experimentSettings.js'
-import {} from './experimentDataSettings.js'
+import {fillOutExperimentDataSettings} from './experimentDataSettings.js'
+import {setTheme} from '../headerFunctions.js'
 
 /*partially done with ChatGPT*/
-function exportSettings(){
-    var fullSettingsObject = createObjects(false)
-    var lingVar = document.getElementById("varField").value
+function exportMinSettings(){
+    var fullSettingsObject = createObjects()
+    
     if(fullSettingsObject){
         fullSettingsObject["theme"] = localStorage.getItem("theme")
         let dataStr  = JSON.stringify(fullSettingsObject)
@@ -28,7 +29,7 @@ function exportSettings(){
 
 
 /*partially done with ChatGPT*/
-async function importSettings(){
+async function importMinSettings(){
     const file = await pickFile()
     const fileContent = await readFileAsText(file);
     const content = JSON.parse(fileContent);
@@ -38,9 +39,9 @@ async function importSettings(){
         return
     }
 
-    document.getElementsByTagName("body")[0].style = content["theme"]
-    localStorage.setItem("theme", content["theme"])
+    setTheme(content["theme"])
 
+    fillOutExperimentDataSettings(content["experimentData"])
     fillOutScaleSettings(content["scale"])
     fillOutSettings(content["settings"])
 }
@@ -76,6 +77,8 @@ function readFileAsText(file) {
 }
 
 export{
-    importSettings,
-    exportSettings
+    importMinSettings,
+    exportMinSettings,
+    pickFile,
+    readFileAsText
 }

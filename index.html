@@ -5,13 +5,13 @@
         <link href="./css/basicLayout.css" type="text/css" rel="stylesheet">
         <link href="./css/index.css" type="text/css" rel="stylesheet">
         <script type="module" src="./js/index/indexEventListeners.js"></script>
+        <script type="module" src="./js/headerFunctions.js"></script>
         <script src="./js/index/index.js"></script>
-        <script src="./js/headerFunctions.js"></script>
         <meta charset="UTF-8">
         <link rel="icon" type="image/x-icon" href="./media/viinvara.ico">
         <!--Font in icon: Imprint MT Shadow-->
     </head>
-    <body onload="chooseTheme('blue')">
+    <body>
         <header class = "header">
             <a id="homeButton" class="iconWrapper" onclick="reset()"><img class="home icon" src="./media/home_icon.png" alt="Home Icon"></a>
             <h1>Viinvara</h1>
@@ -20,10 +20,10 @@
         <main class="mainBody">
             <div class="pageContent">
                 <div class="themeChoice">
-                    <button class="themeOption green" onclick="chooseTheme('green')"></button>
-                    <button class="themeOption pink" onclick="chooseTheme('pink')"></button>
-                    <button class="themeOption blue" onclick="chooseTheme('blue')"></button>
-                    <button class="themeOption gray" onclick="chooseTheme('gray')"></button>
+                    <button class="themeOption green" id="greenThemeButton"></button>
+                    <button class="themeOption pink" id="pinkThemeButton"></button>
+                    <button class="themeOption blue" id="blueThemeButton"></button>
+                    <button class="themeOption gray" id="grayThemeButton"></button>
                 </div>
                 <div class="textPanel">
                     <h1>Viinvara</h1>
@@ -209,7 +209,7 @@
                     </div>
                     <div class="startButtonContainer">
                         <img id="settingsExportButton" src="./media/download_doc.png" class="downloadImg" title="export current settings" >
-                        <img id="settingsImportButton" src="./media/upload_doc.png" class="downloadImg" title="import settings from file" onclick="importSettings()">                        
+                        <img id="settingsImportButton" src="./media/upload_doc.png" class="downloadImg" title="import settings from file">                        
                         <button id="experimentStartButton" class="startButton" onclick="loadExperiment()">Start Experiment</button>
                     </div>
                 </section>
