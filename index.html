@@ -13,7 +13,7 @@
     </head>
     <body>
         <header class = "header">
-            <a id="homeButton" class="iconWrapper" onclick="reset()"><img class="home icon" src="./media/home_icon.png" alt="Home Icon"></a>
+            <a id="homeButton" class="iconWrapper"><img class="home icon" src="./media/home_icon.png" alt="Home Icon"></a>
             <h1>Viinvara</h1>
             <!--<a class="iconWrapper" onclick=""><img class="help icon" src="./media/help_icon.png" alt="Help Icon"></a>-->        
         </header>
@@ -64,9 +64,9 @@
                             </div-->
                             <div class="settingRow">
                                 <b>Rating Scale:</b>
-                                <input id="scale_start_input" class="nrInputSmall" type="number" value="1" onkeyup=updateScale(this) onchange=updateScale(this)>
+                                <input id="scale_start_input" class="nrInputSmall" type="number" value="1">
                                 to
-                                <input id="scale_end_input" class="nrInputSmall" type="number" value="5" onkeyup=updateScale(this) onchange=updateScale(this)>
+                                <input id="scale_end_input" class="nrInputSmall" type="number" value="5">
                                 <div class="tooltipTrigger">
                                     <img src="./media/help_icon.png" class="tooltipSymbol" onclick="openInfoBox('ratingScale')">
                                 </div>
@@ -75,7 +75,7 @@
                                 <b>Add labels:</b> 
                                 no
                                 <label class="switch">
-                                    <input type="checkbox" id="labelChecker" onchange="updateLabelSettings()">
+                                    <input type="checkbox" id="labelChecker">
                                     <span class="slider"></span>
                                 </label>
                                 yes
@@ -92,7 +92,7 @@
                         <div class="settingAccordion">
                             <div class="settingRow">
                                 <b>Interval:</b>
-                                <input id="interval_input" class="nrInputBig" type="number" min="1" max="3600" value="60" onkeyup=enforceInterval(this)>
+                                <input id="interval_input" class="nrInputBig" type="number" min="1" max="3600" value="60">
                                 seconds
                                 <div class="tooltipTrigger">
                                     <img src="./media/help_icon.png" class="tooltipSymbol" onclick="openInfoBox('interval')">
@@ -132,7 +132,7 @@
                                 <b>Pause to rate:</b> 
                                 no
                                 <label class="switch">
-                                    <input type="checkbox" id="pauseChecker" onchange="updateNoRatingSettings()">
+                                    <input type="checkbox" id="pauseChecker">
                                     <span class="slider"></span>
                                 </label>
                                 yes
@@ -160,7 +160,7 @@
                             </div>
                             <div class="settingRow">
                                 <b style="float: left; margin-right: 5px">Notification Sound at Interval:</b> 
-                                <select id="notificationSound" onchange="setSound()" style="float: left; margin-right: 5px">
+                                <select id="notificationSound" style="float: left; margin-right: 5px">
                                     <option value="none">None (silent)</option>
                                     <option value="bubbles.mp3">Bubbles</option>
                                     <option value="chime.mp3">Chime</option>
@@ -182,7 +182,7 @@
                                 <b>Show video controls during experiment:</b> 
                                 no
                                 <label class="switch">
-                                    <input type="checkbox" id="vcChecker" onchange="updateControlSettings()">
+                                    <input type="checkbox" id="vcChecker">
                                     <span class="slider"></span>
                                 </label>
                                 yes
@@ -210,7 +210,7 @@
                     <div class="startButtonContainer">
                         <img id="settingsExportButton" src="./media/download_doc.png" class="downloadImg" title="export current settings" >
                         <img id="settingsImportButton" src="./media/upload_doc.png" class="downloadImg" title="import settings from file">                        
-                        <button id="experimentStartButton" class="startButton" onclick="loadExperiment()">Start Experiment</button>
+                        <button id="experimentStartButton" class="startButton">Start Experiment</button>
                     </div>
                 </section>
             </div>

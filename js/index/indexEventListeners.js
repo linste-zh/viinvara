@@ -31,10 +31,10 @@ window.updateNoRatingSettings = updateNoRatingSettings
 
 import {updateScale, updateLabelSettings} from '../settings/scaleSettings.js'
 
-document.getElementById("scale_start_input").addEventListener("keyup", () => {updateScale(this)});
-document.getElementById("scale_start_input").addEventListener("change", () => {updateScale(this)});
-document.getElementById("scale_end_input").addEventListener("keyup", () => {updateScale(this)});
-document.getElementById("scale_end_input").addEventListener("change", () => {updateScale(this)});
+document.getElementById("scale_start_input").addEventListener("keyup", updateScale)
+document.getElementById("scale_start_input").addEventListener("change", updateScale)
+document.getElementById("scale_end_input").addEventListener("keyup", updateScale)
+document.getElementById("scale_end_input").addEventListener("change", updateScale)
 window.updateScale = updateScale
 
 document.getElementById("labelChecker").addEventListener("change", updateLabelSettings)

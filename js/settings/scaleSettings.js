@@ -43,7 +43,9 @@ function getCurrentFullScale(){
     return curFullScale
 }
 
-function updateScale(el){
+function updateScale(eventObj){
+    var el = eventObj.target
+
     scaleChanged = true
     let curFullScale = getCurrentFullScale()
 
