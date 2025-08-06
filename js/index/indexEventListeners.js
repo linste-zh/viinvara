@@ -41,10 +41,13 @@ document.getElementById("labelChecker").addEventListener("change", updateLabelSe
 window.updateLabelSettings = updateLabelSettings
 
 
-import {exportMinSettings, importMinSettings} from '../settings/settingsImportExport.js'
+import {exportMinSettings} from '../importAndExport/exportFiles.js'
 
 document.getElementById("settingsExportButton").addEventListener("click", exportMinSettings)
 window.exportMinSettings = exportMinSettings
+
+
+import {importMinSettings} from '../importAndExport/importFiles.js'
 
 document.getElementById("settingsImportButton").addEventListener("click", importMinSettings)
 window.importMinSettings = importMinSettings
