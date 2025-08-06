@@ -175,8 +175,9 @@ input:checked + .slider:before {
 .infoBox{
   background-color: white;
   min-width: 200px;
-  max-width: 70%;
+  max-width: 500px;
   min-height: 100px;
+  width: 500px;
   display: flex;
   flex-direction: column;
 }
@@ -189,10 +190,15 @@ input:checked + .slider:before {
   display: block;
 }
 
-.closeButton{
+.infoBox .closeButton{
   float: right;
   max-height: 90%;
   cursor: pointer;
+}
+
+.infoBox .title{
+  color: white;
+  padding: 5px;
 }
 
 

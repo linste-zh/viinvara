@@ -13,7 +13,10 @@ window.loadExperiment = loadExperiment
 
 import {exportSettings} from '../importAndExport/exportFiles.js'
 
-document.getElementById("settingsExportButton").addEventListener("click", () => exportSettings(false))
+document.getElementById("settingsExportButton").addEventListener("click", () => {
+    window.alert("This is only a minimal settings file. It cannot be used for a remote experiment.\nTo create full settings file, go to the 'Create Experiment' page.")
+    exportSettings(false)
+})
 window.exportSettings = exportSettings
 
 

@@ -24,12 +24,12 @@ function openInfoBox(id){
     infoBox.id = 'infoBox';
     infoBox.className = 'infoBox';
 
-    content = toolTipTexts[id]
     infoBox.innerHTML=`
     <div class='infoHeader'> 
+        <span class="title">${toolTipTexts[id]["header"]}</span>
         <button class='closeButton' onclick='closeInfoBox()'> &#9747; </button> 
     </div> 
-    <div class='text'> ${content} </div>`
+    <div class='text'> ${toolTipTexts[id]["text"]} </div>`
     background.appendChild(infoBox);
 }
 
@@ -38,14 +38,44 @@ function closeInfoBox(){
 }
 
 const toolTipTexts = {
-    "ratingScale": "E.g. <i>-2</i> to <i>2</i> will give participants the options: <i>-2, -1, 0, 1, 2</i>.</br><b>Max. possible difference: 10</b>. Step is fixed at 1.</br>The scale will become visible beneath the videoframe at every interval time and remain until 0.5 before the next interval or until a rating is provided.",
-    "labels": "If activated, the provided labels will appear beneath the corresponding scale button, e.g. <i>'Very High'</i>, <i>'Neutral'</i> ,<i>'Not at all'</i>, etc.</br>Labels can be provided for only some or for all scale points.</br> <b>Max. length: 20 characters.</b>",
-    "interval" : "<b>Minimum: 1 second</b></br>",
-    "ratingStart" : "If activated, the participant will have to provide a rating as 0s, i.e. before the video starts. The video will not start until a rating is provided.",
-    "ratingEnd" : "If activated, the participant will have to provide a rating at the end of the video (if one is not yet provided through the interval). The page will move to the results once the rating is provided.",
-    "pause" : "If activated, the video will pause at every interval and not continue until a rating is provided.",
-    "sound" : "Will play whenever a rating is required from the participant. Sounds can be tested by clicking &#9654.",
-    "notRated" : "If no rating is provided by user until 0.5 seconds before the next interval, either:</br>- pause video until rating is provided </br>- provide the most neutral rating available (e.g. on scale <i>-2</i> to <i>2</i> rate <i>0</i>, on scale <i>1</i> to <i>4</i> rate <i>2.5</i>)</br>- leave out datapoint entirely",
-    "controls" : "If enabled, participant can pause and change the timestamp at will as in a regular video player.</br><b>This overrides any enforced pause ratings<b>.",
-    "fullscreen" : "If enabled, participant can additionally enter fullcsreen mode.</br><b>This will hide the rating scale from their view.<b>."
+    "ratingScale": {
+        "header":  "Rating Scale",
+        "text": "E.g. <i>-2</i> to <i>2</i> will give participants the options: <i>-2, -1, 0, 1, 2</i>.</br><b>Max. possible difference: 10</b>. Step is fixed at 1.</br>The scale will become visible beneath the videoframe at every interval time and remain until 0.5 before the next interval or until a rating is provided."
+    },
+    "labels": {
+        "header":  "Rating Scale Labels",
+        "text": "If activated, the provided labels will appear beneath the corresponding scale button, e.g. <i>'Very High'</i>, <i>'Neutral'</i> ,<i>'Not at all'</i>, etc.</br>Labels can be provided for only some or for all scale points.</br> <b>Max. length: 20 characters.</b>"
+    },
+    "interval": {
+        "header":  "Rating Interval",
+        "text": "<b>Minimum: 1 second</b></br><b>Maximum: 1 hour</b></br>"
+    },
+    "ratingStart": {
+        "header":  "Rating at start of video",
+        "text": "If activated, the participant will have to provide a rating as 0s, i.e. before the video starts. The video will not start until a rating is provided.",
+    },
+    "ratingEnd":{
+        "header":  "Rating at end of video",
+        "text":  "If activated, the participant will have to provide a rating at the end of the video (if one is not yet provided through the interval). The page will move to the results once the rating is provided.",
+    },
+    "pause":{
+        "header":  "Pausing at interval",
+        "text":  "If activated, the video will pause at every interval and not continue until a rating is provided.",
+    },
+    "sound":{
+        "header":  "Notification Sound at interval",
+        "text":  "Will play whenever a rating is required from the participant. Sounds can be tested by clicking &#9654.",
+    },
+    "notRated":{
+        "header":  "Behaviour when rating is missed",
+        "text":  "If no rating is provided by user until 0.5 seconds before the next interval, either:</br>- pause video until rating is provided </br>- provide the most neutral rating available (e.g. on scale <i>-2</i> to <i>2</i> rate <i>0</i>, on scale <i>1</i> to <i>4</i> rate <i>2.5</i>)</br>- leave out datapoint entirely",
+    },
+    "controls":{
+        "header":  "Video Controls",
+        "text":  "If enabled, participant can pause and change the timestamp at will as in a regular video player.</br><b>This overrides any enforced pause ratings<b>.",
+    },
+    "fullscreen":{
+        "header":  "Fullscreen",
+        "text":  "If enabled, participant can additionally enter fullcsreen mode.</br><b>This will hide the rating scale from their view.<b>."
+    },
 }
