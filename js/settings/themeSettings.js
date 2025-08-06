@@ -1,19 +1,3 @@
-function reset(){
-    if (confirm("Return to start page? This will reset all your data and variables.")){
-        localStorage.removeItem("experimentDataObject")
-        localStorage.removeItem("scaleObject")
-        localStorage.removeItem("settingsObject")
-        localStorage.removeItem("theme")
-
-        window.location.href="index.html"
-    }else{
-        console.log("cancelled")
-    }
-}
-document.getElementById("homeButton").addEventListener("click", reset)
-window.reset = reset
-
-
 function setTheme(color = "blue"){
     if(color == "blue"){
         localStorage.setItem("theme", "blue")

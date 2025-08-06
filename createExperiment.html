@@ -15,8 +15,8 @@
         <!--Font in icon: Imprint MT Shadow-->
     </head>
     <body>
-        <header class="header" id="header" header-type="home">
-            loading header...      
+        <header class="header" id="header" header-type="inex">
+            loading header...
         </header>
         <main class="mainBody">
             <div class="pageContent">
@@ -27,26 +27,38 @@
                     <button class="themeOption gray" id="grayThemeButton"></button>
                 </div>
                 <div class="textPanel">
-                    <h1>Viinvara</h1>
-                    <h2>The <b>Vi</b>deo <b>In</b>terval <b>Va</b>riable <b>Ra</b>ter</h2>
+                    <h1>Create Remote Experiment</h1>
                     <p>
-                        Viinvara allows the rating of a variable on some scale at regular intervals while watching a video.</br>
-                        The results are presented as an interactive graph and can be downloaded as a CSV table or JPG.</br>
-                        This work is based on <a href="https://80113hunterhsu.github.io/VariableTester/" target="_blank">MacIntyre's Idiodynamic Software/the Anion Variable Tester</a>.
+                        This page allows you to create a full settings file that can be sent to other people, who can in turn upload it under 
+                        <a href="loadExperiment.html" target="_blank">https://linste-zh.github.io/viinvara/loadExperiment.html</a>.</br>
+                        How does this work?
+                        <ol>
+                            <li>Fill out the variable name (required).</li>
+                            <li>Fill out the participant name (optional, they can change this themselves again).</li>
+                            <li>Add a message to be shown to the participant (optional).</li>
+                            <li>Adjust the settings (including the website theme) to your liking.</li>
+                            <li>Download the file.</li>
+                            <li>Send it and your video file to the participant and direct them to <a href="loadExperiment.html" target="_blank">https://linste-zh.github.io/viinvara/loadExperiment.html</a></li>
+                            <li>They will only be able to fill out their name/participant ID and start the experiment.</li>
+                        </ol>
                     </p>
                 </div>
                 <section class="settings">
-                    <h1>Set Up Experiment</h1>
+                    <h1>Set Up Remote Experiment</h1>
                     <div class="var settingsContainer">
-                        <label for="nameField">Who is doing the experiment?</label>
+                        <label for="nameField">Participant Name/ID (optional)</label>
                         <input type="text" class = "textInput" id="nameField" autofocus>
                     </div>
                     <div class="var settingsContainer">
-                        <label for="varField">What variable are they rating?</label>
+                        <label for="varField">Experiment Variable (required)</label>
+                        <input type="text" class = "textInput" id="varField">
+                    </div>
+                    <div class="var settingsContainer">
+                        <label for="varField">Message for participant</label>
                         <input type="text" class = "textInput" id="varField">
                     </div>
                     <div class="exp settingsContainer" id="settingsContainer">
-                        loading settings...
+                        loading settings...                     
                     </div>
                     <div class="startButtonContainer">
                         <img id="settingsExportButton" src="./media/download_doc.png" class="downloadImg" title="export current settings" >

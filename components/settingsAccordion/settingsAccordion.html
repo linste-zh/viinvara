@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="./js/settings/settingsAccordionBehaviour.js"></script>
+    </head>
+    <body>
+        <div class="settingAccordionTrigger" onclick="toggleAccordion(this)">
+            Scale Settings
+            <img id="accordionArrow" class="arrowIcon" src="./media/arrow_icon.png">
+        </div>
+        <div class="settingAccordion">
+            <!-- div class="settingRow">
+                <b>Input Type:</b> 
+                Buttons
+                <label class="switch">
+                    <input type="checkbox" id="inputChecker" onchange="updateInputSettings()">
+                    <span class="slider"></span>
+                </label>
+                Slider
+                <div class="tooltipTrigger">
+                    <img src="./media/help_icon.png" class="tooltipSymbol" onclick="openInfoBox('inputType')">
+                </div>
+            </div-->
+            <div class="settingRow">
+                <b>Rating Scale:</b>
+                <input id="scale_start_input" class="nrInputSmall" type="number" value="1">
+                to
+                <input id="scale_end_input" class="nrInputSmall" type="number" value="5">
+                <div class="tooltipTrigger">
+                    <img src="./media/help_icon.png" class="tooltipSymbol" onclick="openInfoBox('ratingScale')">
+                </div>
+            </div>
+            <div class="settingRow">
+                <b>Add labels:</b> 
+                no
+                <label class="switch">
+                    <input type="checkbox" id="labelChecker">
+                    <span class="slider"></span>
+                </label>
+                yes
+                <div class="tooltipTrigger">
+                    <img src="./media/help_icon.png" class="tooltipSymbol" onclick="openInfoBox('labels')">
+                </div>
+            </div>
+            <div class="settingRow" id="labelSettings"></div>
+        </div>
+        <div class="settingAccordionTrigger" onclick="toggleAccordion(this)">
+            Interval Settings
+            <img id="accordionArrow" class="arrowIcon" src="./media/arrow_icon.png">
+        </div>
+        <div class="settingAccordion">
+            <div class="settingRow">
+                <b>Interval:</b>
+                <input id="interval_input" class="nrInputBig" type="number" min="1" max="3600" value="60">
+                seconds
+                <div class="tooltipTrigger">
+                    <img src="./media/help_icon.png" class="tooltipSymbol" onclick="openInfoBox('interval')">
+                </div>
+            </div>
+            <div class="settingRow">
+                <b>Rating at Start of Video:</b> 
+                no
+                <label class="switch">
+                    <input type="checkbox" id="startInputChecker">
+                    <span class="slider"></span>
+                </label>
+                yes
+                <div class="tooltipTrigger">
+                    <img src="./media/help_icon.png" class="tooltipSymbol" onclick="openInfoBox('ratingStart')">
+                </div>
+            </div>
+            <div class="settingRow">
+                <b>Rating at End of Video:</b> 
+                no
+                <label class="switch">
+                    <input type="checkbox" id="endInputChecker">
+                    <span class="slider"></span>
+                </label>
+                yes
+                <div class="tooltipTrigger">
+                    <img src="./media/help_icon.png" class="tooltipSymbol" onclick="openInfoBox('ratingEnd')">
+                </div>
+            </div>
+        </div>
+        <div class="settingAccordionTrigger" onclick="toggleAccordion(this)">
+            Rating Behaviour Settings
+            <img id="accordionArrow" class="arrowIcon" src="./media/arrow_icon.png">
+        </div>
+        <div class="settingAccordion">
+            <div class="settingRow">
+                <b>Pause to rate:</b> 
+                no
+                <label class="switch">
+                    <input type="checkbox" id="pauseChecker">
+                    <span class="slider"></span>
+                </label>
+                yes
+                <div class="tooltipTrigger">
+                    <img src="./media/help_icon.png" class="tooltipSymbol" onclick="openInfoBox('pause')">
+                </div>
+            </div>
+            <div class="settingRow" id = "noRatingProvided" style="flex-direction: column; justify-content: center; align-items: stretch;">
+                <div class="tooltipTrigger" style="justify-content: space-between;">
+                    <b>Behaviour when rating not provided in time:</b>
+                    <img src="./media/help_icon.png" class="tooltipSymbol" onclick="openInfoBox('notRated')">
+                </div>  
+                <div>
+                    <input type="radio" id="pause" class="radioButton" name="notRatedBehaviour" value="pause" checked="checked">
+                    <label for="pause">pause</label>
+                </div>
+                <div>
+                    <input type="radio" id="neutral" class="radioButton" name="notRatedBehaviour" value="neutral">
+                    <label for="neutral">rate neutral</label>
+                </div>
+                <div>
+                    <input type="radio" id="empty" class="radioButton" name="notRatedBehaviour" value="empty">
+                    <label for="empty">leave out</label>
+                </div>
+            </div>
+            <div class="settingRow">
+                <b style="float: left; margin-right: 5px">Notification Sound at Interval:</b> 
+                <select id="notificationSound" style="float: left; margin-right: 5px">
+                    <option value="none">None (silent)</option>
+                    <option value="bubbles.mp3">Bubbles</option>
+                    <option value="chime.mp3">Chime</option>
+                    <option value="honk.mp3">Honk</option>
+                    <option value="ping.mp3">Ping</option>
+                </select>
+                <img id="soundIcon" onclick="testSound()" src="./media/play_icon.png" alt="Test Sound Icon">
+                <div class="tooltipTrigger">
+                    <img src="./media/help_icon.png" class="tooltipSymbol" onclick="openInfoBox('sound')">
+                </div> 
+            </div>
+        </div>
+        <div class="settingAccordionTrigger" onclick="toggleAccordion(this)">
+            Video Settings
+            <img id="accordionArrow" class="arrowIcon" src="./media/arrow_icon.png">
+        </div>
+        <div class="settingAccordion">
+            <div class="settingRow">
+                <b>Show video controls during experiment:</b> 
+                no
+                <label class="switch">
+                    <input type="checkbox" id="vcChecker">
+                    <span class="slider"></span>
+                </label>
+                yes
+                <div class="tooltipTrigger">
+                    <img src="./media/help_icon.png" class="tooltipSymbol" onclick="openInfoBox('controls')">
+                </div>
+            </div>
+            <div id="fullScreenSwitch" class="settingRow" style = "display: none">
+                <b>Allow Fullscreen:</b> 
+                no
+                <label class="switch">
+                    <input type="checkbox" id="fullscreenChecker">
+                    <span class="slider"></span>
+                </label>
+                yes
+                <div class="tooltipTrigger">
+                    <img src="./media/help_icon.png" class="tooltipSymbol" onclick="openInfoBox('fullscreen')">
+                </div>
+            </div>
+            <div class="settingRow">
+                <i>(video file selected on next screen)</i>
+            </div>
+        </div>
+    </body>
+</html>

@@ -5,7 +5,9 @@
         <link href="./css/basicLayout.css" type="text/css" rel="stylesheet">
         <link href="./css/experiment.css" type="text/css" rel="stylesheet">
         <script type="module" src="./js/experiment/experimentEventListeners.js"></script>
-        <script type="module" src="./js/headerFunctions.js"></script>
+        <script type="module" src="./components/header/header.js"></script>
+        <script type="module" src="./components/footer/footer.js"></script>
+        <script type="module" src="./js/settings/themeSettings.js"></script>
         <meta charset="UTF-8">
         <link rel="icon" type="image/x-icon" href="./media/viinvara.ico">
         <!--Font in icon: Imprint MT Shadow-->
@@ -13,10 +15,8 @@
 
     
     <body>
-        <header class = "header">
-            <a id="homeButton" class="iconWrapper" onclick="reset()"><img class="home icon" src="./media/home_icon.png" alt="Home Icon"></a>
-            <h1>Viinvara</h1>
-            <!--<a class="iconWrapper" onclick=""><img class="help icon" src="./media/help_icon.png" alt="Help Icon"></a>-->        
+        <header class="header" id="header" header-type="inex">
+            loading header...
         </header>
         <main class="mainBody">
             <div class="pageContent">
@@ -35,12 +35,8 @@
                 <source id="soundSource" type="audio/mpeg">
             </audio>
         </main>
-        <footer class = "footer">
-            <span class="footerNote">09/07/2025</span>
-            <span class="footerNote">V2.0</span>
-            <span class="footerNote">© Linda Steiner (linste.zh@gmail.com)</span>
-            <span class="footerNote">UZH - Zurich</span>
-            <span class="footerNote"><a href="https://github.com/linste-zh/viinvara" target="_blank">Project Git Page</a></span>
+        <footer class="footer" id="footer">
+            loading footer ...
         </footer>
     </body>
 </html>
