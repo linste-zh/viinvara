@@ -4,11 +4,18 @@ async function loadHeader(){
     header = document.getElementById("header")
     if(header.getAttribute('header-type') == "home"){
         header.innerHTML = await fetchHtmlAsText("./components/header/homeHeader.html")
+        var links = header.children
+        console.log(links)
+        for(var i = 0;i < links.length; i++){
+            if(links[i].href == window.location.href){
+                links[i].classList.add("active")
+            }
+        }
     }else if(header.getAttribute('header-type') == "inex"){
         header.innerHTML = await fetchHtmlAsText("./components/header/inexHeader.html")
-        document.getElementById("homeButton").addEventListener("click", reset)
-        window.reset = reset
     }
+    document.getElementById("homeButton").addEventListener("click", reset)
+    window.reset = reset
 }
 
 async function fetchHtmlAsText(url) {
@@ -17,7 +24,7 @@ async function fetchHtmlAsText(url) {
 }
 
 function reset(){
-    if (confirm("Return to start page? This will reset all your data and variables.")){
+    if (confirm("Return to start page? This will reset all your data and settings.")){
         localStorage.removeItem("experimentDataObject")
         localStorage.removeItem("scaleObject")
         localStorage.removeItem("settingsObject")
