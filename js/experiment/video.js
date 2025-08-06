@@ -5,7 +5,7 @@ import {checkIfRatingRequired, intervalContained} from './rating.js';
 async function setUpVideo(){
     const videoSrc = await pickSrc()
 
-    activeExperimentState.videoContainer.innerHTML = '<video id="video_player" class="videoPlayer" type="video/mp4"></video>'
+    activeExperimentState.videoContainer.innerHTML = '<video id="video_player" class="videoPlayer" type="video/mp4" disablepictureinpicture></video>'
     activeExperimentState.videoElement = document.getElementById("video_player")
 
     activeExperimentState.videoElement.src = videoSrc + "#t=" + Math.max(activeExperimentState.currentTimeStamp - (activeExperimentState.interval / 2), 0, activeExperimentState.currentInterval)
@@ -17,12 +17,11 @@ async function setUpVideo(){
     }
 
     if(settings["controls"]){
+        console.log(activeExperimentState.videoElement)
         activeExperimentState.videoElement.setAttribute("controls", "")
     }
 
-    if(!settings["fullscreen"]){
-        activeExperimentState.videoElement.setAttribute("controlsList", "nofullscreen")
-    }
+    
 
     activeExperimentState.videoElement.onended = () => {
         end()

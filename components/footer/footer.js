@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", loadFooter)
 
 async function loadFooter(){
-    footer = document.getElementById("footer")
+    const footer = document.getElementById("footer")
     footer.innerHTML = await fetchHtmlAsText("./components/footer/footer.html")
 }
 

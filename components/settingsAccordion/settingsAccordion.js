@@ -13,10 +13,19 @@ async function fetchHtmlAsText(url) {
 }
 
 
-import {enforceInterval, setSound, testSound, updateControlSettings, updateNoRatingSettings} from '../../js/settings/experimentSettings.js'
+import {enforceInterval, setSound, testSound, updateNoRatingSettings} from '../../js/settings/experimentSettings.js'
 import {updateScale, updateLabelSettings} from '../../js/settings/scaleSettings.js'
 
 function addEventListeners(){
+    document.getElementById("scale_start_input").addEventListener("keyup", updateScale)
+    document.getElementById("scale_start_input").addEventListener("change", updateScale)
+    document.getElementById("scale_end_input").addEventListener("keyup", updateScale)
+    document.getElementById("scale_end_input").addEventListener("change", updateScale)
+    window.updateScale = updateScale
+
+    document.getElementById("labelChecker").addEventListener("change", updateLabelSettings)
+    window.updateLabelSettings = updateLabelSettings
+
     document.getElementById("interval_input").addEventListener("keyup", enforceInterval)
     window.enforceInterval = enforceInterval
 
@@ -26,19 +35,7 @@ function addEventListeners(){
     document.getElementById("soundIcon").addEventListener("click", testSound)
     window.testSound = testSound
 
-    document.getElementById("vcChecker").addEventListener("change", updateControlSettings)
-    window.updateControlSettings = updateControlSettings
-
     document.getElementById("pauseChecker").addEventListener("change", updateNoRatingSettings)
     window.updateNoRatingSettings = updateNoRatingSettings
-
-    document.getElementById("scale_start_input").addEventListener("keyup", updateScale)
-    document.getElementById("scale_start_input").addEventListener("change", updateScale)
-    document.getElementById("scale_end_input").addEventListener("keyup", updateScale)
-    document.getElementById("scale_end_input").addEventListener("change", updateScale)
-    window.updateScale = updateScale
-
-    document.getElementById("labelChecker").addEventListener("change", updateLabelSettings)
-    window.updateLabelSettings = updateLabelSettings
 }
 

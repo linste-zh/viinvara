@@ -63,6 +63,14 @@ async function importSettingsForEdit(){
 
     setTheme(content["theme"])
 
+    const accordions = document.getElementsByClassName("settingAccordionTrigger")
+    console.log(accordions)
+    for(let i = 0; i < accordions.length; i++){
+        console.log(i)
+        console.log(accordions[i])
+        accordions[i].click()
+    }
+
     fillOutExperimentDataSettings(content["experimentData"])
     fillOutScaleSettings(content["scale"])
     fillOutSettings(content["settings"])

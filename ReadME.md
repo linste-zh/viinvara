@@ -56,7 +56,7 @@ Viinvara should scale well on all laptop screens but does not work well on mobil
 ### Video Settings:
 
   - **Show video controls during experiment**:  if enabled, the participant can pause the video and change the current time stamp. This can override any pausing behaviour specified above. 
-  - **Allow fullscreen**: if enabled, the participant can also enter full screen (which hides the rating scale at the interval)
+  - **(removed in V3) Allow fullscreen**: if enabled, the participant can also enter full screen (which hides the rating scale at the interval). This feature was removed in V3 of Viinvara due to the lack of browser support.
 
 ## Experiment
 

@@ -72,10 +72,6 @@ const toolTipTexts = {
     },
     "controls":{
         "header":  "Video Controls",
-        "text":  "If enabled, participant can pause and change the timestamp at will as in a regular video player.</br><b>This overrides any enforced pause ratings<b>.",
-    },
-    "fullscreen":{
-        "header":  "Fullscreen",
-        "text":  "If enabled, participant can additionally enter fullcsreen mode.</br><b>This will hide the rating scale from their view.<b>."
-    },
+        "text":  "If enabled, participant can pause, change the timestamp at will, and enter fullscreen as in a regular video player.</br><b>This overrides any enforced pause ratings.</br></b> Interval ratings will not be repeated even on rewatch. Additionally, the fullscreen setting hides the rating buttons.</br><b>It is thus not recommended to enable this.</b>",
+    }
 }

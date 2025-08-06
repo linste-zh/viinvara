@@ -1,11 +1,10 @@
 document.addEventListener("DOMContentLoaded", loadHeader)
 
 async function loadHeader(){
-    header = document.getElementById("header")
+    var header = document.getElementById("header")
     if(header.getAttribute('header-type') == "home"){
         header.innerHTML = await fetchHtmlAsText("./components/header/homeHeader.html")
         var links = header.children
-        console.log(links)
         for(var i = 0;i < links.length; i++){
             if(links[i].href == window.location.href){
                 links[i].classList.add("active")

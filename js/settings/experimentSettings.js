@@ -27,9 +27,6 @@ function createSettingsObject(){
     let controls = document.getElementById("vcChecker").checked
     settingObject["controls"] = controls
 
-    let fullscreen = document.getElementById("fullscreenChecker").checked
-    settingObject["fullscreen"] = fullscreen
-
     return settingObject
 }
 
@@ -72,19 +69,6 @@ function testSound(){
 }
 
 
-function updateControlSettings(){
-    if(document.getElementById("vcChecker").checked){
-        document.getElementById("fullScreenSwitch").style.display = "flex"
-    }else{
-        document.getElementById("fullScreenSwitch").style.display = "none"
-    }
-
-    let accordionContainer = document.getElementById("fullScreenSwitch").closest(".settingAccordion");
-    setTimeout(() => {
-        accordionContainer.style.maxHeight = accordionContainer.scrollHeight + "px";
-    }, 20);
-}
-
 
 function updateNoRatingSettings(){
     if(document.getElementById("pauseChecker").checked){
@@ -116,7 +100,7 @@ function fillOutSettings(settingsInfo){
     setSound()
     
     document.getElementById("vcChecker").checked = settingsInfo["controls"]
-    document.getElementById("fullscreenChecker").checked = settingsInfo["fullscreen"]
+
     updateControlSettings()
 }
 
@@ -126,6 +110,5 @@ export{
     enforceInterval,
     setSound,
     testSound,
-    updateControlSettings,
     updateNoRatingSettings
 }
