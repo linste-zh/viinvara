@@ -2,7 +2,7 @@ function createDataExperimentObject(presetVariable = ""){
     var dataExperimentObject = {}
 
     let userName = ""
-    if(document.getElementById("varField")){
+    if(document.getElementById("nameField")){
         userName = document.getElementById("nameField").value
     }else{
         alert("Cannot find name!")

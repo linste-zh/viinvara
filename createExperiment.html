@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Welcome</title>
+        <title>Create Remote Experiment File</title>
         <link href="./css/basicLayout.css" type="text/css" rel="stylesheet">
-        <link href="./css/index.css" type="text/css" rel="stylesheet">
-        <script type="module" src="./js/index/indexEventListeners.js"></script>
+        <link href="./css/createExperiment.css" type="text/css" rel="stylesheet">
+        <link href="./css/accordionSettings.css" type="text/css" rel="stylesheet">
         <script type="module" src="./components/header/header.js"></script>
         <script type="module" src="./components/footer/footer.js"></script>
         <script type="module" src="./js/settings/themeSettings.js"></script>
+        <script type="module" src="./js/remoteExperiment/createExperimentEventListeners.js"></script>
         <script type="module" src="./components/settingsAccordion/settingsAccordion.js"></script>
         <script src="./components/settingsAccordion/settingsAccordionBehaviour.js"></script>
         <meta charset="UTF-8">
@@ -15,55 +16,56 @@
         <!--Font in icon: Imprint MT Shadow-->
     </head>
     <body>
-        <header class="header" id="header" header-type="inex">
+        <header class="header" id="header" header-type="home">
             loading header...
         </header>
         <main class="mainBody">
             <div class="pageContent">
-                <div class="themeChoice">
-                    <button class="themeOption green" id="greenThemeButton"></button>
-                    <button class="themeOption pink" id="pinkThemeButton"></button>
-                    <button class="themeOption blue" id="blueThemeButton"></button>
-                    <button class="themeOption gray" id="grayThemeButton"></button>
-                </div>
                 <div class="textPanel">
-                    <h1>Create Remote Experiment</h1>
+                    <h1>Create Remote Experiment File</h1>
                     <p>
-                        This page allows you to create a full settings file that can be sent to other people, who can in turn upload it under 
-                        <a href="loadExperiment.html" target="_blank">https://linste-zh.github.io/viinvara/loadExperiment.html</a>.</br>
-                        How does this work?
+                        This page allows you to create a full settings file that can be sent to other people, who can in turn upload it to the 
+                        <a href="loadExperiment.html" target="_blank">Load Experiment page</a>. How does this work?
                         <ol>
                             <li>Fill out the variable name (required).</li>
                             <li>Fill out the participant name (optional, they can change this themselves again).</li>
                             <li>Add a message to be shown to the participant (optional).</li>
-                            <li>Adjust the settings (including the website theme) to your liking.</li>
+                            <li>Adjust the settings (including the colour theme) to your liking.</li>
                             <li>Download the file.</li>
                             <li>Send it and your video file to the participant and direct them to <a href="loadExperiment.html" target="_blank">https://linste-zh.github.io/viinvara/loadExperiment.html</a></li>
-                            <li>They will only be able to fill out their name/participant ID and start the experiment.</li>
+                            <li>They will only be able to fill out their name/participant ID and start the experiment. They will still have to upload the local MP4 file of the video.</li>
                         </ol>
                     </p>
                 </div>
                 <section class="settings">
-                    <h1>Set Up Remote Experiment</h1>
+                    <h1>Set Up File</h1>
+                    <img id="settingsImportButton" src="./media/upload_doc.png" class="downloadImg" title="import settings from existing file">
                     <div class="var settingsContainer">
-                        <label for="nameField">Participant Name/ID (optional)</label>
+                        <label>Colour Theme</label>
+                        <div class="themeChoice">
+                            <button class="themeOption green" id="greenThemeButton"></button>
+                            <button class="themeOption pink" id="pinkThemeButton"></button>
+                            <button class="themeOption blue" id="blueThemeButton"></button>
+                            <button class="themeOption gray" id="grayThemeButton"></button>
+                        </div>
+                    </div>
+                    <div class="var settingsContainer">
+                        <label for="nameField">Participant Name/ID</label>
                         <input type="text" class = "textInput" id="nameField" autofocus>
                     </div>
                     <div class="var settingsContainer">
-                        <label for="varField">Experiment Variable (required)</label>
+                        <label for="varField"><b>(required)</b> Experiment Variable</label>
                         <input type="text" class = "textInput" id="varField">
                     </div>
-                    <div class="var settingsContainer">
-                        <label for="varField">Message for participant</label>
-                        <input type="text" class = "textInput" id="varField">
+                    <div class="big settingsContainer">
+                        <label for="varField">Message for participant (can be enriched with HTML tags)</label>
+                        <textarea type="text" class="largeTextInput" id="msgField" placeholder="e.g. instructions for conducting the experiment, definition of the variable, thanks for participating, ..."></textarea>
                     </div>
                     <div class="exp settingsContainer" id="settingsContainer">
                         loading settings...                     
                     </div>
-                    <div class="startButtonContainer">
-                        <img id="settingsExportButton" src="./media/download_doc.png" class="downloadImg" title="export current settings" >
-                        <img id="settingsImportButton" src="./media/upload_doc.png" class="downloadImg" title="import settings from file">                        
-                        <button id="experimentStartButton" class="startButton">Start Experiment</button>
+                    <div class="exportButtonContainer">                        
+                        <button id="remoteSettingsExportButton" class="exportButton">Export Settings as File</button>
                     </div>
                 </section>
             </div>

@@ -1,66 +1,9 @@
 import {fillOutScaleSettings} from '../settings/scaleSettings.js'
 import {fillOutSettings} from '../settings/experimentSettings.js'
-import {fillOutExperimentDataSettings} from '../settings/experimentDataSettings.js'
-import {setTheme} from '../headerFunctions.js'
+import {fillOutExperimentDataSettings, createDataExperimentObject} from '../settings/experimentDataSettings.js'
+import {setTheme} from '../settings/themeSettings.js'
 
 var content
-
-async function importFullSettings(){
-    const file = await pickFile()
-    const fileContent = await readFileAsText(file);
-    content = JSON.parse(fileContent);
-
-    if(!content.hasOwnProperty("scale") || !content.hasOwnProperty("settings") ){
-        alert("The provided JSON does not contain the expected content.  Please try a different file.")
-        return
-    }
-
-    setTheme(content["theme"])
-
-    localStorage.setItem("scaleObject", JSON.stringify(content["scale"]))
-    console.log(localStorage.getItem("scaleObject"))
-    localStorage.setItem("settingsObject", JSON.stringify(content["settings"]))
-    console.log(localStorage.getItem("settingsObject"))
-    localStorage.setItem("experimentDataObject", JSON.stringify(content["experimentData"]))
-    console.log(localStorage.getItem("experimentDataObject"))
-    if(content["experimentData"]["userName"] != ""){
-        document.getElementById("nameField").value = content["experimentData"]["userName"]
-    }
-
-    document.getElementById("infoField").innerHTML = ""
-
-    content["infoBox"] = ""
-    if(content["infoBox"] != ""){
-        createInfoBox(content["infoBox"])
-    }
-
-
-
-    var startButton = document.createElement("button")
-    startButton.classList.add("startButton")
-    startButton.textContent = "start Experiment"
-    startButton.addEventListener("click", startExperiment);
-    document.getElementById("infoField").append(startButton)
-}
-
-/*partially done with ChatGPT*/
-async function importMinSettings(){
-    const file = await pickFile()
-    const fileContent = await readFileAsText(file);
-    const content = JSON.parse(fileContent);
-
-    if(!content.hasOwnProperty("scale") || !content.hasOwnProperty("settings") ){
-        alert("The provided JSON does not contain the expected content.  Please try a different file.")
-        return
-    }
-
-    setTheme(content["theme"])
-
-    fillOutExperimentDataSettings(content["experimentData"])
-    fillOutScaleSettings(content["scale"])
-    fillOutSettings(content["settings"])
-}
-
 
 function pickFile(){
      return new Promise((resolve, reject) => {
@@ -91,25 +34,92 @@ function readFileAsText(file) {
     });
 }
 
-function createInfoBox(infoText){
+async function importSettings(){
+    const file = await pickFile()
+    const fileContent = await readFileAsText(file)
+
+    content = JSON.parse(fileContent)
+    return content
+}
+
+function verifyValidity(jsonContent, requireFull = false){
+    return new Promise((resolve, reject) => {
+        if(!jsonContent.hasOwnProperty("viinvaraFileType") || !jsonContent.hasOwnProperty("experimentData") || !jsonContent.hasOwnProperty("scale") || !jsonContent.hasOwnProperty("settings")){
+            alert("The provided JSON is not a current Viinvara settings file.  Please try a different file.")
+            reject()
+        }else if(requireFull && jsonContent["viinvaraFileType"] != "full"){
+            alert("The file you have provided is not a full settings file and thus is not valid for a remote experiment.")
+            reject()
+        }else{
+            resolve()
+        }
+    })
+}
+
+/*partially done with ChatGPT*/
+async function importSettingsForEdit(){
+    await importSettings()
+    await verifyValidity(content)
+
+    setTheme(content["theme"])
+
+    fillOutExperimentDataSettings(content["experimentData"])
+    fillOutScaleSettings(content["scale"])
+    fillOutSettings(content["settings"])
+    if(document.getElementById("msgField")){
+        document.getElementById("msgField").value = content["message"]
+    }
+}
+
+async function importSettingsForRemoteEx(){
+    await importSettings()
+    await verifyValidity(content, true)
+
+    setTheme(content["theme"])
+
+    localStorage.setItem("scaleObject", JSON.stringify(content["scale"]))
+    console.log(localStorage.getItem("scaleObject"))
+    localStorage.setItem("settingsObject", JSON.stringify(content["settings"]))
+    console.log(localStorage.getItem("settingsObject"))
+    localStorage.setItem("experimentDataObject", JSON.stringify(content["experimentData"]))
+    console.log(localStorage.getItem("experimentDataObject"))
+    if(content["experimentData"]["userName"] != ""){
+        document.getElementById("nameField").value = content["experimentData"]["userName"]
+    }
+
+    document.getElementById("infoField").innerHTML = ""
+
+    if(content["message"] != ""){
+        createMsgBox(content["message"])
+    }
+
+    var startButton = document.createElement("button")
+    startButton.classList.add("startButton")
+    startButton.textContent = "start Experiment"
+    startButton.addEventListener("click", startRemoteExperiment);
+    document.getElementById("infoField").append(startButton)
+}
+
+function createMsgBox(infoText){
     if(infoText == ""){
         return false
     }
 
     var infoBox = document.createElement("div")
-    infoBox.classList.add("infoText")
+    infoBox.classList.add("msgField")
     infoBox.innerHTML = infoText
     document.getElementById("infoField").append(infoBox)
 }
 
 
-function startExperiment(){
-    experimentDataObject = createDataExperimentObject(content["lingVar"])
+function startRemoteExperiment(){
+    var experimentDataObject = createDataExperimentObject(content["experimentData"]["lingVar"])
 
     localStorage.setItem("experimentDataObject", JSON.stringify(experimentDataObject))
+    window.location.href="experiment.html"
 }
 
 export{
-    importMinSettings,
-    importFullSettings
+    importSettingsForEdit,
+    importSettingsForRemoteEx
 }

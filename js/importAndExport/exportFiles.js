@@ -1,28 +1,52 @@
 import {createObjects} from '../settings/settings.js'
 
 /*partially done with ChatGPT*/
-function exportMinSettings(){
-    var fullSettingsObject = createObjects()
+function exportSettings(full = false){
+    var retrievedSettingsObject = createObjects()
     
-    if(fullSettingsObject){
-        fullSettingsObject["theme"] = localStorage.getItem("theme")
-        let dataStr  = JSON.stringify(fullSettingsObject)
+    if(retrievedSettingsObject){
+        retrievedSettingsObject["theme"] = localStorage.getItem("theme")
+        if(full){
+            if(retrievedSettingsObject["experimentData"]["lingVar"] == ""){
+                alert("The variable field must not be empty.")
+                return false
+            }
+            retrievedSettingsObject["viinvaraFileType"] = "full"
+            retrievedSettingsObject["message"] = document.getElementById("msgField").value
+        }else{
+            retrievedSettingsObject["viinvaraFileType"] = "min"
+            retrievedSettingsObject["message"] = ""
+        }
+        let dataStr  = JSON.stringify(retrievedSettingsObject)
         const blob = new Blob([dataStr], { type: 'text/plain' });
         const url = URL.createObjectURL(blob);
 
         let currentDate = new Date()
         const a = document.createElement('a');
         a.href = url;
-        a.download = `${currentDate.getFullYear()}/${currentDate.getMonth()+1}/${currentDate.getDate()}_Viinvara_ExperimentSettings.json`
+        let docName = `Viinvara_`
+        if(full){
+            docName = docName.concat("FullSettingsFile")
+        }else{
+            docName = docName.concat("MinSettingsFile")
+        }
+        docName = docName.concat(`_${retrievedSettingsObject["experimentData"]["lingVar"]}`)
+        if(retrievedSettingsObject["experimentData"]["userName"] != ""){
+            docName = docName.concat(`_${retrievedSettingsObject["experimentData"]["userName"]}`)
+        }
+        console.log(docName)
+        a.download = `${docName}.json`
         a.click();
 
         URL.revokeObjectURL(url);
-    }else{
-        alert("Could not download settings. Check if all fields are filled.")
-        return false
+        return true
     }
+
+    alert("Could not download settings. Check if all fields are filled.")
+    return false
+    
 }
 
 export{
-    exportMinSettings
+    exportSettings
 }

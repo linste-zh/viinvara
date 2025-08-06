@@ -5,15 +5,9 @@ document.getElementById("blueThemeButton").addEventListener("click", () => setTh
 document.getElementById("grayThemeButton").addEventListener("click", () => setTheme("gray"))
 window.setTheme = setTheme
 
-import {loadExperiment} from '../settings/settings.js'
-
-document.getElementById("experimentStartButton").addEventListener("click", loadExperiment)
-window.loadExperiment = loadExperiment
-
-
 import {exportSettings} from '../importAndExport/exportFiles.js'
 
-document.getElementById("settingsExportButton").addEventListener("click", () => exportSettings(false))
+document.getElementById("remoteSettingsExportButton").addEventListener("click", () => exportSettings(true))
 window.exportSettings = exportSettings
 
 

@@ -1,0 +1,203 @@
+.nrInputSmall{
+  width: 35px;
+}
+.nrInputBig{
+  width: 50px;
+}
+
+.radioButton{
+  accent-color: rgb(48, 166, 154);
+}
+
+/*based on https://www.w3schools.com/howto/howto_js_accordion.asp*/
+.settingAccordionTrigger{
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    padding: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.484);
+}
+
+.active, .settingAccordionTrigger:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.arrowIcon{
+  height: 20px;
+  width: auto;
+  float: right;
+  transition: transform 0.2s ease-out;
+}
+
+.iconActive{
+  transform: scaleY(-1);
+}
+
+
+.settingAccordion{
+    width: 100%;
+    padding: 0px 5px;
+    background-color: rgba(255, 255, 255, 0.2);
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.2s ease-out;
+    display: flex;
+    justify-content: space-between;
+    align-items: right;
+    flex-direction: column;
+}
+
+.settingRow{
+  margin: 5px 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 5px;
+}
+
+#soundIcon{
+  height: 20px;
+  width: auto;
+  cursor: pointer;
+  float: left;
+}
+
+#labelSettings{
+  display: none;
+  grid-auto-rows: 1fr; 
+  grid-template-columns: 20% 80%; 
+  gap: 5px 0px; 
+  align-content: center;
+}
+
+#labelSettings label{
+  text-align: center;
+  font-weight: bold;
+}
+
+.labelInput{
+  width: 50%;
+  min-width: 50px;
+}
+
+/*based on https://www.w3schools.com/howto/howto_css_switch.asp*/
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 30px;
+    height: 17px;
+}
+  
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 17px;
+  width: 17px;
+  left: 1px;
+  bottom: 0px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: rgb(48, 166, 154);
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px rgb(48, 166, 154);
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(12px);
+  -ms-transform: translateX(12px);
+  transform: translateX(12px);
+}
+
+
+.tooltipTrigger{
+  flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: right;
+}
+
+.tooltipSymbol{
+  height: 15px;
+  width: auto;
+  filter: invert(0.5);
+}
+
+.tooltipSymbol:hover{
+  filter: invert(0);
+}
+
+
+.backgroundCover{
+  position:fixed;
+  width:100%;
+  height:100%;
+  top:0px;
+  left:0px;
+  z-index:1000;
+  background-color: rgba(120, 120, 120, 0.712);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.infoBox{
+  background-color: white;
+  min-width: 200px;
+  max-width: 70%;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+}
+
+.infoBox .infoHeader{
+  flex: 0 0 20%;
+  width: 100%;
+  background-color: rgba(19,73,233,1);
+  position: relative;
+  display: block;
+}
+
+.closeButton{
+  float: right;
+  max-height: 90%;
+  cursor: pointer;
+}
+
+
+.infoBox .text{
+  flex: 1;
+  position: relative;
+  padding: 15px;
+}

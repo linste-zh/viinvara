@@ -1,4 +1,4 @@
-import {importFullSettings} from '../importAndExport/importFiles.js'
+import {importSettingsForRemoteEx} from '../importAndExport/importFiles.js'
 
-document.getElementById("remoteSettingsImportButton").addEventListener("click", importFullSettings)
-window.importFullSettings = importFullSettings
+document.getElementById("remoteSettingsImportButton").addEventListener("click", importSettingsForRemoteEx)
+window.importSettingsForRemoteEx = importSettingsForRemoteEx

@@ -8,10 +8,10 @@
   align-items: center;
 }
 
-
 .textPanel{
   text-align: center;
   margin-bottom: 20px;
+  max-width: 700px;
 }
 
 .textPanel h1{
@@ -19,28 +19,25 @@
   margin: 0px;
 }
 
-.textPanel h2{
-  color: black;
-  margin: 0px;
-  font-size: 12pt;
-  font-weight: normal;
-}
-
 .textPanel p{
   color: black;
 }
 
+.textPanel ol{
+    text-align: left;
+}
+
 .themeChoice{
-  min-width: 400px;
+  width: fit-content;
   display: flex;
-  justify-content: center;
+  justify-content: right;
   align-items: space-around;
   flex-direction: row;
 }
 
 .themeOption{
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   margin: 10px;
   border-radius: 100%;
   cursor: pointer;
@@ -70,6 +67,7 @@
 }
 
 .settings{
+  position: relative;
   min-height: 200px;
   min-width: 400px;
   background-color: rgba(255, 255, 255, 0.6);
@@ -92,33 +90,51 @@
   min-width: 150px;
 }
 
+.largeTextInput{
+  min-width: 300px;
+  min-height: 200px;
+  resize: none;
+}
+
 .settingsContainer{
   width: 100%;
   padding: 5px;
   margin-bottom: 10px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
 .var{
   flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   gap: 8px;
+}
+
+.big{
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
 }
 
 .exp{
   flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .settingsContainer label{
   color: black;
 }
 
-.startButtonContainer{
-    width: 100%;
+.exportButtonContainer{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.startButton{
+.exportButton{
   float: right;
   background-color: white;
   border: 1px solid black;
@@ -126,7 +142,7 @@
   cursor: pointer;
 }
 
-.startButton:hover{
+.exportButton:hover{
     background-color: rgba(255, 255, 255, 0.6);
 }
 
@@ -139,6 +155,9 @@ source: https://www.flaticon.com/free-icon/file_1092216?term=upload+document&pag
     margin-left: 5px;
     background-color: white;
     border: 1px solid black;
+    position: absolute;
+    top: 10px;
+    right: 10px;
 }
 
 .downloadImg:hover{
