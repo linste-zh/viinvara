@@ -26,9 +26,7 @@ function setUp(){
 
     document.getElementById("intervalButton").click()
 
-    //showGraph()
-    //createCSV()
-    //createJpeg()
+    toggleVideo()
 }
 
 function toggleGraph(button){
@@ -43,8 +41,6 @@ function toggleGraph(button){
         ib.classList.remove("activeOption")
         showGraph(timestampValues)
     }
-    
-    
 }
 
 function showGraph(variable = intervalValues){

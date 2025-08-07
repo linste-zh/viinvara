@@ -141,3 +141,26 @@ canvas{
 .csvContainer a:hover{
     background-color: rgba(255, 255, 255, 0.846);
 }
+
+.bigButton{
+    font-size: 12pt;
+    max-height: 90%;
+    width: fit-content;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+.bigButton .btnIcon{
+    max-height: 25px;
+    margin-left: 5px;
+}
+
+.bigButton:hover{
+    background-color: rgba(255, 255, 255, 1);
+}
