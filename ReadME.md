@@ -1,19 +1,30 @@
 # Viinvara
-cite as (APA 7): Steiner, Linda. (2025). *Viinvara* (Version 2.0) [Computer software]. GitHub. https://linste-zh.github.io/viinvara/
+cite as (APA 7): Steiner, Linda. (2025). *Viinvara* (Version 3.0) [Computer software]. GitHub. https://linste-zh.github.io/viinvara/
 
 ---
 
 ## The "video interval variable rater"
 
-Viinvara allows users to rate some variable on a scale while watching a video. The conditions are customisable. Results are presented in an interactive graph and can be downloaded as a CSV or JPEG.
+Viinvara allows users to rate some variable on a scale while watching a local video file. The conditions are customisable and can be downloaded in the form of JSON files for convenience or remote experiments. Results are presented in an interactive graph and can be downloaded as a CSV or JPEG.
 
 ## Feedback and Error Reports
 
 Please address your feedback or error reports to linste.zh@gmail.com
 
+## Last Update (V3)
+* **Homepage**: *minimal* settings can be downloaded and uploaded as JSON files
+* **Create Remote Experiment (new)**: allows for the creation of a *full* settings file including message to participants
+* **Load Remote Experiment (new)**: requires a *full* settings file, gives participants option to input their name and see a message but not change any settings
+* Experiment: video source can be changed via button after initial loading (instead of having to reload the page), additional icons added for clearer buttons
+* Allow Fullscreen (removed): the allow fullscreen option was removed due to lacking browser support. The video controls option now includes fullscreen per default.
+* Updates Headers: difference between home pages and experiment pages
+* Bug fixes: multiple bugs were fixed, including the behaviour of missed ratings intercepting with the end-of-video rating
+* Modularisation and reorganisation of code: code was modularised and reorganised heavily
+
 ## Future Updates
 
-TBD
+* scale option (instead of buttons)
+* online video sources (youtube, drive, etc.)
 
 ## Inspiration
 
@@ -24,9 +35,17 @@ It  was originally created as part of a idiodynamic, linguistic pilotstudy in a 
 
 # Usage
 
-Adjust the experiment settings to your purpose.  
+## Regular Experiment
+Adjust the experiment settings to your purpose. You can downlaod them as *minimal* (works on homepage) settings file so they can be reused.
 Load a local video file into the experiment and press start. The experiment will run until the end of the video or until cancelled (by returning home or by continuing to the results).  
 Analysye your results in the interactive graph with the video file side-by-side and download your data as CSV and JPEG.
+
+## Remote Experiment
+Create a *full* settings file on the "Create Experiment" page. This can optionally include a message to the participant(s).
+Send the settings and video file to your participant.
+They can upload the file on the "Load Experiment" page and adjust their name. They will see the message (optionally) but cannot change any of the settings.
+Participants can start the experiment by uploading the video file as per usual.
+Participants can analyse their results in the interactive graph. They can manually download and send you the data as CSV or JPEG.
 
 ## Scaling
 Viinvara should scale well on all laptop screens but does not work well on mobile.
@@ -101,3 +120,12 @@ Data can be saved anywhere on your device as a CSV (Timestamp and Rating). The c
 # Use of AI and online Sources Disclaimer
 
 Small portions of the code were generated in collaboration with ChatGPT or taken from online tutorials. Insofar as sections were directly copied and modified only mildly, they are indicated within the code in the form of comments.
+
+# Icon Credits
+Icons (here referenced as in the code)were taken from flaticon.com for free from the following makers:
+*  th studio: [arrow_icon](https://www.flaticon.com/free-icon/down-arrow_2985150?term=arrow+down&page=1&position=2&origin=search&related_id=2985150)
+* Freepik: [home_icon](https://www.flaticon.com/free-icon/home_1946436?term=home&page=1&position=3&origin=tag&related_id=1946436*/), [help_icon](https://www.flaticon.com/free-icon/question_471715?term=question+mark&page=1&position=20&origin=search&related_id=471715*/), [refresh](https://www.flaticon.com/free-icon/refresh_545661?term=change&page=1&position=1&origin=search&related_id=545661*/), [exit_icon](https://www.flaticon.com/free-icon/exit_1286853?term=exit&page=1&position=1&origin=search&related_id=1286853*/)
+* Kiranshasty [download_doc](https://www.flaticon.com/free-icon/file_1092000?term=download+document&page=1&position=1&origin=search&related_id=1092000), [upload_doc](https://www.flaticon.com/free-icon/file_1092216?term=upload+document&page=1&position=1&origin=search&related_id=1092216*/)
+* abdul allib: [play_icon](https://www.flaticon.com/free-icon/play_3318660?term=play&page=1&position=1&origin=style&related_id=3318660)
+* Prashanth Rapolu 15: [playing_icon](https://www.flaticon.com/free-icon/sound-waves_7582349?term=playing+sound&page=1&position=1&origin=search&related_id=7582349)
+* Hilmy Abiyyu A.: [upload_vid](https://www.flaticon.com/free-icon/upload_4620095?term=video+upload&page=1&position=3&origin=search&related_id=4620095*/)

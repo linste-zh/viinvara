@@ -101,7 +101,6 @@ function fillOutSettings(settingsInfo){
     
     document.getElementById("vcChecker").checked = settingsInfo["controls"]
 
-    updateControlSettings()
 }
 
 export{

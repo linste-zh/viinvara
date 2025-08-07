@@ -5,6 +5,7 @@ import {checkIfRatingRequired, intervalContained} from './rating.js';
 async function setUpVideo(){
     const videoSrc = await pickSrc()
 
+    activeExperimentState.videoContainer.innerHTML = ""
     activeExperimentState.videoContainer.innerHTML = '<video id="video_player" class="videoPlayer" type="video/mp4" disablepictureinpicture></video>'
     activeExperimentState.videoElement = document.getElementById("video_player")
 
@@ -21,8 +22,6 @@ async function setUpVideo(){
         activeExperimentState.videoElement.setAttribute("controls", "")
     }
 
-    
-
     activeExperimentState.videoElement.onended = () => {
         end()
     }
@@ -31,10 +30,21 @@ async function setUpVideo(){
         activeExperimentState.videoElement.volume = 1;
     }
 
-    activeExperimentState.ratingElement.innerHTML='<div class="ratingGridDiv"><button id="startButton" class="bigButton">start</button></div>'
-    document.getElementById('startButton').addEventListener("click", () => {
-        start()
-    })
+    activeExperimentState.ratingElement.innerHTML='<div class="ratingGridDiv" id="ratingGridDiv"></div>'
+
+    var changeVidButton = document.createElement("button")
+    changeVidButton.innerHTML = "change video <img class='btnIcon' src='./media/refresh.png'>"
+    changeVidButton.id = "changeVidButton"
+    changeVidButton.className = "bigButton"
+    changeVidButton.onclick = setUpVideo
+    document.getElementById('ratingGridDiv').appendChild(changeVidButton)
+
+    var startButton = document.createElement("button")
+    startButton.innerHTML = "start experiment <img class='btnIcon' src='./media/play_icon.png'>"
+    startButton.id = "startButton"
+    startButton.className = "bigButton"
+    startButton.onclick = start
+    document.getElementById('ratingGridDiv').appendChild(startButton)
 }
 
 

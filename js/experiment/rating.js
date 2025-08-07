@@ -17,7 +17,8 @@ function applyScale(){
     }else{
         activeExperimentState.ratingElement.style.gridTemplateRows = "100% 0%;";
     }
-    
+
+
     Object.values(scale).forEach(index => {
         let button = document.createElement('button');
         button.textContent = index.value;
@@ -43,6 +44,7 @@ function applyScale(){
         }
     })
 }
+
 
 function checkIfRatingRequired(pausingBehaviour = () => {}){
     localStorage.setItem("currentTimeStamp", Math.floor(activeExperimentState.videoElement.currentTime * 100)/100)
@@ -71,6 +73,7 @@ function notRatedInTime(){
     if(behaviour == "pause"){
         pauseVideo()
     }else if(behaviour == "empty"){
+        activeExperimentState.ratingElement.style.visibility = "hidden"
         activeExperimentState.pendingRating = false
     }else if(behaviour == "neutral"){
         submit(activeExperimentState.neutralRating)

@@ -45,7 +45,7 @@ function setup(){
         localStorage.setItem("currentTimeStamp", 0)    
     }
 
-    let instruction = String("<b>" + experimentData["userName"] + "</b>, please rate this video based on <b>" + experimentData["lingVar"] + "</b>")
+    let instruction =`<span class="mainInstruction"><b>${experimentData["userName"]}</b>, please rate this video based on <b> ${experimentData["lingVar"]}</b>.</span></br><span class="secondaryInstruction">You can use the onscreen buttons or your keyboard to submit a rating. The keys match the buttons by position from left to right.</span>`
     document.getElementById("instruction").innerHTML = instruction
 
     console.log(activeExperimentState)
