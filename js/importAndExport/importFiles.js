@@ -100,12 +100,7 @@ async function importSettingsForRemoteEx(){
     if(content["message"] != ""){
         createMsgBox(content["message"])
     }
-
-    var startButton = document.createElement("button")
-    startButton.classList.add("startButton")
-    startButton.textContent = "start Experiment"
-    startButton.addEventListener("click", startRemoteExperiment);
-    document.getElementById("infoField").append(startButton)
+    createButtons()
 }
 
 function createMsgBox(infoText){
@@ -117,6 +112,25 @@ function createMsgBox(infoText){
     infoBox.classList.add("msgField")
     infoBox.innerHTML = infoText
     document.getElementById("infoField").append(infoBox)
+}
+
+function createButtons(){
+    var buttonField = document.createElement("div")
+    buttonField.classList.add("buttonField")
+    buttonField.id = "buttonField"
+    document.getElementById("infoField").appendChild(buttonField)
+
+    var changeFileButton = document.createElement("button")
+    changeFileButton.innerHTML = "change file <img class='btnIcon' src='./media/refresh.png'>"
+    changeFileButton.classList.add("mediumButton")
+    changeFileButton.onclick = importSettingsForRemoteEx
+    document.getElementById("buttonField").appendChild(changeFileButton)
+
+    var startButton = document.createElement("button")
+    startButton.classList.add("mediumButton")
+    startButton.innerHTML = "go to experiment <img class='btnIcon' src='./media/play_icon.png'>"
+    startButton.onclick =  startRemoteExperiment
+    document.getElementById("buttonField").appendChild(startButton)   
 }
 
 
