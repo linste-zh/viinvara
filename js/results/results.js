@@ -246,7 +246,7 @@ async function setUpVideo(){
     const videoSrc = await pickSrc()
 
     videoContainer.innerHTML = '<video controls id="video_player" class="videoPlayer"><source id = "video_src" type="video/mp4"></video>'
-    document.getElementById("video_player")
+    
     document.getElementById("video_player").src = videoSrc + "#t=" + timeStamp
 
     document.getElementById("video_player").ontimeupdate  = () => {
@@ -255,6 +255,13 @@ async function setUpVideo(){
         chart.options.plugins.annotation.annotations.timestampLine.value = timeStamp;
         chart.update()
     }
+
+    var changeVidButton = document.createElement("button")
+    changeVidButton.innerHTML = "change video <img class='btnIcon' src='./media/refresh.png'>"
+    changeVidButton.id = "changeVidButton"
+    changeVidButton.className = "bigButton"
+    changeVidButton.onclick = setUpVideo
+    videoContainer.appendChild(changeVidButton)
 }
 
 function pickSrc(){
