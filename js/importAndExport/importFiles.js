@@ -137,6 +137,11 @@ function createButtons(){
 function startRemoteExperiment(){
     var experimentDataObject = createDataExperimentObject(content["experimentData"]["lingVar"])
 
+    if(experimentDataObject["userName"] == ""){
+        alert("Please fill out the participant name/id field to continue.")
+        return false
+    }
+
     localStorage.setItem("experimentDataObject", JSON.stringify(experimentDataObject))
     window.location.href="experiment.html"
 }
