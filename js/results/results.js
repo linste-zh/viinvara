@@ -26,6 +26,19 @@ function setUp(){
 
     document.getElementById("intervalButton").click()
 
+    window.addEventListener("beforeunload", function(e){
+        if(!confirm("Are you sure you want to leave the page?")){
+            e.preventDefault()
+        }
+    })
+
+    //specifically for safari
+    window.addEventListener("pagehide", function(e){
+        if(!confirm("Are you sure you want to leave the page?")){
+            e.preventDefault()
+        }
+    })
+
     toggleVideo()
 }
 
