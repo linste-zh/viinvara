@@ -18,3 +18,10 @@ window.addEventListener("beforeunload", function(e){
         e.preventDefault()
     }
 })
+
+//specifically for safari
+window.addEventListener("pagehide", function(e){
+    if(!confirm("Are you sure you want to leave the page? This might reset your data.")){
+        e.preventDefault()
+    }
+})
