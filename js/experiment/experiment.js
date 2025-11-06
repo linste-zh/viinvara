@@ -36,7 +36,10 @@ function setup(){
         }else{
             var middle = fullScale[Math.floor(fullScale.length / 2)] - 0.5;
         }
-        activeExperimentState.neutralRating = middle
+        activeExperimentState.autoRating = middle
+    }else if(settings["notRatedBehaviour"] == "lowest"){
+        var lowest = fullScale[0]
+        activeExperimentState.autoRating = lowest
     }
 
     document.getElementById("soundPlayer").src = settings["sound"] === "none" ? "" : settings["sound"];
@@ -95,8 +98,8 @@ function end(){
         }else if(behaviour == "empty"){
             activeExperimentState.pendingRating = false
             end()
-        }else if(behaviour == "neutral"){
-            submit(activeExperimentState.neutralRating)
+        }else if(behaviour == "neutral" || behaviour == "lowest"){
+            submit(activeExperimentState.autoRating)
             hasEnded = false
             end()
         }

@@ -75,8 +75,8 @@ function notRatedInTime(){
     }else if(behaviour == "empty"){
         activeExperimentState.ratingElement.style.visibility = "hidden"
         activeExperimentState.pendingRating = false
-    }else if(behaviour == "neutral"){
-        submit(activeExperimentState.neutralRating)
+    }else if(behaviour == "neutral" || behaviour == "lowest"){
+        submit(activeExperimentState.autoRating)
     }
 }
 
