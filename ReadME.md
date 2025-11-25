@@ -1,5 +1,5 @@
 # Vinvara
-cite as (APA 7): Steiner, Linda. (2025). *Vinvara* (Version 3.0) [Computer software]. GitHub. https://linste-zh.github.io/vinvara/
+cite as (APA 7): Steiner, Linda. (2025). *Vinvara* (Version 4.1) [Computer software]. GitHub. https://linste-zh.github.io/vinvara/
 
 ---
 

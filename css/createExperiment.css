@@ -129,21 +129,30 @@
 .exportButtonContainer{
   width: 100%;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
 }
 
 .exportButton{
-  float: right;
-  background-color: white;
-  border: 1px solid black;
+  font-size: 12pt;
+  max-height: 90%;
+  width: fit-content;
   padding: 10px;
-  cursor: pointer;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .exportButton:hover{
     background-color: rgba(255, 255, 255, 0.6);
+}
+
+.exportButton .btnIcon{
+    max-height: 25px;
+    margin-left: 5px;
 }
 
 /*source: https://www.flaticon.com/free-icon/file_1092000?term=download+document&page=1&position=1&origin=search&related_id=1092000
@@ -155,9 +164,6 @@ source: https://www.flaticon.com/free-icon/file_1092216?term=upload+document&pag
     margin-left: 5px;
     background-color: white;
     border: 1px solid black;
-    position: absolute;
-    top: 10px;
-    right: 10px;
 }
 
 .downloadImg:hover{

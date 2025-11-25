@@ -28,7 +28,7 @@ function openCitationBox(){
     </div> 
     <div class='text'>
         <b>Cite as:</b></br>
-        <div class="citation">Steiner, Linda. (2025). <i>Vinvara</i> (Version 4.0) [Computer software]. GitHub. <a href='https://linste-zh.github.io/vinvara/' target="_blank">https://linste-zh.github.io/vinvara/</a></div>
+        <div class="citation">Steiner, Linda. (2025). <i>Vinvara</i> (Version 4.1) [Computer software]. GitHub. <a href='https://linste-zh.github.io/vinvara/' target="_blank">https://linste-zh.github.io/vinvara/</a></div>
         <hr>
         <b>Cited by:</b>
         <div class="citation"></div>
