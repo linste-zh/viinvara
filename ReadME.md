@@ -14,6 +14,7 @@ Please address your feedback or error reports to linste.zh@gmail.com
 ## Last Update (V4)
 * Name changed from 'Viinvara' to 'Vinvara'
 * **Settings** added option to automatically rate lowest when rating missed
+* minor bug fixes and improvements
 
 ## Future Updates
 

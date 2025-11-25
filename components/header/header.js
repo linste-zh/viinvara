@@ -1,6 +1,10 @@
 document.addEventListener("DOMContentLoaded", loadHeader)
 
+window.allowLeavePage = true
+
 async function loadHeader(){
+    console.log(window.allowLeavePage)
+    
     var header = document.getElementById("header")
     if(header.getAttribute('header-type') == "home"){
         header.innerHTML = await fetchHtmlAsText("./components/header/homeHeader.html")
@@ -13,8 +17,8 @@ async function loadHeader(){
     }else if(header.getAttribute('header-type') == "index"){
         header.innerHTML = await fetchHtmlAsText("./components/header/indexHeader.html")
     }
-    document.getElementById("homeButton").addEventListener("click", reset)
-    window.reset = reset
+    document.getElementById("homeButton").addEventListener("click", returnHome)
+    window.returnHome = returnHome
 }
 
 async function fetchHtmlAsText(url) {
@@ -22,15 +26,23 @@ async function fetchHtmlAsText(url) {
     return await response.text();
 }
 
-function reset(){
-    if(confirm("Return to start page? This will reset all your data and settings.")){
-        localStorage.removeItem("experimentDataObject")
-        localStorage.removeItem("scaleObject")
-        localStorage.removeItem("settingsObject")
-        localStorage.removeItem("theme")
-
-        window.location.href="index.html"
-    }else{
-        console.log("cancelled")
-    }
+function returnHome(){
+    window.location.href="index.html"
 }
+
+window.addEventListener("beforeunload", function(e){
+    if(!window.allowLeavePage){
+        console.log(window.allowLeavePage)
+        e.preventDefault();
+        e.returnValue = "";
+    }
+})
+
+//specifically for safari
+window.addEventListener("pagehide", function(e){
+    if(!window.allowLeavePage){
+        e.preventDefault();
+        e.returnValue = "";
+    }
+})
+
