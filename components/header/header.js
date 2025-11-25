@@ -23,7 +23,7 @@ async function fetchHtmlAsText(url) {
 }
 
 function reset(){
-    if (confirm("Return to start page? This will reset all your data and settings.")){
+    if(confirm("Return to start page? This will reset all your data and settings.")){
         localStorage.removeItem("experimentDataObject")
         localStorage.removeItem("scaleObject")
         localStorage.removeItem("settingsObject")

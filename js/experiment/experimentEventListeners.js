@@ -1,4 +1,4 @@
-import {setup, exitExperiment} from './experiment.js'
+import {setup, exitExperiment, allowLeavePage} from './experiment.js'
 
 window.addEventListener("DOMContentLoaded", setup)
 window.setup = setup
@@ -14,14 +14,14 @@ window.setUpVideo = setUpVideo
 
 
 window.addEventListener("beforeunload", function(e){
-    if(!confirm("Are you sure you want to leave the page? This might reset your data.")){
-        e.preventDefault()
+    if(!allowLeavePage){
+        e.preventDefault();
     }
 })
 
 //specifically for safari
 window.addEventListener("pagehide", function(e){
-    if(!confirm("Are you sure you want to leave the page? This might reset your data.")){
-        e.preventDefault()
+    if(!allowLeavePage){
+        e.preventDefault();
     }
 })

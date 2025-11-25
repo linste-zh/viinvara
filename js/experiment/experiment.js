@@ -1,6 +1,8 @@
 import { playVideo, pauseVideo } from './video.js';
 import { applyScale, activateRating, keyPressed, intervalContained, submit } from './rating.js';
 
+let allowLeavePage = true
+
 const activeExperimentState = {
     currentInterval: 0,
     pendingRating: false,
@@ -60,6 +62,8 @@ function setup(){
 
 
 function start(){
+    allowLeavePage = false
+
     settings["videoDuration"] = activeExperimentState.videoElement.duration
     localStorage.setItem("settingsObject", JSON.stringify(settings))
 
@@ -92,6 +96,7 @@ function end(){
             let endInterval = setInterval(function () {
             if(!activeExperimentState.pendingRating){
                 clearInterval(endInterval)
+                allowLeavePage = true
                 window.location.href="results.html"
             }
         }, 500);
@@ -109,25 +114,20 @@ function end(){
         let endInterval = setInterval(function () {
             if(!activeExperimentState.pendingRating){
                 clearInterval(endInterval)
+                allowLeavePage = true
                 window.location.href="results.html"
             }
         }, 500);
     }else{
+        allowLeavePage = true
         window.location.href="results.html"
     }
 }
 
 function exitExperiment(){
-    if(activeExperimentState.videoElement){
-        pauseVideo()
-    }
-   
     if (confirm("Continue to the results already? This will prematurely end your experiment.")){
+        allowLeavePage = true
         window.location.href="results.html"
-    }else{
-        if(activeExperimentState.videoElement){
-            playVideo()
-        }
     }
 }
 
@@ -140,5 +140,6 @@ export {
     activeExperimentState,
     experimentData,
     scale,
-    settings
+    settings,
+    allowLeavePage
 };
