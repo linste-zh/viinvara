@@ -11,20 +11,15 @@ Vinvara allows users to rate some variable on a scale while watching a local vid
 
 Please address your feedback or error reports to linste.zh@gmail.com
 
-## Last Update (V3)
-* **Homepage**: *minimal* settings can be downloaded and uploaded as JSON files
-* **Create Remote Experiment (new)**: allows for the creation of a *full* settings file including message to participants
-* **Load Remote Experiment (new)**: requires a *full* settings file, gives participants option to input their name and see a message but not change any settings
-* Experiment: video source can be changed via button after initial loading (instead of having to reload the page), additional icons added for clearer buttons
-* Allow Fullscreen (removed): the allow fullscreen option was removed due to lacking browser support. The video controls option now includes fullscreen per default.
-* Updates Headers: difference between home pages and experiment pages
-* Bug fixes: multiple bugs were fixed, including the behaviour of missed ratings intercepting with the end-of-video rating
-* Modularisation and reorganisation of code: code was modularised and reorganised heavily
+## Last Update (V4)
+* Name changed from 'Viinvara' to 'Vinvara'
+* **Settings** added option to automatically rate lowest when rating missed
 
 ## Future Updates
 
 * scale option (instead of buttons)
 * online video sources (youtube, drive, etc.)
+* accessibility improvements
 
 ## Inspiration
 
@@ -129,3 +124,17 @@ Icons (here referenced as in the code)were taken from flaticon.com for free from
 * abdul allib: [play_icon](https://www.flaticon.com/free-icon/play_3318660?term=play&page=1&position=1&origin=style&related_id=3318660)
 * Prashanth Rapolu 15: [playing_icon](https://www.flaticon.com/free-icon/sound-waves_7582349?term=playing+sound&page=1&position=1&origin=search&related_id=7582349)
 * Hilmy Abiyyu A.: [upload_vid](https://www.flaticon.com/free-icon/upload_4620095?term=video+upload&page=1&position=3&origin=search&related_id=4620095*/)
+
+---
+
+# Previous Major Update Tracker
+
+## V3
+* **Homepage**: *minimal* settings can be downloaded and uploaded as JSON files
+* **Create Remote Experiment (new)**: allows for the creation of a *full* settings file including message to participants
+* **Load Remote Experiment (new)**: requires a *full* settings file, gives participants option to input their name and see a message but not change any settings
+* Experiment: video source can be changed via button after initial loading (instead of having to reload the page), additional icons added for clearer buttons
+* Allow Fullscreen (removed): the allow fullscreen option was removed due to lacking browser support. The video controls option now includes fullscreen per default.
+* Updates Headers: difference between home pages and experiment pages
+* Bug fixes: multiple bugs were fixed, including the behaviour of missed ratings intercepting with the end-of-video rating
+* Modularisation and reorganisation of code: code was modularised and reorganised heavily
