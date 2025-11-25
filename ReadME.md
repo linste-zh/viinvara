@@ -1,11 +1,11 @@
-# Viinvara
-cite as (APA 7): Steiner, Linda. (2025). *Viinvara* (Version 3.0) [Computer software]. GitHub. https://linste-zh.github.io/viinvara/
+# Vinvara
+cite as (APA 7): Steiner, Linda. (2025). *Vinvara* (Version 3.0) [Computer software]. GitHub. https://linste-zh.github.io/vinvara/
 
 ---
 
 ## The "video interval variable rater"
 
-Viinvara allows users to rate some variable on a scale while watching a local video file. The conditions are customisable and can be downloaded in the form of JSON files for convenience or remote experiments. Results are presented in an interactive graph and can be downloaded as a CSV or JPEG.
+Vinvara allows users to rate some variable on a scale while watching a local video file. The conditions are customisable and can be downloaded in the form of JSON files for convenience or remote experiments. Results are presented in an interactive graph and can be downloaded as a CSV or JPEG.
 
 ## Feedback and Error Reports
 
@@ -48,7 +48,7 @@ Participants can start the experiment by uploading the video file as per usual.
 Participants can analyse their results in the interactive graph. They can manually download and send you the data as CSV or JPEG.
 
 ## Scaling
-Viinvara should scale well on all laptop screens but does not work well on mobile.
+Vinvara should scale well on all laptop screens but does not work well on mobile.
 
 ## Experiment Settings
 
@@ -70,12 +70,12 @@ Viinvara should scale well on all laptop screens but does not work well on mobil
 
   - **Pause to rate**:  pause video when rating scale appears until a rating is provided
   - **Notification Sound at Interval**:  test out the different options with the play button
-  - **Behaviour when rating not provided in time**:  the rating scale will disappear automatically half a second before the next interval is hit. If no rating is provided in that time, select whether the system should pause to enfore a rating ("pause"), provide the numerically middle rating (e.g. on a scale -3 to -3 => 0; 1 to 7 => 4; 1 to 4 => 2.5, etc.) ("neutral"), or omit the datapoint ("leave out")
+  - **Behaviour when rating not provided in time**:  the rating scale will disappear automatically half a second before the next interval is hit. If no rating is provided in that time, select whether the system should pause to enfore a rating ("pause"), provide the numerically middle rating (e.g. on a scale -3 to -3 => 0; 1 to 7 => 4; 1 to 4 => 2.5, etc.) ("neutral"), provide the numerically lowest rating (e.g. on a scale 1 to 7 => 0)("lowest"), or omit the datapoint ("leave out")
 
 ### Video Settings:
 
   - **Show video controls during experiment**:  if enabled, the participant can pause the video and change the current time stamp. This can override any pausing behaviour specified above. 
-  - **(removed in V3) Allow fullscreen**: if enabled, the participant can also enter full screen (which hides the rating scale at the interval). This feature was removed in V3 of Viinvara due to the lack of browser support.
+  - **(removed in V3) Allow fullscreen**: if enabled, the participant can also enter full screen (which hides the rating scale at the interval). This feature was removed in V3 of Vinvara due to the lack of browser support.
 
 ## Experiment
 
@@ -113,7 +113,7 @@ To hide the video and time indication line in the graph, click on "Hide Video"
 
 ### Download as CSV or JPEG
 
-Data can be saved anywhere on your device as a CSV (Timestamp and Rating). The currently visible graph can also be downlodaded as a JPEG. In order to download both version of the graph, click the button once with each view active. The default name has format is "Year_Month_Date_ParticipantName_Variable".
+Data can be saved anywhere on your device as a CSV (Interval, Timestamp, and Rating). The currently visible graph can also be downlodaded as a JPEG. In order to download both version of the graph, click the button once with each view active. The default name has format is "Year_Month_Date_ParticipantName_Variable".
 
 ---
 

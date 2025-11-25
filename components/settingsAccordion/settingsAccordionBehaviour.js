@@ -68,7 +68,7 @@ const toolTipTexts = {
     },
     "notRated":{
         "header":  "Behaviour when rating is missed",
-        "text":  "If no rating is provided by user until 0.5 seconds before the next interval, either:</br>- pause video until rating is provided </br>- provide the most neutral rating available (e.g. on scale <i>-2</i> to <i>2</i> rate <i>0</i>, on scale <i>1</i> to <i>4</i> rate <i>2.5</i>)</br>- leave out datapoint entirely",
+        "text":  "If no rating is provided by user until 0.5 seconds before the next interval, either:</br>- pause video until rating is provided </br>- provide the most neutral rating available (e.g. on scale <i>-2</i> to <i>2</i> rate <i>0</i>, on scale <i>1</i> to <i>4</i> rate <i>2.5</i>)</br>- provide the lowest rating available (e.g. on scale <i>-2</i> to <i>2</i> rate <i>-2</i>, on scale <i>1</i> to <i>4</i> rate <i>1</i>)</br>- leave out datapoint entirely",
     },
     "controls":{
         "header":  "Video Controls",
