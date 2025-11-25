@@ -54,6 +54,7 @@ function checkIfRatingRequired(pausingBehaviour = () => {}){
     console.log("current interval: " + activeExperimentState.currentInterval)
 
     let timeUntilNextRating = activeExperimentState.currentInterval + activeExperimentState.interval - activeExperimentState.currentTimeStamp 
+    //note: bugs out!
     if(activeExperimentState.pendingRating && timeUntilNextRating < 0.5){
         notRatedInTime()
     }
