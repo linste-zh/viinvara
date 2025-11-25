@@ -44,10 +44,10 @@ async function importSettings(){
 
 function verifyValidity(jsonContent, requireFull = false){
     return new Promise((resolve, reject) => {
-        if(!jsonContent.hasOwnProperty("viinvaraFileType") || !jsonContent.hasOwnProperty("experimentData") || !jsonContent.hasOwnProperty("scale") || !jsonContent.hasOwnProperty("settings")){
-            alert("The provided JSON is not a current Viinvara settings file.  Please try a different file.")
+        if(!jsonContent.hasOwnProperty("VinvaraFileType") || !jsonContent.hasOwnProperty("experimentData") || !jsonContent.hasOwnProperty("scale") || !jsonContent.hasOwnProperty("settings")){
+            alert("The provided JSON is not a current Vinvara settings file.  Please try a different file.")
             reject()
-        }else if(requireFull && jsonContent["viinvaraFileType"] != "full"){
+        }else if(requireFull && jsonContent["VinvaraFileType"] != "full"){
             alert("The file you have provided is not a full settings file and thus is not valid for a remote experiment.")
             reject()
         }else{

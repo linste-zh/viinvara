@@ -10,8 +10,8 @@ async function loadHeader(){
                 links[i].classList.add("active")
             }
         }
-    }else if(header.getAttribute('header-type') == "inex"){
-        header.innerHTML = await fetchHtmlAsText("./components/header/inexHeader.html")
+    }else if(header.getAttribute('header-type') == "index"){
+        header.innerHTML = await fetchHtmlAsText("./components/header/indexHeader.html")
     }
     document.getElementById("homeButton").addEventListener("click", reset)
     window.reset = reset

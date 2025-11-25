@@ -11,10 +11,10 @@ function exportSettings(full = false){
                 alert("The variable field must not be empty.")
                 return false
             }
-            retrievedSettingsObject["viinvaraFileType"] = "full"
+            retrievedSettingsObject["VinvaraFileType"] = "full"
             retrievedSettingsObject["message"] = document.getElementById("msgField").value
         }else{
-            retrievedSettingsObject["viinvaraFileType"] = "min"
+            retrievedSettingsObject["VinvaraFileType"] = "min"
             retrievedSettingsObject["message"] = ""
         }
         let dataStr  = JSON.stringify(retrievedSettingsObject)
@@ -24,7 +24,7 @@ function exportSettings(full = false){
         let currentDate = new Date()
         const a = document.createElement('a');
         a.href = url;
-        let docName = `Viinvara_`
+        let docName = `Vinvara_`
         if(full){
             docName = docName.concat("FullSettingsFile")
         }else{
